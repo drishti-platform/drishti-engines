@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Drishti Engines · the first-party platform engines.
+
+  Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>.
+  All rights reserved.
+
+  PROPRIETARY AND CONFIDENTIAL.
+
+  This file is the confidential and proprietary property of Ashutosh Sinha.
+  Unauthorised copying, use, modification, distribution or disclosure of this
+  file, via any medium, is strictly prohibited except with the express prior
+  written permission of the copyright holder.
+
+  See the LICENSE file in the root of this repository for the full terms.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.ash.engines</groupId>
+    <artifactId>engines-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>engine-indicators</artifactId>
+  <name>Drishti Engines: engine-indicators</name>
+  <description>Derived economic figures (change, growth, compound growth, spread, z-score, rank) over series of observations, as an engine. One JAR; engine-api and tools-xlsx are provided by the host; nothing else. Its kit runs on the packaged JAR in this build.</description>
+  <properties>
+    <automatic.module.name>com.ash.engines.indicators</automatic.module.name>
+  </properties>
+  <dependencies>
+    <dependency><groupId>com.ash.tools</groupId><artifactId>tools-xlsx</artifactId><scope>provided</scope></dependency>
+    <!-- the kit and its harness, for this build's own tests only -->
+    <dependency><groupId>com.ash.engine</groupId><artifactId>engine-tck</artifactId><scope>test</scope></dependency>
+    <dependency><groupId>com.ash.engine</groupId><artifactId>engine-cli</artifactId><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <!-- the kit on the packaged JAR, as a host will meet it: after package, before install -->
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals><goal>integration-test</goal><goal>verify</goal></goals>
+          </execution>
+        </executions>
+        <configuration>
+          <tempDir>tmp</tempDir>
+          <argLine>-Djava.io.tmpdir=${project.build.directory}/tmp</argLine>
+          <systemPropertyVariables>
+            <engine.jar>${project.build.directory}/${project.build.finalName}.jar</engine.jar>
+            <engine.cases>${project.basedir}/tck/cases</engine.cases>
+            <engine.kit.out>${project.build.directory}/kit</engine.kit.out>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
