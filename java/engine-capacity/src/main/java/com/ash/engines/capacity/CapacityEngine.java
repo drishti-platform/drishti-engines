@@ -19,6 +19,10 @@ import com.ash.engine.Control;
 import com.ash.engine.Descriptor;
 import com.ash.engine.Descriptors;
 import com.ash.engine.Engine;
+import com.ash.engine.EngineMeter;
+import com.ash.engine.EngineStats;
+import com.ash.engine.Health;
+import com.ash.engine.LifecycleState;
 import com.ash.engine.EngineContext;
 import com.ash.engine.EngineException;
 import com.ash.engine.EngineException.Kind;
@@ -41,8 +45,8 @@ public final class CapacityEngine implements Engine {
 
     private volatile EngineContext context;
     private volatile Planner planner;
-    private volatile boolean running;
-    private volatile boolean suspended;
+    private volatile LifecycleState lifecycle = LifecycleState.NEW;
+    private volatile EngineMeter meter = new EngineMeter(java.time.Clock.systemUTC());
 
     @Override
     public Descriptor descriptor() {
@@ -60,33 +64,34 @@ public final class CapacityEngine implements Engine {
                     "the descriptor's parameters and the planner's inputs differ; run tools/capacity_descriptor.py in the drishti-engines repository");
         }
         this.context = context;
+        this.meter = new EngineMeter(context.clock());
         this.planner = p;
+        this.lifecycle = LifecycleState.INITIALISED;
     }
 
     /** Nothing to start: the planner is read at init and the engine holds no thread, timer or connection. */
     @Override
     public void start() {
-        running = true;
-        suspended = false;
+        lifecycle = LifecycleState.RUNNING;
     }
 
     /** While suspended no new session opens; asks of open sessions still answer (they hold nothing that changes). */
     @Override
     public void suspend() {
-        suspended = true;
+        lifecycle = LifecycleState.SUSPENDED;
     }
 
     @Override
     public void resume() {
-        suspended = false;
+        lifecycle = LifecycleState.RUNNING;
     }
 
     @Override
     public Session session(Snapshot snapshot, Inputs inputs, Control control) throws EngineException {
-        if (!running || suspended) {
-            throw new EngineException("ENG-5020", Kind.REFUSED, "the capacity engine is " + (suspended ? "suspended" : "not started") + "; no session opens");
+        if (!lifecycle.serving()) {
+            throw new EngineException("ENG-5020", Kind.REFUSED, "the capacity engine is " + (lifecycle == LifecycleState.SUSPENDED ? "suspended" : "not running") + "; no session opens");
         }
-        return new CapacitySession(context, planner, descriptor(), snapshot);
+        return new CapacitySession(context, meter, planner, descriptor(), snapshot);
     }
 
     @Override
@@ -96,9 +101,18 @@ public final class CapacityEngine implements Engine {
     }
 
     @Override
+    public Health health() {
+        return Health.of(lifecycle, meter.snapshot().takenAt());
+    }
+
+    @Override
+    public EngineStats stats() {
+        return meter.snapshot();
+    }
+
+    @Override
     public void shutdown() {
-        running = false;
-        suspended = false;
+        lifecycle = LifecycleState.SHUTDOWN;
         context = null;
         planner = null;
     }

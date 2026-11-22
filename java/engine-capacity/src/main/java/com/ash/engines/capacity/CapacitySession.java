@@ -21,6 +21,7 @@ import com.ash.engine.Cell;
 import com.ash.engine.Control;
 import com.ash.engine.Descriptor;
 import com.ash.engine.EngineContext;
+import com.ash.engine.EngineMeter;
 import com.ash.engine.EngineException;
 import com.ash.engine.EngineException.Kind;
 import com.ash.engine.Explaining;
@@ -41,13 +42,16 @@ import java.util.Map;
 final class CapacitySession implements Session, Explaining {
 
     private final EngineContext context;
+    private final EngineMeter meter;
     private final Planner planner;
     private final Descriptor descriptor;
     private final Snapshot snapshot;
     private volatile boolean closed;
 
-    CapacitySession(EngineContext context, Planner planner, Descriptor descriptor, Snapshot snapshot) {
+    CapacitySession(EngineContext context, EngineMeter meter, Planner planner, Descriptor descriptor, Snapshot snapshot) {
         this.context = context;
+        this.meter = meter;
+        meter.sessionOpened();
         this.planner = planner;
         this.descriptor = descriptor;
         this.snapshot = snapshot;
@@ -77,6 +81,10 @@ final class CapacitySession implements Session, Explaining {
 
     @Override
     public Answer ask(Request request, Control control) throws EngineException {
+        return meter.measure(() -> compute(request, control), 0, 0);
+    }
+
+    private Answer compute(Request request, Control control) throws EngineException {
         Evaluator ev = new Evaluator(planner.cells(overrides(request)));
         List<Table> tables = new ArrayList<>();
         for (String output : request.outputs()) {
@@ -153,7 +161,10 @@ final class CapacitySession implements Session, Explaining {
 
     @Override
     public void close() {
-        closed = true;
+        if (!closed) {
+            closed = true;
+            meter.sessionClosed();
+        }
     }
 
     boolean closed() {

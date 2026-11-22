@@ -21,6 +21,7 @@ import com.ash.engine.Cell;
 import com.ash.engine.Control;
 import com.ash.engine.Descriptor;
 import com.ash.engine.EngineContext;
+import com.ash.engine.EngineMeter;
 import com.ash.engine.EngineException;
 import com.ash.engine.EngineException.Kind;
 import com.ash.engine.Explaining;
@@ -48,6 +49,7 @@ import java.util.stream.Collectors;
 final class GenomicsSession implements Session, Explaining {
 
     private final EngineContext context;
+    private final EngineMeter meter;
     private final Descriptor descriptor;
     private final Snapshot snapshot;
     private final Map<String, List<V.Row>> tables;
@@ -56,9 +58,11 @@ final class GenomicsSession implements Session, Explaining {
     private final List<MemoryBudget.Reservation> holds;
     private volatile boolean closed;
 
-    GenomicsSession(EngineContext context, Descriptor descriptor, Snapshot snapshot, Map<String, List<V.Row>> tables, Map<String, List<String>> lacking,
+    GenomicsSession(EngineContext context, EngineMeter meter, Descriptor descriptor, Snapshot snapshot, Map<String, List<V.Row>> tables, Map<String, List<String>> lacking,
             long bytes, List<MemoryBudget.Reservation> holds) {
         this.context = context;
+        this.meter = meter;
+        meter.sessionOpened();
         this.descriptor = descriptor;
         this.snapshot = snapshot;
         this.tables = tables;
@@ -189,6 +193,11 @@ final class GenomicsSession implements Session, Explaining {
 
     @Override
     public Answer ask(Request request, Control control) throws EngineException {
+        long rowsIn = tables.values().stream().mapToLong(List::size).sum();
+        return meter.measure(() -> compute(request, control), rowsIn, 0);
+    }
+
+    private Answer compute(Request request, Control control) throws EngineException {
         List<Missing> missing = missing(request.outputs());
         Worked w = work(request, request.outputs());
         control.check();
@@ -268,7 +277,10 @@ final class GenomicsSession implements Session, Explaining {
 
     @Override
     public void close() {
-        closed = true;
-        holds.forEach(MemoryBudget.Reservation::close);
+        if (!closed) {
+            closed = true;
+            meter.sessionClosed();
+            holds.forEach(MemoryBudget.Reservation::close);
+        }
     }
 }

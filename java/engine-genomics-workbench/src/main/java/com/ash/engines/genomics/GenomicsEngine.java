@@ -22,6 +22,10 @@ import com.ash.engine.Engine;
 import com.ash.engine.EngineContext;
 import com.ash.engine.EngineException;
 import com.ash.engine.EngineException.Kind;
+import com.ash.engine.EngineMeter;
+import com.ash.engine.EngineStats;
+import com.ash.engine.Health;
+import com.ash.engine.LifecycleState;
 import com.ash.engine.Filter;
 import com.ash.engine.InputTable;
 import com.ash.engine.Inputs;
@@ -44,8 +48,8 @@ public final class GenomicsEngine implements Engine {
     static final String ID = "genomics-workbench";
 
     private volatile EngineContext context;
-    private volatile boolean running;
-    private volatile boolean suspended;
+    private volatile LifecycleState lifecycle = LifecycleState.NEW;
+    private volatile EngineMeter meter = new EngineMeter(java.time.Clock.systemUTC());
 
     @Override
     public Descriptor descriptor() {
@@ -55,30 +59,31 @@ public final class GenomicsEngine implements Engine {
     @Override
     public void init(EngineContext context) {
         this.context = context;
+        this.meter = new EngineMeter(context.clock());
+        this.lifecycle = LifecycleState.INITIALISED;
     }
 
     /** Nothing to start: the engine holds no thread, timer or connection; sessions read their rows when they open. */
     @Override
     public void start() {
-        running = true;
-        suspended = false;
+        lifecycle = LifecycleState.RUNNING;
     }
 
     /** While suspended no new session opens; open sessions still answer from the rows they hold. */
     @Override
     public void suspend() {
-        suspended = true;
+        lifecycle = LifecycleState.SUSPENDED;
     }
 
     @Override
     public void resume() {
-        suspended = false;
+        lifecycle = LifecycleState.RUNNING;
     }
 
     @Override
     public Session session(Snapshot snapshot, Inputs inputs, Control control) throws EngineException {
-        if (!running || suspended) {
-            throw new EngineException("ENG-5020", Kind.REFUSED, "the genomics workbench is " + (suspended ? "suspended" : "not started") + "; no session opens");
+        if (!lifecycle.serving()) {
+            throw new EngineException("ENG-5020", Kind.REFUSED, "the genomics workbench is " + (lifecycle == LifecycleState.SUSPENDED ? "suspended" : "not running") + "; no session opens");
         }
         Descriptor d = descriptor();
         Map<String, List<V.Row>> tables = new LinkedHashMap<>();
@@ -112,13 +117,22 @@ public final class GenomicsEngine implements Engine {
             holds.forEach(MemoryBudget.Reservation::close);
             throw ex;
         }
-        return new GenomicsSession(context, d, snapshot, tables, lacking, bytes, holds);
+        return new GenomicsSession(context, meter, d, snapshot, tables, lacking, bytes, holds);
+    }
+
+    @Override
+    public Health health() {
+        return Health.of(lifecycle, meter.snapshot().takenAt());
+    }
+
+    @Override
+    public EngineStats stats() {
+        return meter.snapshot();
     }
 
     @Override
     public void shutdown() {
-        running = false;
-        suspended = false;
+        lifecycle = LifecycleState.SHUTDOWN;
         context = null;
     }
 }
