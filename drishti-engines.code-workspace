@@ -1,0 +1,24 @@
+// Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>. All rights reserved.
+// Drishti Engines. Proprietary: see LICENSE.
+//
+// Engines in VS Code: File, Open Workspace from File. The tasks carry the SAME names as the JetBrains run configurations in run-configs/.
+// JDK 21: change the Java path below (Windows: C:\\jdk-21).
+{
+  "folders": [{"name": "engines", "path": "."}],
+  "extensions": {"recommendations": ["vscjava.vscode-java-pack", "redhat.vscode-xml"]},
+  "settings": {
+    "java.configuration.runtimes": [{"name": "JavaSE-21", "path": "/usr/lib/jvm/java-21-openjdk-amd64", "default": true}],
+    "java.jdt.ls.java.home": "/usr/lib/jvm/java-21-openjdk-amd64",
+    "java.import.maven.enabled": true,
+    "java.configuration.updateBuildConfiguration": "automatic"
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {"label": "Engines: build all", "type": "shell", "command": "./mvnw clean verify -DskipTests", "windows": {"command": "mvnw.cmd clean verify -DskipTests"}, "options": {"cwd": "${workspaceFolder:engines}/java"}, "group": "build", "problemMatcher": []},
+      {"label": "Engines: test", "type": "shell", "command": "./mvnw clean verify", "windows": {"command": "mvnw.cmd clean verify"}, "options": {"cwd": "${workspaceFolder:engines}/java"}, "group": "test", "problemMatcher": []},
+      {"label": "Engines: check guards", "type": "shell", "command": "./mvnw clean verify -pl engines-guards -am", "windows": {"command": "mvnw.cmd clean verify -pl engines-guards -am"}, "options": {"cwd": "${workspaceFolder:engines}/java"}, "group": "test", "problemMatcher": []},
+      {"label": "Engines: install release (tag only)", "type": "shell", "command": "./mvnw clean install -DskipTests", "windows": {"command": "mvnw.cmd clean install -DskipTests"}, "options": {"cwd": "${workspaceFolder:engines}/java"}, "problemMatcher": []}
+    ]
+  }
+}

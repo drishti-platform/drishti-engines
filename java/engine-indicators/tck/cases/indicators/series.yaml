@@ -1,0 +1,111 @@
+# Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>. All rights reserved. Drishti Engines. Proprietary: see LICENSE.
+# Written by tools/indicators_cases.py: the figures of an independent Python oracle over series whose powers are exact.
+suite: indicators/series
+engine: indicators
+since: "1.0"
+description: Change, percentage change, compound growth, mean, spread, z-score and rank over nine series, with every figure that cannot be made left null.
+given:
+  inputs:
+    observation:
+      rows:
+        - {"ECONOMY": "A", "INDICATOR": "GDP", "YEAR": 2020, "VALUE": 100.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "A", "INDICATOR": "GDP", "YEAR": 2021, "VALUE": 110.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "A", "INDICATOR": "GDP", "YEAR": 2022, "VALUE": 121.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "A", "INDICATOR": "GDP", "YEAR": 2023, "VALUE": 133.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "B", "INDICATOR": "GDP", "YEAR": 2021, "VALUE": 150.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "B", "INDICATOR": "GDP", "YEAR": 2022, "VALUE": 160.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "B", "INDICATOR": "GDP", "YEAR": 2023, "VALUE": 200.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "C", "INDICATOR": "GDP", "YEAR": 2022, "VALUE": 130.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "C", "INDICATOR": "GDP", "YEAR": 2023, "VALUE": 133.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "D", "INDICATOR": "GDP", "YEAR": 2023, "VALUE": 90.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "E", "INDICATOR": "GDP", "YEAR": 2022, "VALUE": 0.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "E", "INDICATOR": "GDP", "YEAR": 2023, "VALUE": 5.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "F", "INDICATOR": "GDP", "YEAR": 2021, "VALUE": 10.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "F", "INDICATOR": "GDP", "YEAR": 2022, "VALUE": 10.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "F", "INDICATOR": "GDP", "YEAR": 2023, "VALUE": 10.0, "UNIT": "USD bn"}
+        - {"ECONOMY": "A", "INDICATOR": "GROWTH", "YEAR": 2021, "VALUE": 25.0, "UNIT": "% a year"}
+        - {"ECONOMY": "A", "INDICATOR": "GROWTH", "YEAR": 2022, "VALUE": 50.0, "UNIT": "% a year"}
+        - {"ECONOMY": "A", "INDICATOR": "GROWTH", "YEAR": 2023, "VALUE": 100.0, "UNIT": "% a year"}
+        - {"ECONOMY": "B", "INDICATOR": "GROWTH", "YEAR": 2021, "VALUE": 4.0, "UNIT": "% a year"}
+        - {"ECONOMY": "B", "INDICATOR": "GROWTH", "YEAR": 2022, "VALUE": 5.0, "UNIT": "% a year"}
+        - {"ECONOMY": "B", "INDICATOR": "GROWTH", "YEAR": 2023, "VALUE": 36.0, "UNIT": "% a year"}
+        - {"ECONOMY": "C", "INDICATOR": "GROWTH", "YEAR": 2021, "VALUE": 7.0, "UNIT": "% a year"}
+        - {"ECONOMY": "C", "INDICATOR": "GROWTH", "YEAR": 2022, "VALUE": 7.0, "UNIT": "% a year"}
+        - {"ECONOMY": "C", "INDICATOR": "GROWTH", "YEAR": 2023, "VALUE": 7.0, "UNIT": "% a year"}
+cases:
+  - id: gdp-over-one-year
+    source: "independent Python oracle over the series above (growth over 1 year is the ratio, exactly)"
+    reference: true
+    request: { outputs: [ series ], params: { years: 1, indicator: GDP }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        series:
+          columns: [ ECONOMY, INDICATOR, UNIT, LATEST_YEAR, N, LATEST, PREVIOUS, CHANGE, PCT_CHANGE, CAGR, MEAN, STDEV, Z_SCORE ]
+          rows:
+            - ["A", "GDP", "USD bn", 2023, 4, 133.0, 121.0, 12.0, 9.917355371900827, 9.917355371900815, 116.0, 14.212670403551895, 1.1961158260414961]
+            - ["B", "GDP", "USD bn", 2023, 3, 200.0, 160.0, 40.0, 25.0, 25.0, 170.0, 26.457513110645905, 1.1338934190276817]
+            - ["C", "GDP", "USD bn", 2023, 2, 133.0, 130.0, 3.0, 2.307692307692308, 2.3076923076922995, 131.5, 2.1213203435596424, 0.7071067811865476]
+            - ["D", "GDP", "USD bn", 2023, 1, 90.0, null, null, null, null, 90.0, null, null]
+            - ["E", "GDP", "USD bn", 2023, 2, 5.0, 0.0, 5.0, null, null, 2.5, 3.5355339059327378, 0.7071067811865475]
+            - ["F", "GDP", "USD bn", 2023, 3, 10.0, 10.0, 0.0, 0.0, 0.0, 10.0, 0.0, null]
+  - id: gdp-ranks
+    source: "independent Python oracle: largest first, equal values share the better rank"
+    request: { outputs: [ ranks ], params: { indicator: GDP }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        ranks:
+          columns: [ INDICATOR, ECONOMY, RANK, OF_COUNT, LATEST, PERCENTILE ]
+          rows:
+            - ["GDP", "B", 1, 6, 200.0, 100.0]
+            - ["GDP", "A", 2, 6, 133.0, 80.0]
+            - ["GDP", "C", 2, 6, 133.0, 80.0]
+            - ["GDP", "D", 4, 6, 90.0, 40.0]
+            - ["GDP", "F", 5, 6, 10.0, 20.0]
+            - ["GDP", "E", 6, 6, 5.0, 0.0]
+  - id: growth-over-two-years
+    source: "independent Python oracle: ratios 4, 9 and 1 over 2 years have exact square roots"
+    request: { outputs: [ series ], params: { years: 2, indicator: GROWTH }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        series:
+          columns: [ ECONOMY, INDICATOR, UNIT, LATEST_YEAR, N, LATEST, PREVIOUS, CHANGE, PCT_CHANGE, CAGR, MEAN, STDEV, Z_SCORE ]
+          rows:
+            - ["A", "GROWTH", "% a year", 2023, 3, 100.0, 50.0, 50.0, 100.0, 100.0, 58.333333333333336, 38.18813079129867, 1.0910894511799618]
+            - ["B", "GROWTH", "% a year", 2023, 3, 36.0, 5.0, 31.0, 620.0, 200.0, 15.0, 18.193405398660254, 1.1542643908515566]
+            - ["C", "GROWTH", "% a year", 2023, 3, 7.0, 7.0, 0.0, 0.0, 0.0, 7.0, 0.0, null]
+  - id: a-viewer-of-economy-b-sees-only-b
+    source: "filter equivalence, by hand: B alone in GDP has no percentile"
+    request: { outputs: [ series ], params: { years: 1, indicator: GDP }, visibility: { observation: { eq: [ ECONOMY, B ] } }, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        series:
+          columns: [ ECONOMY, INDICATOR, UNIT, LATEST_YEAR, N, LATEST, PREVIOUS, CHANGE, PCT_CHANGE, CAGR, MEAN, STDEV, Z_SCORE ]
+          rows:
+            - ["B", "GDP", "USD bn", 2023, 3, 200.0, 160.0, 40.0, 25.0, 25.0, 170.0, 26.457513110645905, 1.1338934190276817]
+  - id: a-viewer-of-economy-b-ranks-alone
+    source: "filter equivalence, by hand: B alone in GDP is rank 1 of 1 with no percentile"
+    request: { outputs: [ ranks ], params: { indicator: GDP }, visibility: { observation: { eq: [ ECONOMY, B ] } }, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        ranks:
+          columns: [ INDICATOR, ECONOMY, RANK, OF_COUNT, LATEST, PERCENTILE ]
+          rows:
+            - ["GDP", "B", 1, 1, 200.0, null]
+  - id: no-observation-table
+    source: "section 8.2"
+    given: { inputs: { observation: absent } }
+    request: { outputs: [ series ], params: { years: 1 }, visibility: all, seed: 0 }
+    expect: { status: not-found, missing: [ { input: observation, outputs: [ series ] } ] }
+  - id: zero-years-is-refused
+    source: "descriptor: years has min 1"
+    request: { outputs: [ series ], params: { years: 0 }, visibility: all, seed: 0 }
+    expect: { refused: ENG-3002 }
+  - id: a-request-without-rows-of-observations-is-refused
+    source: "section 8.6 rule 1"
+    request: { outputs: [ series ], params: { years: 1 }, visibility: {}, seed: 0 }
+    expect: { refused: ENG-4002 }

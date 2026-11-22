@@ -1,0 +1,66 @@
+# Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>. All rights reserved. Drishti Engines. Proprietary: see LICENSE.
+# Derived economic figures over series of observations: born as an engine (the economy module computes no derived series today).
+engine: 1
+id: indicators
+version: 0.1.0
+title: Economic indicators
+about: >-
+  Derived figures over series of yearly observations of an indicator for an economy: the latest value, the change since the year before, the
+  percentage change, the compound annual growth over a number of years, the mean and the spread of the history, how far the latest value
+  stands from that history (a z-score), and where the economy ranks among the economies of the same indicator. Every figure is explained and
+  has a workbook.
+publisher: { id: com.ash.engines, name: Drishti Engines }
+product: drishti-economy
+api: "0.1"
+platform: { tools: "1.1" }
+snapshot:
+  dimensions: []
+inputs:
+  observation:
+    contract: economy/observation@1
+    about: One row per economy, indicator and year (the history of a macro indicator, one observation a row). A row without a year or a value is left out; a year given twice keeps the larger value.
+    key: [ ECONOMY, INDICATOR, YEAR ]
+    columns: [ ECONOMY, INDICATOR, YEAR, VALUE, UNIT ]
+    scope-columns: [ ECONOMY ]
+    mode: session
+params:
+  years: { type: int, default: 5, min: 1, max: 100, label: Years of growth, help: The number of years the compound annual growth runs over, back from each series' latest year. }
+  indicator: { type: text, default: "", label: Indicator, help: One indicator by its name; empty for every indicator. }
+outputs:
+  series:
+    title: Series figures
+    about: One row per economy and indicator.
+    params: [ years, indicator ]
+    key: [ ECONOMY, INDICATOR ]
+    columns:
+      - { name: ECONOMY, type: string, nullable: false, label: Economy }
+      - { name: INDICATOR, type: string, nullable: false, label: Indicator }
+      - { name: UNIT, type: string, nullable: false, label: Unit }
+      - { name: LATEST_YEAR, type: integer, nullable: false, label: Latest year }
+      - { name: N, type: integer, nullable: false, label: Observations }
+      - { name: LATEST, type: number, nullable: false, label: Latest value }
+      - { name: PREVIOUS, type: number, nullable: true, label: Previous value }
+      - { name: CHANGE, type: number, nullable: true, label: Change, measure: true, exact: bits }
+      - { name: PCT_CHANGE, type: number, nullable: true, label: Change in percent, measure: true, exact: bits }
+      - { name: CAGR, type: number, nullable: true, label: Compound annual growth in percent, measure: true, exact: bits }
+      - { name: MEAN, type: number, nullable: false, label: Mean of the history, measure: true, exact: bits }
+      - { name: STDEV, type: number, nullable: true, label: Standard deviation of the history, measure: true, exact: bits }
+      - { name: Z_SCORE, type: number, nullable: true, label: Z-score of the latest value, measure: true, exact: bits }
+  ranks:
+    title: Ranks
+    about: Each economy's rank by latest value among the economies of an indicator, largest first; equal values share the better rank.
+    params: [ indicator ]
+    key: [ INDICATOR, ECONOMY ]
+    order: [ INDICATOR, RANK, ECONOMY ]
+    columns:
+      - { name: INDICATOR, type: string, nullable: false, label: Indicator }
+      - { name: ECONOMY, type: string, nullable: false, label: Economy }
+      - { name: RANK, type: integer, nullable: false, label: Rank }
+      - { name: OF_COUNT, type: integer, nullable: false, label: Economies ranked }
+      - { name: LATEST, type: number, nullable: false, label: Latest value }
+      - { name: PERCENTILE, type: number, nullable: true, label: Percentile, measure: true, exact: bits }
+capabilities: [ explain, workbook ]
+limits:
+  memory: { fixed-bytes: 262144, per-row-bytes: { observation: 120 } }
+  cancel-latency: 200ms
+ui: { group: Economy, words: [ INDIC ] }
