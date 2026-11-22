@@ -1,0 +1,115 @@
+# Drishti Engines · first-party engines by contract.
+#
+# Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>.
+# All rights reserved.
+#
+# PROPRIETARY AND CONFIDENTIAL.
+#
+# This file is the confidential and proprietary property of Ashutosh Sinha.
+# Unauthorised copying, use, modification, distribution or disclosure of this
+# file, via any medium, is strictly prohibited except with the express prior
+# written permission of the copyright holder.
+#
+# See the LICENSE file in the root of this repository for the full terms.
+suite: python/items
+engine: python
+since: "1.0"
+description: >-
+  Approved code on the one pool, recorded from Drishti's tests of the python pool, Transforms and Python items: a measure by group
+  (per group and vectorised), a derived column, a transform, the author's failure as one typed refusal, a text that does not hash to
+  its approval, a code item that is not approved, a static check, a frame that is not there. The environment needs Python 3.10+ with pandas and pyarrow.
+given:
+  snapshot: { date: "2026-01-13" }
+  options: { isolation: standard }
+  inputs:
+    code:
+      rows:
+        - { NAME: t-measure, VERSION: "1", HASH: "e90f9833c340fbe6931f1f0a179a0807818db5aeedc54844b039364611e5e960f19cf949a0084e05292e3b1441108b5a", INTERFACE: measure, ENTRY: "", PACKAGES: pandas, TEXT: "def compute(table, params):\n    return float(table['pnl1d'].sum()) * params.get('k', 1)\n" }
+        - { NAME: t-measure-vec, VERSION: "1", HASH: "5551e870d3c4d53fa6da8485e2e128b7c282d71a37c95e5faae37f7f0095071b161d238607610481499ea32aa5ada286", INTERFACE: measure, ENTRY: "", PACKAGES: pandas, TEXT: "def compute_groups(frame, by, params):\n    return frame.groupby(by, as_index=False)['pnl1d'].sum().rename(columns={'pnl1d': 'value'})\n" }
+        - { NAME: t-column, VERSION: "1", HASH: "76ad07e593a69a698e6828fcf0b6de641860a737883a94b4f7edf9c3d8f4f8324d32693b48aa465e7e0df8ed57d702e5", INTERFACE: column, ENTRY: "", PACKAGES: pandas, TEXT: "def derive(rows, params):\n    return rows['pnl1d'] * 2\n" }
+        - { NAME: t-transform, VERSION: "1", HASH: "8d48fefa037b19fbfabd1aaf9f71002974ec3491292f6ad9b451aa4cb6259afec7111ee145d732f14cbf7da249e3090e", INTERFACE: transform, ENTRY: "", PACKAGES: pandas, TEXT: "def run(t, params):\n    return t.groupby('desk', as_index=False)['pnl1d'].sum()\n" }
+        - { NAME: t-boom, VERSION: "1", HASH: "d5c4d36b177a57e0693cbcfcfb0bc75305d9523a051df1801d20453144d984225c0bdecfe60c03a1957f7add09951f5e", INTERFACE: visual, ENTRY: "", PACKAGES: pandas, TEXT: "def render(table, params):\n    return 1 / 0\n" }
+        - { NAME: t-bad, VERSION: "1", HASH: "1d13a125219f0931638fb5138975e52b8893ef4ba496b960066a84f40ca0562b91c705c92c14e55135509261a8931bdb", INTERFACE: measure, ENTRY: "", PACKAGES: pandas, TEXT: "import os\ndef compute(t, p):\n    return eval('1')\n" }
+        - { NAME: t-tampered, VERSION: "1", HASH: "9ee6016d5b347f55fa5c7ecdecf3b97118cc963cc8d378fa9ec5864bfa455b15a12a22dfcdcf60c306329488f5e33110", INTERFACE: measure, PACKAGES: pandas, TEXT: "def compute(t, p):\n    return 2\n" }
+    frames:
+      tables:
+        trades:
+          columns: { desk: string, pnl1d: number }
+          rows:
+            - { desk: A, pnl1d: 1.0 }
+            - { desk: A, pnl1d: 2.0 }
+            - { desk: B, pnl1d: 5.0 }
+cases:
+  - id: measure-one-number-per-group
+    source: "Drishti test_items: sum of pnl1d per desk times k=2: A = 3*2, B = 5*2"
+    reference: true
+    request: { outputs: [ measure ], params: { item: t-measure, tables: [ { name: trades, columns: [ "desk:string", "pnl1d:number" ] } ], frame: trades, inputs: [ pnl1d ], group-by: [ desk ], params: { k: 2 } }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        measure:
+          columns: [ ITEM, GROUP, VALUE, CODE ]
+          rows:
+            - [ t-measure, '["A"]', 6, "e90f9833c340fbe6931f1f0a179a0807818db5aeedc54844b039364611e5e960f19cf949a0084e05292e3b1441108b5a" ]
+            - [ t-measure, '["B"]', 10, "e90f9833c340fbe6931f1f0a179a0807818db5aeedc54844b039364611e5e960f19cf949a0084e05292e3b1441108b5a" ]
+  - id: measure-vectorised-compute-groups
+    source: "Drishti test_items: compute_groups gives A = 3, B = 5"
+    request: { outputs: [ measure ], params: { item: t-measure-vec, tables: [ { name: trades, columns: [ "desk:string", "pnl1d:number" ] } ], frame: trades, inputs: [ pnl1d ], group-by: [ desk ] }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        measure:
+          columns: [ ITEM, GROUP, VALUE, CODE ]
+          rows:
+            - [ t-measure-vec, '["A"]', 3, "5551e870d3c4d53fa6da8485e2e128b7c282d71a37c95e5faae37f7f0095071b161d238607610481499ea32aa5ada286" ]
+            - [ t-measure-vec, '["B"]', 5, "5551e870d3c4d53fa6da8485e2e128b7c282d71a37c95e5faae37f7f0095071b161d238607610481499ea32aa5ada286" ]
+  - id: column-one-value-per-row
+    source: "Drishti test_items: derive returns pnl1d * 2"
+    request: { outputs: [ column ], params: { item: t-column, tables: [ { name: trades, columns: [ "desk:string", "pnl1d:number" ] } ], frame: trades, inputs: [ pnl1d ] }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        column:
+          columns: [ ITEM, ROW, VALUE, TEXT ]
+          rows:
+            - [ t-column, 0, 2, null ]
+            - [ t-column, 1, 4, null ]
+            - [ t-column, 2, 10, null ]
+  - id: transform-rows
+    source: "Drishti test_items: a transform groups pnl1d by desk"
+    request: { outputs: [ transform ], params: { item: t-transform, tables: [ { name: trades, columns: [ "desk:string", "pnl1d:number" ] } ], frames: [ trades ] }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        transform:
+          columns: [ ITEM, ROW, CELLS ]
+          rows:
+            - [ t-transform, 0, '{"desk":"A","pnl1d":3.0}' ]
+            - [ t-transform, 1, '{"desk":"B","pnl1d":5.0}' ]
+  - id: the-authors-failure-is-one-typed-refusal
+    source: "Drishti test_items: a failure of the author's code is an answer with its traceback, here PYT-2001"
+    request: { outputs: [ visual ], params: { item: t-boom, tables: [ { name: trades, columns: [ "desk:string", "pnl1d:number" ] } ], frame: trades, format: echarts }, visibility: all, seed: 0 }
+    expect: { refused: PYT-2001 }
+  - id: a-text-that-does-not-hash-to-its-approval-is-not-run
+    source: "specification of the python engine: the hash is in every stamp and the text is held to it"
+    request: { outputs: [ measure ], params: { item: t-tampered, tables: [ { name: trades, columns: [ "desk:string", "pnl1d:number" ] } ], frame: trades, inputs: [ pnl1d ], group-by: [ desk ] }, visibility: all, seed: 0 }
+    expect: { refused: PYT-1003 }
+  - id: code-that-is-not-approved-is-refused
+    source: "Drishti ApprovalsTest: only approved code reaches the engine"
+    request: { outputs: [ measure ], params: { item: never-approved, tables: [ { name: trades, columns: [ "desk:string", "pnl1d:number" ] } ], frame: trades, inputs: [ pnl1d ], group-by: [ desk ] }, visibility: all, seed: 0 }
+    expect: { refused: PYT-1001 }
+  - id: the-static-check-of-valid-code-finds-nothing
+    source: "Drishti test_items: check_source of valid code finds nothing (the item with import os and eval, t-bad, is for the problems the worker test lists)"
+    request: { outputs: [ check ], params: { item: t-measure }, visibility: all, seed: 0 }
+    laws: { skip: [ explain ], why: the check output has no measure }
+    expect:
+      status: complete
+      tables:
+        check:
+          columns: [ ITEM, N, LEVEL, CODE, PATH, MESSAGE ]
+          rows: []
+  - id: a-frame-that-is-not-there-is-named
+    source: "specification 8.2: a missing input is an answer naming it"
+    given: { inputs: { frames: { tables: {} } } }
+    request: { outputs: [ measure ], params: { item: t-measure, tables: [ { name: trades, columns: [ "desk:string", "pnl1d:number" ] } ], frame: trades, inputs: [ pnl1d ], group-by: [ desk ] }, visibility: all, seed: 0 }
+    expect: { status: not-found, missing: [ { input: frames, outputs: [ measure ] } ] }

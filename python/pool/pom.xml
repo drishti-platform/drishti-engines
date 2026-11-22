@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Drishti Engines · first-party engines by contract.
+  Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>. All rights reserved. PROPRIETARY AND CONFIDENTIAL. See the LICENSE file.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent><groupId>com.ash.engines</groupId><artifactId>engines-python-parent</artifactId><version>0.1.0-SNAPSHOT</version></parent>
+  <artifactId>engines-python-pool</artifactId>
+  <name>Drishti Engines: python pool (the one process pool and the python engine's binding; host side)</name>
+  <description>Host-side code: process lifecycle, fair admission, cancel, limits, column hand-over, the binding of the python engine. Not an engine JAR: it starts processes.</description>
+  <dependencies>
+    <dependency><groupId>com.ash.engine</groupId><artifactId>engine-api</artifactId></dependency>
+    <dependency><groupId>com.ash.engine</groupId><artifactId>engine-host</artifactId></dependency>
+    <dependency><groupId>com.ash.tools</groupId><artifactId>tools-xlsx</artifactId></dependency>
+    <dependency><groupId>org.apache.arrow</groupId><artifactId>arrow-vector</artifactId></dependency>
+    <dependency><groupId>org.apache.arrow</groupId><artifactId>arrow-memory-netty</artifactId></dependency>
+    <dependency><groupId>com.ash.engines</groupId><artifactId>engines-python</artifactId><version>${project.version}</version></dependency>
+    <dependency><groupId>com.ash.engine</groupId><artifactId>engine-tck</artifactId><scope>test</scope></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><scope>test</scope></dependency>
+    <dependency><groupId>org.assertj</groupId><artifactId>assertj-core</artifactId><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.2</version>
+        <configuration>
+          <argLine>--add-opens=java.base/java.nio=ALL-UNNAMED -Djava.io.tmpdir=${project.build.directory}/tmp</argLine>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

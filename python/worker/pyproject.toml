@@ -1,0 +1,32 @@
+# Drishti Engines · first-party engines by contract.
+#
+# Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>.
+# All rights reserved.
+#
+# PROPRIETARY AND CONFIDENTIAL.
+#
+# This file is the confidential and proprietary property of Ashutosh Sinha.
+# Unauthorised copying, use, modification, distribution or disclosure of this
+# file, via any medium, is strictly prohibited except with the express prior
+# written permission of the copyright holder.
+#
+# See the LICENSE file in the root of this repository for the full terms.
+# The worker package of the python engine, pinned by hash like any other wheel in a locked environment. The engine JAR also carries it
+# as resources and the pool manager puts it on the workers' path, so a pool on the site's interpreter needs no install.
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drishti-engine-python-worker"
+version = "1.0.0"
+description = "The worker of the python engine: the Arrow codec, the engine contract, the worker loop, the sandbox, the items and pivot-function runtimes"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["engine_python*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

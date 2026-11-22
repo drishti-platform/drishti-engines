@@ -1,0 +1,199 @@
+# Drishti Engines · first-party engines by contract.
+#
+# Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>.
+# All rights reserved.
+#
+# PROPRIETARY AND CONFIDENTIAL.
+#
+# This file is the confidential and proprietary property of Ashutosh Sinha.
+# Unauthorised copying, use, modification, distribution or disclosure of this
+# file, via any medium, is strictly prohibited except with the express prior
+# written permission of the copyright holder.
+#
+# See the LICENSE file in the root of this repository for the full terms.
+engine: 1
+id: python
+version: 1.0.0
+title: People's Python
+about: >-
+  Python code people write and an administrator approved (measures, derived columns, transforms, visuals, notebook cells and custom
+  aggregate functions), run on the host's one process pool, over frames read as the person who asks. The code is an input under a
+  contract, never configuration; its figures are explained by one counted opaque step that names the code and its hash.
+publisher: { id: com.ash.engines, name: Drishti Engines }
+product: drishti-engines
+api: "0.1"
+platform: { tools: "1.1" }
+worker: python:engine_python.engine:PythonEngine
+codes: PYT
+snapshot:
+  dimensions: [ { name: date, type: date, label: Business date } ]
+inputs:
+  code:
+    contract: platform/code-item@1
+    about: >-
+      One row per approved version of a code item, from the host's approval store: only approved code is a row. An item whose text does
+      not hash to its HASH is refused by name when asked, never run. Approving, revoking or editing an item arrives as a change.
+    key: [ NAME, VERSION ]
+    columns: [ NAME, VERSION, HASH, INTERFACE, TEXT, ENTRY, PACKAGES, TIMEOUT_S, MEMORY_MB ]
+    mode: session
+    changes: rows
+  frames:
+    about: >-
+      The tables the code reads, by the name the request's parameter tables gives them, resolved in the host's catalogue as the person who
+      asks: their row rules and masks are applied before the rows are handed over, and the hand-over file lives only as long as the request.
+    open: true
+    mode: request
+options:
+  interpreter: { type: text, default: "", label: Python interpreter, help: The Python the workers run (3.10 or later); empty means python3 (python on Windows). }
+  workers-min: { type: int, default: 0, min: 0, max: 1024, label: Workers kept warm }
+  workers-max: { type: int, default: 4, min: 1, max: 1024, label: Most workers, help: As many as this node should run; configuration only, there is no limit in the code. }
+  memory-mb: { type: int, default: 6144, min: 0, unit: MB, label: Memory per request, help: The address space of one request; 0 means no limit. }
+  cpu-seconds: { type: int, default: 120, min: 0, unit: s, label: CPU time per request, help: 0 means no limit. }
+  recycle-after: { type: int, default: 200, min: 0, label: Requests before a worker is replaced, help: 0 means 200, or 50 in warm mode. }
+  batch-share: { type: number, default: 0.5, min: 0, max: 1, label: Batch share, help: The share of the workers batch requests may hold at once. }
+  idle-stop-seconds: { type: int, default: 300, min: 1, unit: s, label: Idle workers stop after }
+  mode:
+    type: enum
+    options: [ auto, fork, warm ]
+    default: auto
+    label: Isolation of one request from the next
+    help: auto is fork where the platform has it (a fresh child per request) and warm on Windows (state reset, worker recycled).
+  isolation:
+    type: enum
+    options: [ standard, strict ]
+    default: strict
+    label: Sandbox
+    help: strict gives the worker no network at all and holds files to the request's folder by the kernel (Linux only; elsewhere nothing runs); standard is for development.
+  timeout-seconds: { type: int, default: 60, min: 1, unit: s, label: Time budget of an interactive or event request }
+  timeout-batch-seconds: { type: int, default: 600, min: 1, unit: s, label: Time budget of a batch request }
+  start-timeout-seconds: { type: int, default: 60, min: 1, unit: s, label: Time a worker may take to start }
+  max-inflight-per-user: { type: int, default: 4, min: 1, label: One person's requests at once, help: The rest wait behind other people's. }
+  queue-interactive: { type: int, default: 256, min: 0, label: Waiting interactive requests, help: A full queue answers ENG-5001 at once. }
+  queue-event: { type: int, default: 10000, min: 0, label: Waiting event requests }
+  queue-batch: { type: int, default: 100000, min: 0, label: Waiting batch requests }
+  max-result-mb: { type: int, default: 256, min: 1, unit: MB, label: Largest result a worker may hand back }
+  max-input-rows: { type: int, default: 50000, min: 1, label: Most rows of one frame handed to code }
+  max-rows: { type: int, default: 100000, min: 1, label: Most rows a transform may return }
+  max-groups: { type: int, default: 5000, min: 1, label: Most groups a measure may return }
+  packages:
+    type: list
+    items: text
+    default: [ numpy, pandas, pyarrow, scipy, polars ]
+    label: Packages approved code may import
+    help: The pinned allow-list besides the safe standard library; an item lists the subset it needs.
+params:
+  item: { type: text, required: true, label: Code item, help: The name of an approved code item. }
+  version: { type: text, label: Version, help: An approved version of the item; empty means its highest. }
+  inputs: { type: list, items: text, default: [], label: Input columns, help: The columns of the frame the code reads. }
+  group-by: { type: list, items: text, default: [], label: Group by, help: The columns whose values make a group. }
+  tables:
+    type: records
+    label: Tables
+    help: The tables the code reads. name is the table in the request's catalogue, as is the name the code sees it by (default name), columns are NAME:type.
+    fields:
+      name: { type: text, required: true }
+      as: { type: text }
+      columns: { type: list, items: text, default: [] }
+  frame: { type: text, label: Main frame, help: The as of the table a measure, column, visual, cell or function reads. }
+  frames: { type: list, items: text, default: [], label: Input frames, help: The as of each table a transform reads, in order. }
+  names: { type: list, items: text, default: [], label: Input names, help: The names a transform's build(inputs, params) finds its frames by. }
+  extracts:
+    type: document
+    schema: { type: object }
+    label: Notebook extracts
+    help: Other tables a notebook cell reads, by the name extract(name) uses, to the as of the table.
+  contract:
+    type: document
+    schema: { type: object }
+    label: Column types
+    help: A transform's declared column types (date, timestamp, string, ...): text the contract calls a date is read as one.
+  params:
+    type: document
+    schema: { type: object }
+    label: Code parameters
+    help: The item's own parameters, handed to it as params.
+  format: { type: enum, options: [ echarts, vega-lite, drishti-chart, svg, png ], default: drishti-chart, label: Visual format }
+  shards: { type: int, default: 1, min: 1, max: 64, label: Shards, help: A function's rows are cut into this many pieces, added apart and merged in order; a mergeable function gives the same figure as one pass. }
+  batch-rows: { type: int, default: 65536, min: 1, label: Rows per batch, help: The size of a batch a function is fed. }
+outputs:
+  measure:
+    title: Measure by group
+    about: One number per group from approved measure code (compute or compute_groups). GROUP is the group's key as a JSON list; CODE is the hash of the code that gave the figure.
+    params: [ item, version, inputs, group-by, tables, frame, params ]
+    needs: [ code, frames ]
+    key: [ ITEM, GROUP ]
+    columns:
+      - { name: ITEM,  type: string, nullable: false, label: Item }
+      - { name: GROUP, type: string, nullable: false, label: Group }
+      - { name: VALUE, type: number, nullable: true, label: Value, measure: true, exact: "relative:1e-12" }
+      - { name: CODE,  type: string, nullable: false, label: Code hash }
+  column:
+    title: Derived column
+    about: One value per input row from approved column code (derive); a number in VALUE, any other value as text in TEXT.
+    params: [ item, version, inputs, tables, frame, params ]
+    needs: [ code, frames ]
+    key: [ ITEM, ROW ]
+    columns:
+      - { name: ITEM,  type: string,  nullable: false, label: Item }
+      - { name: ROW,   type: integer, nullable: false, label: Row }
+      - { name: VALUE, type: number,  nullable: true, label: Value, measure: true, exact: "relative:1e-12" }
+      - { name: TEXT,  type: string,  nullable: true, label: Text }
+  transform:
+    title: Transform
+    about: The rows of a table made by approved transform code (run or build). CELLS is one row as a JSON object; the answer's notes give the columns and their types.
+    params: [ item, version, tables, frames, names, contract, params ]
+    needs: [ code, frames ]
+    key: [ ITEM, ROW ]
+    columns:
+      - { name: ITEM,  type: string,  nullable: false, label: Item }
+      - { name: ROW,   type: integer, nullable: false, label: Row }
+      - { name: CELLS, type: string,  nullable: false, label: Row as JSON }
+  visual:
+    title: Visual
+    about: A chart made by approved visual code, as data: a drishti-chart, ECharts or Vega-Lite specification (JSON), SVG text or PNG (base64); never script or HTML.
+    params: [ item, version, inputs, tables, frame, format, params ]
+    needs: [ code, frames ]
+    key: [ ITEM ]
+    columns:
+      - { name: ITEM, type: string, nullable: false, label: Item }
+      - { name: KIND, type: string, nullable: false, label: Kind }
+      - { name: SPEC, type: string, nullable: false, label: Specification }
+  cell:
+    title: Notebook cell
+    about: What an approved notebook cell printed and the table its result holds (JSON).
+    params: [ item, version, tables, frame, extracts, params ]
+    needs: [ code, frames ]
+    key: [ ITEM ]
+    columns:
+      - { name: ITEM,   type: string, nullable: false, label: Item }
+      - { name: STDOUT, type: string, nullable: false, label: Printed }
+      - { name: RESULT, type: string, nullable: true, label: Result table as JSON }
+  function:
+    title: Custom aggregate by group
+    about: One number per group from an approved custom aggregate function (start, add, merge, finish) over the frame's rows.
+    params: [ item, version, tables, frame, group-by, shards, batch-rows, params ]
+    needs: [ code, frames ]
+    key: [ ITEM, GROUP ]
+    columns:
+      - { name: ITEM,  type: string, nullable: false, label: Item }
+      - { name: GROUP, type: string, nullable: false, label: Group }
+      - { name: VALUE, type: number, nullable: true, label: Value, measure: true, exact: "relative:1e-12" }
+      - { name: CODE,  type: string, nullable: false, label: Code hash }
+  check:
+    title: Static check
+    about: The problems a static check finds in an approved item's source against the interface and the allow-list; nothing runs.
+    params: [ item, version ]
+    needs: [ code ]
+    key: [ ITEM, N ]
+    columns:
+      - { name: ITEM,    type: string,  nullable: false, label: Item }
+      - { name: N,       type: integer, nullable: false, label: Number }
+      - { name: LEVEL,   type: string,  nullable: true, label: Level }
+      - { name: CODE,    type: string,  nullable: true, label: Code }
+      - { name: PATH,    type: string,  nullable: true, label: Where }
+      - { name: MESSAGE, type: string,  nullable: false, label: Problem }
+capabilities: [ explain, workbook, incremental, process ]
+limits:
+  memory: { fixed-bytes: 65536, per-row-bytes: { code: 4096 } }
+  cancel-latency: 1s
+ui: { group: Python, words: [ PYTHON ] }

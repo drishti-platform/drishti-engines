@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Drishti Engines · first-party engines by contract.
+  Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>. All rights reserved. PROPRIETARY AND CONFIDENTIAL. See the LICENSE file.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent><groupId>com.ash.engines</groupId><artifactId>engines-python-parent</artifactId><version>0.1.0-SNAPSHOT</version></parent>
+  <artifactId>engines-python</artifactId>
+  <name>Drishti Engines: python engine JAR (descriptor and worker package; no Java class)</name>
+  <description>The engine as a host loads it: the descriptor and the Python worker package as resources. It registers no Java class (the descriptor carries worker:), so the kit's scan has no process call to find; the host-side process binding is engines-python-pool.</description>
+  <build>
+    <resources>
+      <resource><directory>src/main/resources</directory></resource>
+      <resource>
+        <directory>../worker/src</directory>
+        <targetPath>engine-python-worker</targetPath>
+        <includes><include>engine_python/**/*.py</include></includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+        <configuration><archive><manifestEntries><Engine-Api>0.1</Engine-Api></manifestEntries></archive></configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
