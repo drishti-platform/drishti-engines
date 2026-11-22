@@ -26,6 +26,7 @@
     <module>engine-capacity</module>
     <module>engine-genomics-workbench</module>
     <module>engine-indicators</module>
+    <module>engine-query</module>
     <module>engines-guards</module>
   </modules>
 

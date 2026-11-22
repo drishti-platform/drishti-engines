@@ -27,7 +27,7 @@ final class Repo {
     static final Path JAVA = ROOT.resolve("java");
 
     /** The engine modules. */
-    static final List<String> ENGINES = List.of("engine-capacity", "engine-genomics-workbench", "engine-indicators");
+    static final List<String> ENGINES = List.of("engine-capacity", "engine-genomics-workbench", "engine-indicators", "engine-query");
 
     private Repo() {
     }

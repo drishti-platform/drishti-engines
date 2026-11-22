@@ -1,0 +1,214 @@
+# Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>. All rights reserved. Drishti Engines. Proprietary: see LICENSE.
+# The query engine's hand cases: one small trades table, each document kind, totals, top N and Others, shares and show-as, a
+# calculation group with a time window, the exact path, a missing table and column, and a refusal per own code.
+suite: query/pivot
+engine: query
+since: "0.1"
+description: Totals, top N with Others, shares, a derived kind, a model query, a calculation group, the exact path, missing inputs, refusals.
+given:
+  snapshot: { date: "2026-03-31" }
+  inputs:
+    tables:
+      tables:
+        trades:
+          rows:
+            - { ID: t1, REGION: EMEA, DESK: FX,    CCY: USD, TRADE_DATE: "2026-01-15", PNL: 10.5, NOTIONAL: 100.0 }
+            - { ID: t2, REGION: EMEA, DESK: RATES, CCY: EUR, TRADE_DATE: "2026-02-10", PNL: 4.0,  NOTIONAL: 50.0 }
+            - { ID: t3, REGION: APAC, DESK: FX,    CCY: USD, TRADE_DATE: "2025-12-31", PNL: 2.25, NOTIONAL: 20.0 }
+            - { ID: t4, REGION: APAC, DESK: FX,    CCY: USD, TRADE_DATE: "2026-03-02", PNL: -1.0, NOTIONAL: 10.0 }
+            - { ID: t5, REGION: AMER, DESK: RATES, CCY: USD, TRADE_DATE: "2026-04-01", PNL: null, NOTIONAL: 30.0 }
+cases:
+  - id: totals-by-region
+    source: "by hand: P = 10.5 + 4 + 2.25 - 1 = 15.75 (AMER has no P&L); N counts rows"
+    reference: true
+    request: { outputs: [ cells, members ], params: { view: { source: trades, rows: [ REGION ], values: [ { measure: "sum(PNL)", as: P }, { measure: "count()", as: N } ] } }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        cells:
+          subset: true
+          columns: [ ROW, COLUMN, VALUE, NUMBER, ROWS, NOTE ]
+          rows:
+            - [ "*", "*", N, 5.0, 5, null ]
+            - [ "*", "*", P, 15.75, 5, null ]
+            - [ "REGION=AMER", "*", N, 1.0, 1, null ]
+            - [ "REGION=AMER", "*", P, null, 1, "no values in the cell" ]
+            - [ "REGION=APAC", "*", N, 2.0, 2, null ]
+            - [ "REGION=APAC", "*", P, 1.25, 2, null ]
+            - [ "REGION=EMEA", "*", N, 2.0, 2, null ]
+            - [ "REGION=EMEA", "*", P, 14.5, 2, null ]
+        members:
+          columns: [ AXIS, PATH, DEPTH, DIMENSION, MEMBER, PARENT, OPEN, OTHERS, ORDINAL ]
+          rows:
+            - [ columns, "*", 0, null, null, null, false, false, 4 ]
+            - [ rows, "*", 0, null, null, null, true, false, 0 ]
+            - [ rows, "REGION=AMER", 1, REGION, AMER, "*", false, false, 1 ]
+            - [ rows, "REGION=APAC", 1, REGION, APAC, "*", false, false, 2 ]
+            - [ rows, "REGION=EMEA", 1, REGION, EMEA, "*", false, false, 3 ]
+
+  - id: the-exact-path
+    source: "by hand, as totals-by-region: every figure from a scan, summed exactly"
+    given: { options: { exact-path: true } }
+    request: { outputs: [ cells ], params: { view: { source: trades, rows: [ REGION ], values: [ { measure: "sum(PNL)", as: P } ] } }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        cells:
+          subset: true
+          columns: [ ROW, COLUMN, VALUE, NUMBER ]
+          rows:
+            - [ "*", "*", P, 15.75 ]
+            - [ "REGION=AMER", "*", P, null ]
+            - [ "REGION=APAC", "*", P, 1.25 ]
+            - [ "REGION=EMEA", "*", P, 14.5 ]
+
+  - id: top-one-region-and-others
+    source: "by hand: EMEA (14.5) is the top region; Others is AMER and APAC, its own rows: 1.25 over 3 rows, never 15.75 - 14.5"
+    request: { outputs: [ cells ], params: { view: { source: trades, rows: [ REGION ], values: [ { measure: "sum(PNL)", as: P } ], top: { REGION: { n: 1, by: P } } } }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        cells:
+          subset: true
+          columns: [ ROW, COLUMN, VALUE, NUMBER, ROWS ]
+          rows:
+            - [ "*", "*", P, 15.75, 5 ]
+            - [ "REGION=(others)", "*", P, 1.25, 3 ]
+            - [ "REGION=EMEA", "*", P, 14.5, 2 ]
+
+  - id: shares-and-percent-of-grand
+    source: "by hand: 1.25 / 15.75 and 14.5 / 15.75 (Python's division of the same doubles)"
+    request:
+      outputs: [ cells ]
+      params:
+        view:
+          source: trades
+          rows: [ REGION ]
+          values: [ { measure: "share_of(sum(PNL), over = [REGION])", as: S }, { measure: "sum(PNL)", as: G, showAs: pct-grand } ]
+      visibility: all
+      seed: 0
+    expect:
+      status: complete
+      tables:
+        cells:
+          subset: true
+          columns: [ ROW, COLUMN, VALUE, NUMBER ]
+          rows:
+            - [ "*", "*", G, 1.0 ]
+            - [ "*", "*", S, 1.0 ]
+            - [ "REGION=AMER", "*", G, null ]
+            - [ "REGION=AMER", "*", S, null ]
+            - [ "REGION=APAC", "*", G, 0.07936507936507936 ]
+            - [ "REGION=APAC", "*", S, 0.07936507936507936 ]
+            - [ "REGION=EMEA", "*", G, 0.9206349206349206 ]
+            - [ "REGION=EMEA", "*", S, 0.9206349206349206 ]
+
+  - id: a-calculation-group-with-year-to-date
+    source: "by hand: as of 2026-03-31 the year to date holds t1, t2 and t4: 10.5 + 4 - 1 = 13.5"
+    request:
+      outputs: [ cells ]
+      params:
+        view:
+          source: trades
+          columns: [ "calc:Time" ]
+          values: [ { measure: "sum(PNL)", as: P } ]
+          calc-groups: { Time: { items: { Current: SELECTED, YTD: "ytd(SELECTED, TRADE_DATE)" } } }
+      visibility: all
+      seed: 0
+    expect:
+      status: complete
+      tables:
+        cells:
+          subset: true
+          columns: [ ROW, COLUMN, VALUE, NUMBER ]
+          rows:
+            - [ "*", "*", P, 15.75 ]
+            - [ "*", "calc:Time=Current", P, 15.75 ]
+            - [ "*", "calc:Time=YTD", P, 13.5 ]
+
+  - id: a-derived-kind
+    source: "by hand: per region, the count of trades, the P&L summed and the largest notional"
+    request:
+      outputs: [ cells ]
+      params: { derived: { kind: region-pnl, from: trades, group-by: "$.REGION", fields: { n: count, pnl: "sum $.PNL", big: "max $.NOTIONAL" } } }
+      visibility: all
+      seed: 0
+    expect:
+      status: complete
+      tables:
+        cells:
+          subset: true
+          columns: [ ROW, COLUMN, VALUE, NUMBER ]
+          rows:
+            - [ "REGION=AMER", "*", big, 30.0 ]
+            - [ "REGION=AMER", "*", n, 1.0 ]
+            - [ "REGION=AMER", "*", pnl, null ]
+            - [ "REGION=APAC", "*", big, 20.0 ]
+            - [ "REGION=APAC", "*", n, 2.0 ]
+            - [ "REGION=APAC", "*", pnl, 1.25 ]
+            - [ "REGION=EMEA", "*", big, 100.0 ]
+            - [ "REGION=EMEA", "*", n, 2.0 ]
+            - [ "REGION=EMEA", "*", pnl, 14.5 ]
+
+  - id: a-model-query-ordered-and-limited
+    source: "by hand: notional by desk, FX 130 and RATES 80; the largest one"
+    request:
+      outputs: [ cells ]
+      params: { query: { from: trades, fields: [ DESK ], measures: [ Notional ], model: { measures: { Notional: "sum(NOTIONAL)" } }, orderBy: [ { by: Notional, desc: true } ], limit: 1 } }
+      visibility: all
+      seed: 0
+    expect:
+      status: complete
+      tables:
+        cells:
+          subset: true
+          columns: [ ROW, COLUMN, VALUE, NUMBER ]
+          rows:
+            - [ "DESK=FX", "*", Notional, 130.0 ]
+
+  - id: a-table-that-is-not-there
+    source: "section 8.2: not found, with the open table named"
+    request: { outputs: [ cells ], params: { view: { source: nope, values: [ "count()" ] } }, visibility: all, seed: 0 }
+    expect: { status: not-found, missing: [ { input: "tables:nope", outputs: [ cells ] } ] }
+
+  - id: a-field-that-is-not-there
+    source: "section 8.2: the caller's table has no column MTM"
+    request: { outputs: [ cells ], params: { view: { source: trades, values: [ "sum(MTM)" ] } }, visibility: all, seed: 0 }
+    expect: { status: not-found, missing: [ { input: "tables:trades", columns: [ MTM ], outputs: [ cells ] } ] }
+
+  - id: no-document
+    source: "QUERY_ENGINE.md section 9: QRY-1001"
+    request: { outputs: [ cells ], params: {}, visibility: all, seed: 0 }
+    expect: { refused: QRY-1001 }
+
+  - id: a-formula-that-does-not-read
+    source: "QUERY_ENGINE.md section 9: QRY-1003"
+    request: { outputs: [ cells ], params: { view: { source: trades, values: [ "sum(PNL" ] } }, visibility: all, seed: 0 }
+    expect: { refused: QRY-1003 }
+
+  - id: a-function-that-is-not-known
+    source: "QUERY_ENGINE.md section 9: QRY-1004"
+    request: { outputs: [ cells ], params: { view: { source: trades, values: [ "frobnicate(PNL)" ] } }, visibility: all, seed: 0 }
+    expect: { refused: QRY-1004 }
+
+  - id: a-measure-that-names-itself
+    source: "QUERY_ENGINE.md section 9: QRY-1005"
+    request: { outputs: [ cells ], params: { view: { source: trades, values: [ A ], measures: { A: "B + 1", B: "A * 2" } } }, visibility: all, seed: 0 }
+    expect: { refused: QRY-1005 }
+
+  - id: over-the-cell-budget
+    source: "QUERY_ENGINE.md section 9: QRY-2001 (4 rows x 1 column x 2 values > 2)"
+    given: { options: { max-cells: 2 } }
+    request: { outputs: [ cells ], params: { view: { source: trades, rows: [ REGION ], values: [ "sum(PNL)", "count()" ] } }, visibility: all, seed: 0 }
+    expect: { refused: QRY-2001 }
+
+  - id: over-the-holistic-budget
+    source: "QUERY_ENGINE.md section 9: QRY-2002 (4 rows x 1 column x 1 value > 3, the value holistic)"
+    given: { options: { max-holistic-cells: 3 } }
+    request: { outputs: [ cells ], params: { view: { source: trades, rows: [ REGION ], values: [ "median(PNL)" ] } }, visibility: all, seed: 0 }
+    expect: { refused: QRY-2002 }
+
+  - id: rows-as-they-are
+    source: "QUERY_ENGINE.md section 9: QRY-4001"
+    request: { outputs: [ cells ], params: { query: { from: trades, fields: [ ID ], detail: true } }, visibility: all, seed: 0 }
+    expect: { refused: QRY-4001 }
