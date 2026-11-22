@@ -1,0 +1,307 @@
+# Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>. All rights reserved. Drishti Engines. Proprietary: see LICENSE.
+#
+# The query engine (EN-51): Drishti's pivot core and its BI query engine folded into one engine; derived kinds are its declarations.
+# The E0 paper-review object of EN-53, beside docs/QUERY_ENGINE.md (the design in words and the open points). Draft 1, 2026-11-22.
+#
+# One open input (every table the request's document names, read as the caller), three document parameters (a pivot view, a model
+# query, a derived-kind declaration) that the engine reads into one plan, two tidy outputs (cells and axis members) whose schema does
+# not depend on the question, one output that compares two snapshots (why a cell moved). Grouping is pushed to the host's executor
+# through the grouped scan when the host offers it; the option exact-path never uses it.
+engine: 1
+id: query
+version: 0.1.0
+title: Query
+about: >-
+  Pivot views, model queries and derived-kind declarations over tables the request names, read as the caller: cells with subtotals
+  and totals, measures and formulas, calc, share_of, time windows, calculation groups, show-as, top N with Others, sorting, money
+  conversion at given rates. Grouping and the mergeable aggregates (sum, count, min, max) are pushed to the source when the host offers
+  a grouped scan; holistic functions and expression keys are computed from a scan. Every figure is explained from its own formula.
+publisher: { id: com.ash.engines, name: Drishti Engines }
+product: drishti-platform
+api: "0.1"
+platform: { tools: "1.1" }
+codes: QRY
+snapshot:
+  dimensions: [ { name: date, type: date, label: Business date } ]
+inputs:
+  tables:
+    open: true
+    mode: request
+    about: >-
+      Any table the request's document names (a pack's kind, a lake table, a model's table with its relations already joined by the
+      host), resolved in the host's catalogue as the caller: row rules and masks applied before delivery, its columns those the caller
+      may read. A name the document does not hold is refused by the host (ENG-2001); a table the caller may not read is not present.
+options:
+  exact-path:
+    type: bool
+    default: false
+    forces: exact-path
+    label: Force the exact path
+    help: >-
+      Never use a grouped scan: every aggregate is computed from a scan, sums exactly (order-free, rounded once), so NUMBER is the
+      same bits wherever and however the rows arrive.
+  max-cells:
+    type: int
+    default: 20000
+    min: 1
+    label: Cell budget
+    help: The most cells an answer may hold, totals included; a bigger question is refused with the count (QRY-2001), never cut short.
+  max-holistic-cells:
+    type: int
+    default: 5000
+    min: 1
+    label: Cell budget with a holistic measure
+    help: The most cells when a measure is holistic (median, percentile, distinct counts); refused with the count beyond (QRY-2002).
+  batch-rows:
+    type: int
+    default: 4096
+    min: 1
+    max: 1048576
+    label: Batch rows
+    help: The batch size asked of the host for scans and grouped scans. It changes no figure.
+  explain-rows:
+    type: int
+    default: 50
+    min: 1
+    max: 10000
+    label: Rows shown per explained aggregate
+    help: An explanation lists at most this many of a cell's rows by value and gives the rest as one subtotal, saying so.
+  workbook-rows:
+    type: int
+    default: 100000
+    min: 1
+    label: Workbook row limit
+    help: A workbook whose Data sheet would hold more rows is refused with the count (QRY-3003).
+params:
+  view:
+    type: document
+    label: Pivot view
+    help: >-
+      What a pivot asks: a source table, row and column dimensions (a field, a field with a date grain, or a calculation group),
+      values (formulas in Rachana-EL), filters, open nodes, sort, top N, money conversion. A saved Drishti view is valid as it is.
+    schema:
+      type: object
+      additionalProperties: false
+      required: [ source, values ]
+      properties:
+        pivot: { const: 1 }
+        source: { type: string, minLength: 1, x-table: tables }
+        date: { type: [ string, "null" ], description: "the business date; the host makes it the snapshot, the engine does not read it" }
+        asOf: { type: [ string, "null" ] }
+        rows: { type: array, items: { type: string, pattern: "^([A-Za-z_][A-Za-z0-9_.]*(:(year|quarter|month|week|day))?|calc:[A-Za-z][A-Za-z0-9 _-]*)$" } }
+        columns: { type: array, items: { type: string, pattern: "^([A-Za-z_][A-Za-z0-9_.]*(:(year|quarter|month|week|day))?|calc:[A-Za-z][A-Za-z0-9 _-]*)$" } }
+        values:
+          type: array
+          minItems: 1
+          items:
+            oneOf:
+              - { type: string, minLength: 1 }
+              - type: object
+                additionalProperties: false
+                required: [ measure ]
+                properties:
+                  measure: { type: string, minLength: 1 }
+                  as: { type: string }
+                  showAs: { type: string, pattern: "^(pct-grand|pct-row|pct-column|pct-parent-row|rank|ntile:[0-9]+|diff:-?[0-9]+:.+|pct-change:-?[0-9]+:.+)$" }
+        measures: { type: object, additionalProperties: { type: string, minLength: 1 }, description: "named measures a value may name (a model's measures)" }
+        filters:
+          type: object
+          additionalProperties:
+            oneOf:
+              - { type: array, items: { type: [ string, number, boolean, "null" ] } }
+              - type: object
+                additionalProperties: false
+                properties:
+                  in: { type: array, items: { type: [ string, number, boolean, "null" ] } }
+                  notIn: { type: array, items: { type: [ string, number, boolean, "null" ] } }
+        where: { type: string, description: "one Rachana-EL condition over a row" }
+        expanded:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required: [ path ]
+            properties:
+              axis: { enum: [ rows, columns ] }
+              path: { type: array, items: { type: array, minItems: 2, maxItems: 2, items: { type: string } } }
+              by: { type: string }
+        expandTo:
+          type: object
+          additionalProperties: false
+          properties: { rows: { type: integer, minimum: 1 }, columns: { type: integer, minimum: 1 } }
+        sort:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: false
+            properties: { by: { type: string }, desc: { type: boolean } }
+        top:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: false
+            required: [ n ]
+            properties: { n: { type: integer, minimum: 1 }, by: { type: string } }
+        subtotals: { enum: [ below, above ] }
+        totals: { type: boolean, description: "false: no grand total and no subtotals (a model query's plain rows)" }
+        currency:
+          type: object
+          additionalProperties: false
+          required: [ report ]
+          properties:
+            report: { type: string, pattern: "^[A-Z]{3}$" }
+            field: { type: string }
+            money: { type: array, items: { type: string } }
+            rates: { type: object, additionalProperties: { type: number, exclusiveMinimum: 0 } }
+            source: { type: string }
+        calc-groups:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: false
+            required: [ items ]
+            properties:
+              precedence: { type: integer }
+              items: { type: object, additionalProperties: { type: string } }
+        calendar:
+          type: object
+          additionalProperties: false
+          properties:
+            holidays: { type: array, items: { type: string, format: date } }
+            fiscal-year-start: { type: integer, minimum: 1, maximum: 12 }
+        limit: { type: integer, minimum: 1 }
+        slicers: { type: array, items: { type: string }, description: "screen state, kept with a view; not read" }
+        formats: { type: object, description: "screen state, kept with a view; not read" }
+        options: { type: object, additionalProperties: { type: string }, description: "a measure provider's settings, passed to the measures port" }
+  query:
+    type: document
+    label: Model query
+    help: >-
+      What a BI visual asks: fields to group by, measures (a model measure's name or a formula), filters with operators, business
+      dates, order and a row limit, over one model table (the host joins the model's relations into it). The model's measures,
+      calculation groups and calendar travel with the query.
+    schema:
+      type: object
+      additionalProperties: false
+      required: [ from ]
+      properties:
+        from: { type: string, minLength: 1, x-table: tables }
+        fields: { type: array, items: { type: string } }
+        measures: { type: array, items: { type: string, minLength: 1 } }
+        filters:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required: [ field, op ]
+            properties:
+              field: { type: string }
+              op: { enum: [ eq, ne, in, not-in, lt, le, gt, ge, between, contains, starts-with, is-null, not-null ] }
+              values: { type: array }
+        dates:
+          type: object
+          additionalProperties: false
+          properties: { field: { type: string }, from: { type: string }, to: { type: string } }
+        orderBy:
+          type: array
+          items: { type: object, additionalProperties: false, required: [ by ], properties: { by: { type: string }, desc: { type: boolean } } }
+        limit: { type: integer, minimum: 1 }
+        totals: { type: boolean }
+        detail: { type: boolean, description: "rows as they are: not this engine's (QRY-4001); the kernel's read path answers them" }
+        model:
+          type: object
+          additionalProperties: false
+          properties:
+            measures: { type: object, additionalProperties: { type: string } }
+            calc-groups: { type: object }
+            calendar: { type: object }
+            currency: { type: object }
+  derived:
+    type: document
+    label: Derived kind
+    help: >-
+      A pack's derived kind: the rows of one table grouped by an expression (and further groupings each row joins), each group one
+      entity with fields aggregated over its members. Member lists, member rows and page trees are rows as they are: the host keeps them.
+    schema:
+      type: object
+      additionalProperties: false
+      required: [ kind, from, group-by, fields ]
+      properties:
+        kind: { type: string, minLength: 1 }
+        from: { type: string, minLength: 1, x-table: tables }
+        where: { type: string }
+        group-by: { type: string, minLength: 1 }
+        also-group-by: { type: object, additionalProperties: { type: string } }
+        id: { type: string, description: "the members' order for first: a Rachana-EL expression over a row" }
+        fields:
+          type: object
+          additionalProperties: { type: string, pattern: "^(count|(sum|avg|median|min|max|distinct|first) .+)$" }
+  against:
+    type: date
+    label: Compared with
+    help: The other business date of a comparison; the same view is asked there, under the same visibility.
+  split-by:
+    type: text
+    label: Split by
+    help: The dimension whose members the change of each cell is split into.
+outputs:
+  cells:
+    title: Cells
+    about: >-
+      One row per cell, value and total of the answer: ROW and COLUMN are the cell's coordinates on each axis in canonical form
+      (DIM=member joined by |, dimensions sorted by name; * for the total), VALUE the value's label. NUMBER is made from floating-point
+      states of a grouped scan when the host offers one, so it is exact to relative 1e-12; with exact-path it is the same bits.
+    params: [ view, query, derived ]
+    key: [ ROW, COLUMN, VALUE ]
+    columns:
+      - { name: ROW,    type: string,  nullable: false, label: Row coordinates }
+      - { name: COLUMN, type: string,  nullable: false, label: Column coordinates }
+      - { name: VALUE,  type: string,  nullable: false, label: Value }
+      - { name: NUMBER, type: number,  nullable: true,  label: Figure, measure: true, exact: "relative:1e-12" }
+      - { name: TEXT,   type: string,  nullable: true,  label: Figure as text }
+      - { name: ROWS,   type: integer, nullable: false, label: Rows in the cell }
+      - { name: NOTE,   type: string,  nullable: true,  label: Why the figure is empty }
+  members:
+    title: Axis members
+    about: >-
+      One row per node of each axis: its path, depth, dimension and member, its parent, whether its children were computed, whether it
+      is the Others member of a top N, and its place on the axis after sorting and top N.
+    params: [ view, query, derived ]
+    key: [ AXIS, PATH ]
+    order: [ AXIS, ORDINAL ]
+    columns:
+      - { name: AXIS,      type: string,  nullable: false, label: Axis }
+      - { name: PATH,      type: string,  nullable: false, label: Path }
+      - { name: DEPTH,     type: integer, nullable: false, label: Depth }
+      - { name: DIMENSION, type: string,  nullable: true,  label: Dimension }
+      - { name: MEMBER,    type: string,  nullable: true,  label: Member }
+      - { name: PARENT,    type: string,  nullable: true,  label: Parent path }
+      - { name: OPEN,      type: boolean, nullable: false, label: Children computed }
+      - { name: OTHERS,    type: boolean, nullable: false, label: Others of a top N }
+      - { name: ORDINAL,   type: integer, nullable: false, label: Place on the axis }
+  changes:
+    title: Why the cells moved
+    about: >-
+      For each cell of the view, its figure at the other date and here, and the change split by the members of one dimension; the
+      parts add up to the change for mergeable measures. The other date is asked of this engine there (EngineContext.peer).
+    params: [ view, against, split-by ]
+    key: [ ROW, COLUMN, VALUE, BY ]
+    columns:
+      - { name: ROW,    type: string, nullable: false, label: Row coordinates }
+      - { name: COLUMN, type: string, nullable: false, label: Column coordinates }
+      - { name: VALUE,  type: string, nullable: false, label: Value }
+      - { name: BY,     type: string, nullable: false, label: Member of the split }
+      - { name: BEFORE, type: number, nullable: true,  label: At the other date, measure: true, exact: "relative:1e-12" }
+      - { name: AFTER,  type: number, nullable: true,  label: Here, measure: true, exact: "relative:1e-12" }
+      - { name: CHANGE, type: number, nullable: true,  label: Change, measure: true, exact: "relative:1e-12" }
+capabilities: [ explain, workbook ]
+uses:
+  measures:
+    contract: platform/query-cells@1
+    about: >-
+      A measure provider: another engine's output offered as measures over any grouping (the VaR of a desk). Asked with the view
+      document; answers cells in this engine's cells form for the values it names. Unbound: those values are missing, "not supplied".
+limits:
+  memory: { fixed-bytes: 1048576 }
+  cancel-latency: 200ms
+ui: { group: Analytics, words: [ PIVOT, BI ] }
