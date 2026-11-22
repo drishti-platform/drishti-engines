@@ -1,0 +1,163 @@
+# Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>. All rights reserved. Drishti Engines. Proprietary: see LICENSE.
+# The genomics showcase's computations as an engine: the figures of a selection of samples, the cohort matrix, activity by design round, the leaderboard.
+engine: 1
+id: genomics-workbench
+version: 0.1.0
+title: Genomics workbench
+about: >-
+  The computations behind the genomics showcase, over the rows of its contracts: the figures of a selection of samples (responders, and the
+  response of the carriers of a gene against the others), the cohort matrix (the most altered genes, the samples sorted so each gene's carriers
+  sit together), the activity of protein designs by round (five percentiles) and the leaderboard of the best designs. Every figure is explained
+  and has a workbook.
+publisher: { id: com.ash.engines, name: Drishti Engines }
+product: drishti-genomics
+api: "0.1"
+platform: { tools: "1.1" }
+snapshot:
+  dimensions: []
+inputs:
+  study-sample:
+    contract: genomics/study-sample@1
+    about: One row per sample of a study, with its cohort, cluster, response and place on the map of samples.
+    key: [ SAMPLE_ID ]
+    columns: [ SAMPLE_ID, COHORT, TUMOUR_TYPE, RESPONSE, CLUSTER, EMB_X, EMB_Y ]
+    scope-columns: [ SAMPLE_ID ]
+    mode: session
+  variant-call:
+    contract: genomics/variant-call@1
+    about: One row per sample carrying one variant.
+    columns: [ SAMPLE_ID, VARIANT_ID ]
+    scope-columns: [ SAMPLE_ID ]
+    mode: session
+  study-variant:
+    contract: genomics/study-variant@1
+    about: One row per variant, with its gene and consequence.
+    key: [ VARIANT_ID ]
+    columns: [ VARIANT_ID, GENE, CONSEQUENCE ]
+    mode: session
+  study-gene:
+    contract: genomics/study-gene@1
+    about: One row per gene with its place on the genome.
+    key: [ GENE ]
+    columns: [ GENE, CHROM, START, END ]
+    mode: session
+  cnv-segment:
+    contract: genomics/cnv-segment@1
+    about: One row per copy-number segment of a sample.
+    columns: [ SAMPLE_ID, CHROM, START, END, CALL, COPY_NUMBER ]
+    scope-columns: [ SAMPLE_ID ]
+    mode: session
+  protein:
+    contract: protein/protein@1
+    about: One row per protein, with the gene it is made from.
+    key: [ PROTEIN ]
+    columns: [ PROTEIN, GENE ]
+    mode: session
+  design:
+    contract: protein/design@1
+    about: One row per protein design: its round, parent, activity and measurements.
+    key: [ DESIGN_ID ]
+    columns: [ DESIGN_ID, PROTEIN, ROUND, PARENT, N_CHANGES, ACTIVITY, DELTA_TM, MODEL_SCORE, STATUS ]
+    mode: session
+  design-mutation:
+    contract: protein/design-mutation@1
+    about: One row per change a design makes.
+    columns: [ DESIGN_ID, POS, AA_FROM, AA_TO, MUTATION ]
+    mode: session
+  design-round:
+    contract: protein/design-round@1
+    about: One row per round of a campaign, with its method.
+    columns: [ PROTEIN, ROUND, METHOD ]
+    mode: session
+params:
+  cohort: { type: text, default: "", label: Cohort, help: The cohort of samples; ALL or empty for every cohort. }
+  cluster: { type: text, default: "", label: Clusters, help: Clusters of the cohort as a comma-separated list; empty for any. }
+  box: { type: text, default: "", label: Rectangle, help: A rectangle on the map of samples as x0 x1 y0 y1 separated by commas; empty for none. }
+  samples: { type: text, default: "", label: Named samples, help: Sample ids as a comma-separated list (at most 3000); empty for any. }
+  gene: { type: text, default: "", label: Gene, help: A gene whose alteration is compared within the selection; empty for none. }
+  genes-wanted: { type: int, default: 24, min: 1, max: 60, label: Genes in the matrix, help: How many of the most altered genes the matrix shows. }
+  protein: { type: text, default: "", label: Protein, help: A protein by its name or its gene's. }
+  round: { type: int, default: 0, min: 0, label: Up to round, help: The leaderboard counts designs of this round and earlier; 0 for every round. }
+  n: { type: int, default: 20, min: 1, max: 200, label: Designs, help: How many designs the leaderboard shows. }
+outputs:
+  summary:
+    title: Figures of a selection
+    about: One row. The samples of the selection, how many responded, and with a gene the share altered and the response of the carriers against the others.
+    params: [ cohort, cluster, box, samples, gene ]
+    needs: [ study-sample, study-variant, variant-call, study-gene, cnv-segment ]
+    key: [ COHORT ]
+    columns:
+      - { name: COHORT, type: string, nullable: false, label: Cohort }
+      - { name: SELECTION, type: string, nullable: false, label: Selection }
+      - { name: COHORT_SAMPLES, type: integer, nullable: false, label: Samples of the cohort }
+      - { name: SAMPLES, type: integer, nullable: false, label: Samples of the selection }
+      - { name: RESPONDERS, type: integer, nullable: false, label: Responders }
+      - { name: RESPONSE_RATE, type: number, nullable: true, label: Response rate, measure: true, exact: bits }
+      - { name: ALTERED, type: integer, nullable: true, label: Samples with the gene altered }
+      - { name: ALTERED_RATE, type: number, nullable: true, label: Share altered, measure: true, exact: bits }
+      - { name: RESPONSE_IF_ALTERED, type: number, nullable: true, label: Response if altered, measure: true, exact: bits }
+      - { name: RESPONSE_IF_NOT, type: number, nullable: true, label: Response if not altered, measure: true, exact: bits }
+  matrix-cells:
+    title: Cohort matrix, altered cells
+    about: One row per altered gene of a sample, the samples in the mutual-exclusivity order and the genes in the order of matrix-genes.
+    params: [ cohort, cluster, box, samples, gene, genes-wanted ]
+    needs: [ study-sample, study-variant, variant-call, study-gene, cnv-segment ]
+    key: [ SAMPLE_ID, GENE ]
+    order: [ ORDINAL ]
+    columns:
+      - { name: ORDINAL, type: integer, nullable: false, label: Order }
+      - { name: SAMPLE_ID, type: string, nullable: false, label: Sample }
+      - { name: GENE, type: string, nullable: false, label: Gene }
+      - { name: ALTERATION, type: string, nullable: false, label: Alteration }
+  matrix-genes:
+    title: Cohort matrix, genes
+    about: The most altered genes of the selection (and the one asked for first), with how many samples carry each.
+    params: [ cohort, cluster, box, samples, gene, genes-wanted ]
+    needs: [ study-sample, study-variant, variant-call, study-gene, cnv-segment ]
+    key: [ GENE ]
+    order: [ RANK ]
+    columns:
+      - { name: RANK, type: integer, nullable: false, label: Rank }
+      - { name: GENE, type: string, nullable: false, label: Gene }
+      - { name: SAMPLES, type: integer, nullable: false, label: Samples altered }
+      - { name: PCT, type: number, nullable: false, label: Share of the selection, measure: true, exact: bits }
+  rounds:
+    title: Activity by round
+    about: Each design round of a protein, with the 5th, 25th, 50th, 75th and 95th percentiles of activity, how many designs and the best.
+    params: [ protein ]
+    needs: [ protein, design, design-round ]
+    key: [ PROTEIN, ROUND ]
+    columns:
+      - { name: PROTEIN, type: string, nullable: false, label: Protein }
+      - { name: ROUND, type: integer, nullable: false, label: Round }
+      - { name: LOW, type: number, nullable: false, label: 5th percentile, measure: true, exact: bits }
+      - { name: Q1, type: number, nullable: false, label: 25th percentile, measure: true, exact: bits }
+      - { name: MEDIAN, type: number, nullable: false, label: Median, measure: true, exact: bits }
+      - { name: Q3, type: number, nullable: false, label: 75th percentile, measure: true, exact: bits }
+      - { name: HIGH, type: number, nullable: false, label: 95th percentile, measure: true, exact: bits }
+      - { name: N, type: integer, nullable: false, label: Designs }
+      - { name: BEST, type: number, nullable: false, label: Best activity, measure: true, exact: bits }
+      - { name: METHOD, type: string, nullable: false, label: Method }
+  leaderboard:
+    title: Leaderboard
+    about: The best designs of a protein up to a round, most active first, each with its changes.
+    params: [ protein, round, n ]
+    needs: [ protein, design, design-mutation ]
+    key: [ DESIGN_ID ]
+    order: [ RANK ]
+    columns:
+      - { name: RANK, type: integer, nullable: false, label: Rank }
+      - { name: DESIGN_ID, type: string, nullable: false, label: Design }
+      - { name: ROUND, type: integer, nullable: false, label: Round }
+      - { name: ACTIVITY, type: number, nullable: false, label: Activity }
+      - { name: DELTA_TM, type: number, nullable: true, label: Change in melting temperature }
+      - { name: N_CHANGES, type: integer, nullable: true, label: Changes }
+      - { name: MODEL_SCORE, type: number, nullable: true, label: Model score }
+      - { name: STATUS, type: string, nullable: false, label: Status }
+      - { name: PARENT, type: string, nullable: false, label: Parent }
+      - { name: CHANGES, type: string, nullable: false, label: Changes made }
+capabilities: [ explain, workbook ]
+limits:
+  memory: { fixed-bytes: 1048576, per-row-bytes: { study-sample: 400, variant-call: 200, study-variant: 300, study-gene: 200, cnv-segment: 300, protein: 200, design: 400, design-mutation: 200, design-round: 200 } }
+  cancel-latency: 500ms
+ui: { group: Genomics, words: [ GENWB ] }

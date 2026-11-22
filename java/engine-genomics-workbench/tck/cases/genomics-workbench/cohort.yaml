@@ -1,0 +1,1502 @@
+# Copyright (c) 2026 Ashutosh Sinha <ajsinha@gmail.com>. All rights reserved. Drishti Engines. Proprietary: see LICENSE.
+# Written by tools/genomics_cases.py from Drishti's showcase fixture and its committed answers.json (the answers of GenomicsBoard and ProteinBench).
+suite: genomics-workbench/cohort
+engine: genomics-workbench
+since: "1.0"
+description: The showcase fixture's samples, calls, variants, genes and copy-number segments at the answers Drishti's own code gives; refusals.
+given:
+  inputs:
+    study-sample:
+      rows:
+        - {"SAMPLE_ID": "S001", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C1 quiet", "EMB_X": -3.579, "EMB_Y": -1.572}
+        - {"SAMPLE_ID": "S002", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 1.809, "EMB_Y": -1.139}
+        - {"SAMPLE_ID": "S003", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": 0.008, "EMB_Y": 2.643}
+        - {"SAMPLE_ID": "S004", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C1 quiet", "EMB_X": -3.974, "EMB_Y": -1.622}
+        - {"SAMPLE_ID": "S005", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C2 stromal", "EMB_X": 1.013, "EMB_Y": -1.957}
+        - {"SAMPLE_ID": "S006", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": 0.256, "EMB_Y": 3.983}
+        - {"SAMPLE_ID": "S007", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C1 quiet", "EMB_X": -2.995, "EMB_Y": -1.51}
+        - {"SAMPLE_ID": "S008", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 2.042, "EMB_Y": -1.877}
+        - {"SAMPLE_ID": "S009", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": 0.115, "EMB_Y": 3.665}
+        - {"SAMPLE_ID": "S010", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C1 quiet", "EMB_X": -2.587, "EMB_Y": -1.552}
+        - {"SAMPLE_ID": "S011", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 1.869, "EMB_Y": -2.085}
+        - {"SAMPLE_ID": "S012", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": -0.755, "EMB_Y": 2.932}
+        - {"SAMPLE_ID": "S013", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C1 quiet", "EMB_X": -3.59, "EMB_Y": -1.544}
+        - {"SAMPLE_ID": "S014", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C2 stromal", "EMB_X": 2.158, "EMB_Y": -2.987}
+        - {"SAMPLE_ID": "S015", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": -0.574, "EMB_Y": 2.972}
+        - {"SAMPLE_ID": "S016", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C1 quiet", "EMB_X": -3.684, "EMB_Y": -0.55}
+        - {"SAMPLE_ID": "S017", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 1.499, "EMB_Y": -1.933}
+        - {"SAMPLE_ID": "S018", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C3 immune-hot", "EMB_X": -0.527, "EMB_Y": 2.786}
+        - {"SAMPLE_ID": "S019", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C1 quiet", "EMB_X": -3.668, "EMB_Y": -1.838}
+        - {"SAMPLE_ID": "S020", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 1.901, "EMB_Y": -2.006}
+        - {"SAMPLE_ID": "S021", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": -0.993, "EMB_Y": 3.635}
+        - {"SAMPLE_ID": "S022", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C1 quiet", "EMB_X": -2.162, "EMB_Y": -0.743}
+        - {"SAMPLE_ID": "S023", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C2 stromal", "EMB_X": 1.633, "EMB_Y": -1.748}
+        - {"SAMPLE_ID": "S024", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": 0.672, "EMB_Y": 2.779}
+        - {"SAMPLE_ID": "S025", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C1 quiet", "EMB_X": -2.479, "EMB_Y": -1.072}
+        - {"SAMPLE_ID": "S026", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 2.784, "EMB_Y": -2.771}
+        - {"SAMPLE_ID": "S027", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": -0.229, "EMB_Y": 3.472}
+        - {"SAMPLE_ID": "S028", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C1 quiet", "EMB_X": -2.755, "EMB_Y": -1.537}
+        - {"SAMPLE_ID": "S029", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C2 stromal", "EMB_X": 2.863, "EMB_Y": -1.008}
+        - {"SAMPLE_ID": "S030", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": -0.88, "EMB_Y": 2.14}
+        - {"SAMPLE_ID": "S031", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C1 quiet", "EMB_X": -2.514, "EMB_Y": -1.938}
+        - {"SAMPLE_ID": "S032", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C2 stromal", "EMB_X": 1.049, "EMB_Y": -1.057}
+        - {"SAMPLE_ID": "S033", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": -0.372, "EMB_Y": 3.397}
+        - {"SAMPLE_ID": "S034", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C1 quiet", "EMB_X": -2.533, "EMB_Y": -1.272}
+        - {"SAMPLE_ID": "S035", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 2.391, "EMB_Y": -2.888}
+        - {"SAMPLE_ID": "S036", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": -0.207, "EMB_Y": 2.606}
+        - {"SAMPLE_ID": "S037", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C1 quiet", "EMB_X": -3.137, "EMB_Y": -0.587}
+        - {"SAMPLE_ID": "S038", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C2 stromal", "EMB_X": 2.919, "EMB_Y": -2.982}
+        - {"SAMPLE_ID": "S039", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C3 immune-hot", "EMB_X": 0.189, "EMB_Y": 2.015}
+        - {"SAMPLE_ID": "S040", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C1 quiet", "EMB_X": -2.161, "EMB_Y": -0.046}
+        - {"SAMPLE_ID": "S041", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 1.146, "EMB_Y": -1.963}
+        - {"SAMPLE_ID": "S042", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": 0.298, "EMB_Y": 3.005}
+        - {"SAMPLE_ID": "S043", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C1 quiet", "EMB_X": -3.841, "EMB_Y": -0.829}
+        - {"SAMPLE_ID": "S044", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C2 stromal", "EMB_X": 2.12, "EMB_Y": -2.789}
+        - {"SAMPLE_ID": "S045", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": 0.727, "EMB_Y": 3.306}
+        - {"SAMPLE_ID": "S046", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C1 quiet", "EMB_X": -2.508, "EMB_Y": -1.057}
+        - {"SAMPLE_ID": "S047", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C2 stromal", "EMB_X": 1.486, "EMB_Y": -1.606}
+        - {"SAMPLE_ID": "S048", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": 0.913, "EMB_Y": 3.324}
+        - {"SAMPLE_ID": "S049", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C1 quiet", "EMB_X": -3.303, "EMB_Y": -1.906}
+        - {"SAMPLE_ID": "S050", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 1.745, "EMB_Y": -2.467}
+        - {"SAMPLE_ID": "S051", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": -0.928, "EMB_Y": 3.939}
+        - {"SAMPLE_ID": "S052", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C1 quiet", "EMB_X": -2.311, "EMB_Y": -0.611}
+        - {"SAMPLE_ID": "S053", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 1.935, "EMB_Y": -1.665}
+        - {"SAMPLE_ID": "S054", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": 0.831, "EMB_Y": 2.093}
+        - {"SAMPLE_ID": "S055", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "responder", "CLUSTER": "C1 quiet", "EMB_X": -2.988, "EMB_Y": -1.017}
+        - {"SAMPLE_ID": "S056", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 2.378, "EMB_Y": -1.563}
+        - {"SAMPLE_ID": "S057", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": 0.125, "EMB_Y": 3.381}
+        - {"SAMPLE_ID": "S058", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C1 quiet", "EMB_X": -3.187, "EMB_Y": -0.204}
+        - {"SAMPLE_ID": "S059", "COHORT": "ONC-1", "TUMOUR_TYPE": "lung", "STAGE": "II", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C2 stromal", "EMB_X": 2.314, "EMB_Y": -2.101}
+        - {"SAMPLE_ID": "S060", "COHORT": "ONC-1", "TUMOUR_TYPE": "colon", "STAGE": "III", "AGE_BAND": "50-59", "RESPONSE": "non-responder", "CLUSTER": "C3 immune-hot", "EMB_X": 0.81, "EMB_Y": 2.987}
+    variant-call:
+      rows:
+        - {"SAMPLE_ID": "S001", "VARIANT_ID": "HX-0033", "GENOTYPE": "0/1", "VAF": 0.13, "DEPTH": 85}
+        - {"SAMPLE_ID": "S001", "VARIANT_ID": "HX-0171", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 33}
+        - {"SAMPLE_ID": "S001", "VARIANT_ID": "HX-0004", "GENOTYPE": "0/1", "VAF": 0.13, "DEPTH": 68}
+        - {"SAMPLE_ID": "S001", "VARIANT_ID": "HX-0081", "GENOTYPE": "0/1", "VAF": 0.29, "DEPTH": 48}
+        - {"SAMPLE_ID": "S001", "VARIANT_ID": "HX-0154", "GENOTYPE": "0/1", "VAF": 0.22, "DEPTH": 72}
+        - {"SAMPLE_ID": "S001", "VARIANT_ID": "HX-0030", "GENOTYPE": "0/1", "VAF": 0.55, "DEPTH": 41}
+        - {"SAMPLE_ID": "S001", "VARIANT_ID": "HX-0016", "GENOTYPE": "0/1", "VAF": 0.6, "DEPTH": 65}
+        - {"SAMPLE_ID": "S001", "VARIANT_ID": "HX-0078", "GENOTYPE": "0/1", "VAF": 0.49, "DEPTH": 83}
+        - {"SAMPLE_ID": "S001", "VARIANT_ID": "HX-0150", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 37}
+        - {"SAMPLE_ID": "S001", "VARIANT_ID": "HX-0005", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 65}
+        - {"SAMPLE_ID": "S002", "VARIANT_ID": "HX-0164", "GENOTYPE": "0/1", "VAF": 0.25, "DEPTH": 66}
+        - {"SAMPLE_ID": "S002", "VARIANT_ID": "HX-0122", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 49}
+        - {"SAMPLE_ID": "S002", "VARIANT_ID": "HX-0098", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 23}
+        - {"SAMPLE_ID": "S002", "VARIANT_ID": "HX-0029", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 48}
+        - {"SAMPLE_ID": "S002", "VARIANT_ID": "HX-0227", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 40}
+        - {"SAMPLE_ID": "S002", "VARIANT_ID": "HX-0183", "GENOTYPE": "0/1", "VAF": 0.25, "DEPTH": 23}
+        - {"SAMPLE_ID": "S002", "VARIANT_ID": "HX-0274", "GENOTYPE": "0/1", "VAF": 0.47, "DEPTH": 54}
+        - {"SAMPLE_ID": "S002", "VARIANT_ID": "HX-0146", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 63}
+        - {"SAMPLE_ID": "S002", "VARIANT_ID": "HX-0116", "GENOTYPE": "0/1", "VAF": 0.2, "DEPTH": 59}
+        - {"SAMPLE_ID": "S003", "VARIANT_ID": "HX-0057", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 53}
+        - {"SAMPLE_ID": "S003", "VARIANT_ID": "HX-0069", "GENOTYPE": "0/1", "VAF": 0.13, "DEPTH": 24}
+        - {"SAMPLE_ID": "S003", "VARIANT_ID": "HX-0149", "GENOTYPE": "0/1", "VAF": 0.24, "DEPTH": 74}
+        - {"SAMPLE_ID": "S003", "VARIANT_ID": "HX-0085", "GENOTYPE": "0/1", "VAF": 0.16, "DEPTH": 59}
+        - {"SAMPLE_ID": "S003", "VARIANT_ID": "HX-0116", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 73}
+        - {"SAMPLE_ID": "S003", "VARIANT_ID": "HX-0247", "GENOTYPE": "0/1", "VAF": 0.47, "DEPTH": 39}
+        - {"SAMPLE_ID": "S003", "VARIANT_ID": "HX-0212", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 67}
+        - {"SAMPLE_ID": "S003", "VARIANT_ID": "HX-0238", "GENOTYPE": "0/1", "VAF": 0.51, "DEPTH": 82}
+        - {"SAMPLE_ID": "S003", "VARIANT_ID": "HX-0032", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 81}
+        - {"SAMPLE_ID": "S003", "VARIANT_ID": "HX-0065", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 72}
+        - {"SAMPLE_ID": "S004", "VARIANT_ID": "HX-0203", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 61}
+        - {"SAMPLE_ID": "S004", "VARIANT_ID": "HX-0288", "GENOTYPE": "0/1", "VAF": 0.25, "DEPTH": 53}
+        - {"SAMPLE_ID": "S004", "VARIANT_ID": "HX-0006", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 67}
+        - {"SAMPLE_ID": "S004", "VARIANT_ID": "HX-0055", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 33}
+        - {"SAMPLE_ID": "S004", "VARIANT_ID": "HX-0108", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 71}
+        - {"SAMPLE_ID": "S004", "VARIANT_ID": "HX-0112", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 27}
+        - {"SAMPLE_ID": "S004", "VARIANT_ID": "HX-0051", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 44}
+        - {"SAMPLE_ID": "S004", "VARIANT_ID": "HX-0097", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 58}
+        - {"SAMPLE_ID": "S004", "VARIANT_ID": "HX-0263", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 61}
+        - {"SAMPLE_ID": "S005", "VARIANT_ID": "HX-0251", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 70}
+        - {"SAMPLE_ID": "S005", "VARIANT_ID": "HX-0198", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 54}
+        - {"SAMPLE_ID": "S005", "VARIANT_ID": "HX-0182", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 68}
+        - {"SAMPLE_ID": "S005", "VARIANT_ID": "HX-0273", "GENOTYPE": "0/1", "VAF": 0.24, "DEPTH": 73}
+        - {"SAMPLE_ID": "S005", "VARIANT_ID": "HX-0023", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 88}
+        - {"SAMPLE_ID": "S005", "VARIANT_ID": "HX-0196", "GENOTYPE": "0/1", "VAF": 0.55, "DEPTH": 68}
+        - {"SAMPLE_ID": "S005", "VARIANT_ID": "HX-0268", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 82}
+        - {"SAMPLE_ID": "S005", "VARIANT_ID": "HX-0248", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 40}
+        - {"SAMPLE_ID": "S005", "VARIANT_ID": "HX-0010", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 82}
+        - {"SAMPLE_ID": "S005", "VARIANT_ID": "HX-0125", "GENOTYPE": "0/1", "VAF": 0.47, "DEPTH": 32}
+        - {"SAMPLE_ID": "S006", "VARIANT_ID": "HX-0263", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 42}
+        - {"SAMPLE_ID": "S006", "VARIANT_ID": "HX-0238", "GENOTYPE": "0/1", "VAF": 0.49, "DEPTH": 68}
+        - {"SAMPLE_ID": "S006", "VARIANT_ID": "HX-0058", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 67}
+        - {"SAMPLE_ID": "S006", "VARIANT_ID": "HX-0164", "GENOTYPE": "0/1", "VAF": 0.49, "DEPTH": 56}
+        - {"SAMPLE_ID": "S006", "VARIANT_ID": "HX-0027", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 58}
+        - {"SAMPLE_ID": "S006", "VARIANT_ID": "HX-0087", "GENOTYPE": "0/1", "VAF": 0.51, "DEPTH": 39}
+        - {"SAMPLE_ID": "S006", "VARIANT_ID": "HX-0152", "GENOTYPE": "0/1", "VAF": 0.47, "DEPTH": 43}
+        - {"SAMPLE_ID": "S006", "VARIANT_ID": "HX-0022", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 87}
+        - {"SAMPLE_ID": "S006", "VARIANT_ID": "HX-0271", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 28}
+        - {"SAMPLE_ID": "S006", "VARIANT_ID": "HX-0155", "GENOTYPE": "0/1", "VAF": 0.37, "DEPTH": 26}
+        - {"SAMPLE_ID": "S007", "VARIANT_ID": "HX-0155", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 65}
+        - {"SAMPLE_ID": "S007", "VARIANT_ID": "HX-0109", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 68}
+        - {"SAMPLE_ID": "S007", "VARIANT_ID": "HX-0222", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 27}
+        - {"SAMPLE_ID": "S007", "VARIANT_ID": "HX-0197", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 67}
+        - {"SAMPLE_ID": "S007", "VARIANT_ID": "HX-0079", "GENOTYPE": "0/1", "VAF": 0.33, "DEPTH": 32}
+        - {"SAMPLE_ID": "S007", "VARIANT_ID": "HX-0093", "GENOTYPE": "0/1", "VAF": 0.55, "DEPTH": 32}
+        - {"SAMPLE_ID": "S007", "VARIANT_ID": "HX-0211", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 70}
+        - {"SAMPLE_ID": "S007", "VARIANT_ID": "HX-0021", "GENOTYPE": "0/1", "VAF": 0.16, "DEPTH": 32}
+        - {"SAMPLE_ID": "S007", "VARIANT_ID": "HX-0112", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 24}
+        - {"SAMPLE_ID": "S008", "VARIANT_ID": "HX-0184", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 41}
+        - {"SAMPLE_ID": "S008", "VARIANT_ID": "HX-0194", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 72}
+        - {"SAMPLE_ID": "S008", "VARIANT_ID": "HX-0066", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 36}
+        - {"SAMPLE_ID": "S008", "VARIANT_ID": "HX-0186", "GENOTYPE": "0/1", "VAF": 0.49, "DEPTH": 53}
+        - {"SAMPLE_ID": "S008", "VARIANT_ID": "HX-0195", "GENOTYPE": "0/1", "VAF": 0.28, "DEPTH": 80}
+        - {"SAMPLE_ID": "S008", "VARIANT_ID": "HX-0039", "GENOTYPE": "0/1", "VAF": 0.6, "DEPTH": 82}
+        - {"SAMPLE_ID": "S008", "VARIANT_ID": "HX-0045", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 21}
+        - {"SAMPLE_ID": "S008", "VARIANT_ID": "HX-0106", "GENOTYPE": "0/1", "VAF": 0.29, "DEPTH": 82}
+        - {"SAMPLE_ID": "S008", "VARIANT_ID": "HX-0092", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 39}
+        - {"SAMPLE_ID": "S009", "VARIANT_ID": "HX-0183", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 69}
+        - {"SAMPLE_ID": "S009", "VARIANT_ID": "HX-0069", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 41}
+        - {"SAMPLE_ID": "S009", "VARIANT_ID": "HX-0282", "GENOTYPE": "0/1", "VAF": 0.26, "DEPTH": 53}
+        - {"SAMPLE_ID": "S009", "VARIANT_ID": "HX-0170", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 89}
+        - {"SAMPLE_ID": "S009", "VARIANT_ID": "HX-0159", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 67}
+        - {"SAMPLE_ID": "S009", "VARIANT_ID": "HX-0088", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 81}
+        - {"SAMPLE_ID": "S009", "VARIANT_ID": "HX-0231", "GENOTYPE": "0/1", "VAF": 0.48, "DEPTH": 27}
+        - {"SAMPLE_ID": "S009", "VARIANT_ID": "HX-0188", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 72}
+        - {"SAMPLE_ID": "S009", "VARIANT_ID": "HX-0193", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 46}
+        - {"SAMPLE_ID": "S009", "VARIANT_ID": "HX-0245", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 31}
+        - {"SAMPLE_ID": "S010", "VARIANT_ID": "HX-0200", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 21}
+        - {"SAMPLE_ID": "S010", "VARIANT_ID": "HX-0115", "GENOTYPE": "0/1", "VAF": 0.2, "DEPTH": 64}
+        - {"SAMPLE_ID": "S010", "VARIANT_ID": "HX-0225", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 69}
+        - {"SAMPLE_ID": "S010", "VARIANT_ID": "HX-0255", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 49}
+        - {"SAMPLE_ID": "S010", "VARIANT_ID": "HX-0036", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 27}
+        - {"SAMPLE_ID": "S010", "VARIANT_ID": "HX-0270", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 58}
+        - {"SAMPLE_ID": "S010", "VARIANT_ID": "HX-0023", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 87}
+        - {"SAMPLE_ID": "S010", "VARIANT_ID": "HX-0136", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 90}
+        - {"SAMPLE_ID": "S010", "VARIANT_ID": "HX-0183", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 84}
+        - {"SAMPLE_ID": "S011", "VARIANT_ID": "HX-0153", "GENOTYPE": "0/1", "VAF": 0.41, "DEPTH": 34}
+        - {"SAMPLE_ID": "S011", "VARIANT_ID": "HX-0152", "GENOTYPE": "0/1", "VAF": 0.35, "DEPTH": 67}
+        - {"SAMPLE_ID": "S011", "VARIANT_ID": "HX-0269", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 42}
+        - {"SAMPLE_ID": "S011", "VARIANT_ID": "HX-0258", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 62}
+        - {"SAMPLE_ID": "S011", "VARIANT_ID": "HX-0056", "GENOTYPE": "0/1", "VAF": 0.34, "DEPTH": 71}
+        - {"SAMPLE_ID": "S011", "VARIANT_ID": "HX-0251", "GENOTYPE": "0/1", "VAF": 0.58, "DEPTH": 33}
+        - {"SAMPLE_ID": "S011", "VARIANT_ID": "HX-0036", "GENOTYPE": "0/1", "VAF": 0.36, "DEPTH": 71}
+        - {"SAMPLE_ID": "S011", "VARIANT_ID": "HX-0230", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 60}
+        - {"SAMPLE_ID": "S011", "VARIANT_ID": "HX-0145", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 55}
+        - {"SAMPLE_ID": "S012", "VARIANT_ID": "HX-0175", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 56}
+        - {"SAMPLE_ID": "S012", "VARIANT_ID": "HX-0019", "GENOTYPE": "0/1", "VAF": 0.41, "DEPTH": 40}
+        - {"SAMPLE_ID": "S012", "VARIANT_ID": "HX-0130", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 83}
+        - {"SAMPLE_ID": "S012", "VARIANT_ID": "HX-0128", "GENOTYPE": "0/1", "VAF": 0.15, "DEPTH": 56}
+        - {"SAMPLE_ID": "S012", "VARIANT_ID": "HX-0134", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 29}
+        - {"SAMPLE_ID": "S012", "VARIANT_ID": "HX-0187", "GENOTYPE": "0/1", "VAF": 0.48, "DEPTH": 64}
+        - {"SAMPLE_ID": "S012", "VARIANT_ID": "HX-0020", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 24}
+        - {"SAMPLE_ID": "S012", "VARIANT_ID": "HX-0084", "GENOTYPE": "0/1", "VAF": 0.37, "DEPTH": 82}
+        - {"SAMPLE_ID": "S012", "VARIANT_ID": "HX-0047", "GENOTYPE": "0/1", "VAF": 0.48, "DEPTH": 73}
+        - {"SAMPLE_ID": "S012", "VARIANT_ID": "HX-0035", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 83}
+        - {"SAMPLE_ID": "S013", "VARIANT_ID": "HX-0045", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 89}
+        - {"SAMPLE_ID": "S013", "VARIANT_ID": "HX-0149", "GENOTYPE": "0/1", "VAF": 0.37, "DEPTH": 28}
+        - {"SAMPLE_ID": "S013", "VARIANT_ID": "HX-0140", "GENOTYPE": "0/1", "VAF": 0.21, "DEPTH": 24}
+        - {"SAMPLE_ID": "S013", "VARIANT_ID": "HX-0123", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 51}
+        - {"SAMPLE_ID": "S013", "VARIANT_ID": "HX-0273", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 54}
+        - {"SAMPLE_ID": "S013", "VARIANT_ID": "HX-0196", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 60}
+        - {"SAMPLE_ID": "S013", "VARIANT_ID": "HX-0075", "GENOTYPE": "0/1", "VAF": 0.36, "DEPTH": 20}
+        - {"SAMPLE_ID": "S013", "VARIANT_ID": "HX-0104", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 60}
+        - {"SAMPLE_ID": "S013", "VARIANT_ID": "HX-0069", "GENOTYPE": "0/1", "VAF": 0.29, "DEPTH": 74}
+        - {"SAMPLE_ID": "S013", "VARIANT_ID": "HX-0065", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 89}
+        - {"SAMPLE_ID": "S014", "VARIANT_ID": "HX-0051", "GENOTYPE": "0/1", "VAF": 0.36, "DEPTH": 58}
+        - {"SAMPLE_ID": "S014", "VARIANT_ID": "HX-0042", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 78}
+        - {"SAMPLE_ID": "S014", "VARIANT_ID": "HX-0241", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 47}
+        - {"SAMPLE_ID": "S014", "VARIANT_ID": "HX-0034", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 47}
+        - {"SAMPLE_ID": "S014", "VARIANT_ID": "HX-0055", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 27}
+        - {"SAMPLE_ID": "S014", "VARIANT_ID": "HX-0112", "GENOTYPE": "0/1", "VAF": 0.25, "DEPTH": 58}
+        - {"SAMPLE_ID": "S014", "VARIANT_ID": "HX-0156", "GENOTYPE": "0/1", "VAF": 0.48, "DEPTH": 26}
+        - {"SAMPLE_ID": "S014", "VARIANT_ID": "HX-0178", "GENOTYPE": "0/1", "VAF": 0.34, "DEPTH": 36}
+        - {"SAMPLE_ID": "S014", "VARIANT_ID": "HX-0181", "GENOTYPE": "0/1", "VAF": 0.48, "DEPTH": 25}
+        - {"SAMPLE_ID": "S015", "VARIANT_ID": "HX-0068", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 31}
+        - {"SAMPLE_ID": "S015", "VARIANT_ID": "HX-0231", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 38}
+        - {"SAMPLE_ID": "S015", "VARIANT_ID": "HX-0133", "GENOTYPE": "0/1", "VAF": 0.15, "DEPTH": 79}
+        - {"SAMPLE_ID": "S015", "VARIANT_ID": "HX-0083", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 25}
+        - {"SAMPLE_ID": "S015", "VARIANT_ID": "HX-0057", "GENOTYPE": "0/1", "VAF": 0.15, "DEPTH": 49}
+        - {"SAMPLE_ID": "S015", "VARIANT_ID": "HX-0080", "GENOTYPE": "0/1", "VAF": 0.24, "DEPTH": 75}
+        - {"SAMPLE_ID": "S015", "VARIANT_ID": "HX-0216", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 65}
+        - {"SAMPLE_ID": "S015", "VARIANT_ID": "HX-0106", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 51}
+        - {"SAMPLE_ID": "S015", "VARIANT_ID": "HX-0271", "GENOTYPE": "0/1", "VAF": 0.19, "DEPTH": 55}
+        - {"SAMPLE_ID": "S015", "VARIANT_ID": "HX-0125", "GENOTYPE": "0/1", "VAF": 0.21, "DEPTH": 30}
+        - {"SAMPLE_ID": "S016", "VARIANT_ID": "HX-0212", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 86}
+        - {"SAMPLE_ID": "S016", "VARIANT_ID": "HX-0059", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 82}
+        - {"SAMPLE_ID": "S016", "VARIANT_ID": "HX-0009", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 57}
+        - {"SAMPLE_ID": "S016", "VARIANT_ID": "HX-0122", "GENOTYPE": "0/1", "VAF": 0.21, "DEPTH": 70}
+        - {"SAMPLE_ID": "S016", "VARIANT_ID": "HX-0062", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 58}
+        - {"SAMPLE_ID": "S016", "VARIANT_ID": "HX-0234", "GENOTYPE": "0/1", "VAF": 0.2, "DEPTH": 34}
+        - {"SAMPLE_ID": "S016", "VARIANT_ID": "HX-0103", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 23}
+        - {"SAMPLE_ID": "S016", "VARIANT_ID": "HX-0151", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 24}
+        - {"SAMPLE_ID": "S016", "VARIANT_ID": "HX-0157", "GENOTYPE": "0/1", "VAF": 0.26, "DEPTH": 63}
+        - {"SAMPLE_ID": "S017", "VARIANT_ID": "HX-0038", "GENOTYPE": "0/1", "VAF": 0.37, "DEPTH": 34}
+        - {"SAMPLE_ID": "S017", "VARIANT_ID": "HX-0105", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 76}
+        - {"SAMPLE_ID": "S017", "VARIANT_ID": "HX-0054", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 51}
+        - {"SAMPLE_ID": "S017", "VARIANT_ID": "HX-0293", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 78}
+        - {"SAMPLE_ID": "S017", "VARIANT_ID": "HX-0155", "GENOTYPE": "0/1", "VAF": 0.28, "DEPTH": 41}
+        - {"SAMPLE_ID": "S017", "VARIANT_ID": "HX-0207", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 81}
+        - {"SAMPLE_ID": "S017", "VARIANT_ID": "HX-0033", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 44}
+        - {"SAMPLE_ID": "S017", "VARIANT_ID": "HX-0118", "GENOTYPE": "0/1", "VAF": 0.37, "DEPTH": 44}
+        - {"SAMPLE_ID": "S017", "VARIANT_ID": "HX-0045", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 69}
+        - {"SAMPLE_ID": "S017", "VARIANT_ID": "HX-0185", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 76}
+        - {"SAMPLE_ID": "S018", "VARIANT_ID": "HX-0058", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 33}
+        - {"SAMPLE_ID": "S018", "VARIANT_ID": "HX-0213", "GENOTYPE": "0/1", "VAF": 0.51, "DEPTH": 26}
+        - {"SAMPLE_ID": "S018", "VARIANT_ID": "HX-0074", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 76}
+        - {"SAMPLE_ID": "S018", "VARIANT_ID": "HX-0293", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 30}
+        - {"SAMPLE_ID": "S018", "VARIANT_ID": "HX-0258", "GENOTYPE": "0/1", "VAF": 0.15, "DEPTH": 37}
+        - {"SAMPLE_ID": "S018", "VARIANT_ID": "HX-0200", "GENOTYPE": "0/1", "VAF": 0.17, "DEPTH": 40}
+        - {"SAMPLE_ID": "S018", "VARIANT_ID": "HX-0268", "GENOTYPE": "0/1", "VAF": 0.17, "DEPTH": 73}
+        - {"SAMPLE_ID": "S018", "VARIANT_ID": "HX-0167", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 44}
+        - {"SAMPLE_ID": "S018", "VARIANT_ID": "HX-0168", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 22}
+        - {"SAMPLE_ID": "S018", "VARIANT_ID": "HX-0215", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 78}
+        - {"SAMPLE_ID": "S019", "VARIANT_ID": "HX-0274", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 85}
+        - {"SAMPLE_ID": "S019", "VARIANT_ID": "HX-0186", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 83}
+        - {"SAMPLE_ID": "S019", "VARIANT_ID": "HX-0143", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 84}
+        - {"SAMPLE_ID": "S019", "VARIANT_ID": "HX-0251", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 87}
+        - {"SAMPLE_ID": "S019", "VARIANT_ID": "HX-0240", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 40}
+        - {"SAMPLE_ID": "S019", "VARIANT_ID": "HX-0156", "GENOTYPE": "0/1", "VAF": 0.17, "DEPTH": 21}
+        - {"SAMPLE_ID": "S019", "VARIANT_ID": "HX-0142", "GENOTYPE": "0/1", "VAF": 0.21, "DEPTH": 22}
+        - {"SAMPLE_ID": "S019", "VARIANT_ID": "HX-0042", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 45}
+        - {"SAMPLE_ID": "S019", "VARIANT_ID": "HX-0238", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 81}
+        - {"SAMPLE_ID": "S020", "VARIANT_ID": "HX-0051", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 50}
+        - {"SAMPLE_ID": "S020", "VARIANT_ID": "HX-0248", "GENOTYPE": "0/1", "VAF": 0.33, "DEPTH": 83}
+        - {"SAMPLE_ID": "S020", "VARIANT_ID": "HX-0096", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 78}
+        - {"SAMPLE_ID": "S020", "VARIANT_ID": "HX-0101", "GENOTYPE": "0/1", "VAF": 0.37, "DEPTH": 75}
+        - {"SAMPLE_ID": "S020", "VARIANT_ID": "HX-0072", "GENOTYPE": "0/1", "VAF": 0.47, "DEPTH": 41}
+        - {"SAMPLE_ID": "S020", "VARIANT_ID": "HX-0147", "GENOTYPE": "0/1", "VAF": 0.29, "DEPTH": 68}
+        - {"SAMPLE_ID": "S020", "VARIANT_ID": "HX-0233", "GENOTYPE": "0/1", "VAF": 0.35, "DEPTH": 49}
+        - {"SAMPLE_ID": "S020", "VARIANT_ID": "HX-0165", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 21}
+        - {"SAMPLE_ID": "S020", "VARIANT_ID": "HX-0243", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 78}
+        - {"SAMPLE_ID": "S021", "VARIANT_ID": "HX-0020", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 73}
+        - {"SAMPLE_ID": "S021", "VARIANT_ID": "HX-0284", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 68}
+        - {"SAMPLE_ID": "S021", "VARIANT_ID": "HX-0227", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 87}
+        - {"SAMPLE_ID": "S021", "VARIANT_ID": "HX-0051", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 54}
+        - {"SAMPLE_ID": "S021", "VARIANT_ID": "HX-0126", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 42}
+        - {"SAMPLE_ID": "S021", "VARIANT_ID": "HX-0270", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 90}
+        - {"SAMPLE_ID": "S021", "VARIANT_ID": "HX-0269", "GENOTYPE": "0/1", "VAF": 0.6, "DEPTH": 27}
+        - {"SAMPLE_ID": "S021", "VARIANT_ID": "HX-0082", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 27}
+        - {"SAMPLE_ID": "S021", "VARIANT_ID": "HX-0118", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 20}
+        - {"SAMPLE_ID": "S021", "VARIANT_ID": "HX-0005", "GENOTYPE": "0/1", "VAF": 0.26, "DEPTH": 21}
+        - {"SAMPLE_ID": "S022", "VARIANT_ID": "HX-0230", "GENOTYPE": "0/1", "VAF": 0.28, "DEPTH": 78}
+        - {"SAMPLE_ID": "S022", "VARIANT_ID": "HX-0065", "GENOTYPE": "0/1", "VAF": 0.47, "DEPTH": 68}
+        - {"SAMPLE_ID": "S022", "VARIANT_ID": "HX-0279", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 57}
+        - {"SAMPLE_ID": "S022", "VARIANT_ID": "HX-0189", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 41}
+        - {"SAMPLE_ID": "S022", "VARIANT_ID": "HX-0126", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 75}
+        - {"SAMPLE_ID": "S022", "VARIANT_ID": "HX-0017", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 53}
+        - {"SAMPLE_ID": "S022", "VARIANT_ID": "HX-0185", "GENOTYPE": "0/1", "VAF": 0.25, "DEPTH": 78}
+        - {"SAMPLE_ID": "S022", "VARIANT_ID": "HX-0190", "GENOTYPE": "0/1", "VAF": 0.16, "DEPTH": 39}
+        - {"SAMPLE_ID": "S022", "VARIANT_ID": "HX-0196", "GENOTYPE": "0/1", "VAF": 0.49, "DEPTH": 66}
+        - {"SAMPLE_ID": "S023", "VARIANT_ID": "HX-0118", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 65}
+        - {"SAMPLE_ID": "S023", "VARIANT_ID": "HX-0153", "GENOTYPE": "0/1", "VAF": 0.26, "DEPTH": 45}
+        - {"SAMPLE_ID": "S023", "VARIANT_ID": "HX-0218", "GENOTYPE": "0/1", "VAF": 0.48, "DEPTH": 31}
+        - {"SAMPLE_ID": "S023", "VARIANT_ID": "HX-0143", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 27}
+        - {"SAMPLE_ID": "S023", "VARIANT_ID": "HX-0116", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 60}
+        - {"SAMPLE_ID": "S023", "VARIANT_ID": "HX-0142", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 20}
+        - {"SAMPLE_ID": "S023", "VARIANT_ID": "HX-0183", "GENOTYPE": "0/1", "VAF": 0.37, "DEPTH": 28}
+        - {"SAMPLE_ID": "S023", "VARIANT_ID": "HX-0281", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 55}
+        - {"SAMPLE_ID": "S023", "VARIANT_ID": "HX-0217", "GENOTYPE": "0/1", "VAF": 0.51, "DEPTH": 53}
+        - {"SAMPLE_ID": "S024", "VARIANT_ID": "HX-0284", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 47}
+        - {"SAMPLE_ID": "S024", "VARIANT_ID": "HX-0230", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 81}
+        - {"SAMPLE_ID": "S024", "VARIANT_ID": "HX-0096", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 67}
+        - {"SAMPLE_ID": "S024", "VARIANT_ID": "HX-0042", "GENOTYPE": "0/1", "VAF": 0.15, "DEPTH": 78}
+        - {"SAMPLE_ID": "S024", "VARIANT_ID": "HX-0200", "GENOTYPE": "0/1", "VAF": 0.33, "DEPTH": 80}
+        - {"SAMPLE_ID": "S024", "VARIANT_ID": "HX-0201", "GENOTYPE": "0/1", "VAF": 0.35, "DEPTH": 86}
+        - {"SAMPLE_ID": "S024", "VARIANT_ID": "HX-0041", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 57}
+        - {"SAMPLE_ID": "S024", "VARIANT_ID": "HX-0173", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 27}
+        - {"SAMPLE_ID": "S024", "VARIANT_ID": "HX-0019", "GENOTYPE": "0/1", "VAF": 0.49, "DEPTH": 69}
+        - {"SAMPLE_ID": "S024", "VARIANT_ID": "HX-0095", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 52}
+        - {"SAMPLE_ID": "S025", "VARIANT_ID": "HX-0210", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 26}
+        - {"SAMPLE_ID": "S025", "VARIANT_ID": "HX-0003", "GENOTYPE": "0/1", "VAF": 0.28, "DEPTH": 42}
+        - {"SAMPLE_ID": "S025", "VARIANT_ID": "HX-0111", "GENOTYPE": "0/1", "VAF": 0.47, "DEPTH": 83}
+        - {"SAMPLE_ID": "S025", "VARIANT_ID": "HX-0001", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 37}
+        - {"SAMPLE_ID": "S025", "VARIANT_ID": "HX-0068", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 58}
+        - {"SAMPLE_ID": "S025", "VARIANT_ID": "HX-0199", "GENOTYPE": "0/1", "VAF": 0.49, "DEPTH": 24}
+        - {"SAMPLE_ID": "S025", "VARIANT_ID": "HX-0132", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 73}
+        - {"SAMPLE_ID": "S025", "VARIANT_ID": "HX-0053", "GENOTYPE": "0/1", "VAF": 0.48, "DEPTH": 32}
+        - {"SAMPLE_ID": "S025", "VARIANT_ID": "HX-0034", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 83}
+        - {"SAMPLE_ID": "S025", "VARIANT_ID": "HX-0125", "GENOTYPE": "0/1", "VAF": 0.34, "DEPTH": 41}
+        - {"SAMPLE_ID": "S026", "VARIANT_ID": "HX-0056", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 63}
+        - {"SAMPLE_ID": "S026", "VARIANT_ID": "HX-0232", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 27}
+        - {"SAMPLE_ID": "S026", "VARIANT_ID": "HX-0092", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 76}
+        - {"SAMPLE_ID": "S026", "VARIANT_ID": "HX-0109", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 76}
+        - {"SAMPLE_ID": "S026", "VARIANT_ID": "HX-0299", "GENOTYPE": "0/1", "VAF": 0.58, "DEPTH": 48}
+        - {"SAMPLE_ID": "S026", "VARIANT_ID": "HX-0291", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 47}
+        - {"SAMPLE_ID": "S026", "VARIANT_ID": "HX-0147", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 72}
+        - {"SAMPLE_ID": "S026", "VARIANT_ID": "HX-0154", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 79}
+        - {"SAMPLE_ID": "S026", "VARIANT_ID": "HX-0123", "GENOTYPE": "0/1", "VAF": 0.29, "DEPTH": 80}
+        - {"SAMPLE_ID": "S027", "VARIANT_ID": "HX-0267", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 72}
+        - {"SAMPLE_ID": "S027", "VARIANT_ID": "HX-0158", "GENOTYPE": "0/1", "VAF": 0.34, "DEPTH": 87}
+        - {"SAMPLE_ID": "S027", "VARIANT_ID": "HX-0080", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 89}
+        - {"SAMPLE_ID": "S027", "VARIANT_ID": "HX-0059", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 66}
+        - {"SAMPLE_ID": "S027", "VARIANT_ID": "HX-0017", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 55}
+        - {"SAMPLE_ID": "S027", "VARIANT_ID": "HX-0144", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 81}
+        - {"SAMPLE_ID": "S027", "VARIANT_ID": "HX-0208", "GENOTYPE": "0/1", "VAF": 0.49, "DEPTH": 80}
+        - {"SAMPLE_ID": "S027", "VARIANT_ID": "HX-0248", "GENOTYPE": "0/1", "VAF": 0.13, "DEPTH": 26}
+        - {"SAMPLE_ID": "S027", "VARIANT_ID": "HX-0247", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 60}
+        - {"SAMPLE_ID": "S027", "VARIANT_ID": "HX-0185", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 55}
+        - {"SAMPLE_ID": "S028", "VARIANT_ID": "HX-0224", "GENOTYPE": "0/1", "VAF": 0.58, "DEPTH": 75}
+        - {"SAMPLE_ID": "S028", "VARIANT_ID": "HX-0043", "GENOTYPE": "0/1", "VAF": 0.2, "DEPTH": 44}
+        - {"SAMPLE_ID": "S028", "VARIANT_ID": "HX-0022", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 63}
+        - {"SAMPLE_ID": "S028", "VARIANT_ID": "HX-0281", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 76}
+        - {"SAMPLE_ID": "S028", "VARIANT_ID": "HX-0032", "GENOTYPE": "0/1", "VAF": 0.47, "DEPTH": 23}
+        - {"SAMPLE_ID": "S028", "VARIANT_ID": "HX-0236", "GENOTYPE": "0/1", "VAF": 0.37, "DEPTH": 60}
+        - {"SAMPLE_ID": "S028", "VARIANT_ID": "HX-0010", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 53}
+        - {"SAMPLE_ID": "S028", "VARIANT_ID": "HX-0196", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 24}
+        - {"SAMPLE_ID": "S028", "VARIANT_ID": "HX-0100", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 75}
+        - {"SAMPLE_ID": "S029", "VARIANT_ID": "HX-0171", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 57}
+        - {"SAMPLE_ID": "S029", "VARIANT_ID": "HX-0168", "GENOTYPE": "0/1", "VAF": 0.1, "DEPTH": 20}
+        - {"SAMPLE_ID": "S029", "VARIANT_ID": "HX-0227", "GENOTYPE": "0/1", "VAF": 0.58, "DEPTH": 28}
+        - {"SAMPLE_ID": "S029", "VARIANT_ID": "HX-0144", "GENOTYPE": "0/1", "VAF": 0.13, "DEPTH": 44}
+        - {"SAMPLE_ID": "S029", "VARIANT_ID": "HX-0207", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 38}
+        - {"SAMPLE_ID": "S029", "VARIANT_ID": "HX-0160", "GENOTYPE": "0/1", "VAF": 0.48, "DEPTH": 77}
+        - {"SAMPLE_ID": "S029", "VARIANT_ID": "HX-0077", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 67}
+        - {"SAMPLE_ID": "S029", "VARIANT_ID": "HX-0152", "GENOTYPE": "0/1", "VAF": 0.6, "DEPTH": 83}
+        - {"SAMPLE_ID": "S029", "VARIANT_ID": "HX-0079", "GENOTYPE": "0/1", "VAF": 0.2, "DEPTH": 75}
+        - {"SAMPLE_ID": "S029", "VARIANT_ID": "HX-0245", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 81}
+        - {"SAMPLE_ID": "S030", "VARIANT_ID": "HX-0012", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 42}
+        - {"SAMPLE_ID": "S030", "VARIANT_ID": "HX-0179", "GENOTYPE": "0/1", "VAF": 0.47, "DEPTH": 31}
+        - {"SAMPLE_ID": "S030", "VARIANT_ID": "HX-0196", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 23}
+        - {"SAMPLE_ID": "S030", "VARIANT_ID": "HX-0017", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 48}
+        - {"SAMPLE_ID": "S030", "VARIANT_ID": "HX-0211", "GENOTYPE": "0/1", "VAF": 0.28, "DEPTH": 69}
+        - {"SAMPLE_ID": "S030", "VARIANT_ID": "HX-0100", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 74}
+        - {"SAMPLE_ID": "S030", "VARIANT_ID": "HX-0138", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 22}
+        - {"SAMPLE_ID": "S030", "VARIANT_ID": "HX-0194", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 61}
+        - {"SAMPLE_ID": "S030", "VARIANT_ID": "HX-0267", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 40}
+        - {"SAMPLE_ID": "S030", "VARIANT_ID": "HX-0275", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 49}
+        - {"SAMPLE_ID": "S031", "VARIANT_ID": "HX-0069", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 49}
+        - {"SAMPLE_ID": "S031", "VARIANT_ID": "HX-0114", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 66}
+        - {"SAMPLE_ID": "S031", "VARIANT_ID": "HX-0173", "GENOTYPE": "0/1", "VAF": 0.58, "DEPTH": 20}
+        - {"SAMPLE_ID": "S031", "VARIANT_ID": "HX-0194", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 30}
+        - {"SAMPLE_ID": "S031", "VARIANT_ID": "HX-0198", "GENOTYPE": "0/1", "VAF": 0.17, "DEPTH": 39}
+        - {"SAMPLE_ID": "S031", "VARIANT_ID": "HX-0115", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 76}
+        - {"SAMPLE_ID": "S031", "VARIANT_ID": "HX-0183", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 63}
+        - {"SAMPLE_ID": "S031", "VARIANT_ID": "HX-0162", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 30}
+        - {"SAMPLE_ID": "S031", "VARIANT_ID": "HX-0087", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 33}
+        - {"SAMPLE_ID": "S032", "VARIANT_ID": "HX-0112", "GENOTYPE": "0/1", "VAF": 0.24, "DEPTH": 76}
+        - {"SAMPLE_ID": "S032", "VARIANT_ID": "HX-0117", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 25}
+        - {"SAMPLE_ID": "S032", "VARIANT_ID": "HX-0043", "GENOTYPE": "0/1", "VAF": 0.28, "DEPTH": 23}
+        - {"SAMPLE_ID": "S032", "VARIANT_ID": "HX-0249", "GENOTYPE": "0/1", "VAF": 0.22, "DEPTH": 57}
+        - {"SAMPLE_ID": "S032", "VARIANT_ID": "HX-0014", "GENOTYPE": "0/1", "VAF": 0.26, "DEPTH": 32}
+        - {"SAMPLE_ID": "S032", "VARIANT_ID": "HX-0235", "GENOTYPE": "0/1", "VAF": 0.16, "DEPTH": 26}
+        - {"SAMPLE_ID": "S032", "VARIANT_ID": "HX-0226", "GENOTYPE": "0/1", "VAF": 0.26, "DEPTH": 20}
+        - {"SAMPLE_ID": "S032", "VARIANT_ID": "HX-0140", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 39}
+        - {"SAMPLE_ID": "S032", "VARIANT_ID": "HX-0267", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 60}
+        - {"SAMPLE_ID": "S033", "VARIANT_ID": "HX-0254", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 78}
+        - {"SAMPLE_ID": "S033", "VARIANT_ID": "HX-0048", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 32}
+        - {"SAMPLE_ID": "S033", "VARIANT_ID": "HX-0133", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 52}
+        - {"SAMPLE_ID": "S033", "VARIANT_ID": "HX-0213", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 83}
+        - {"SAMPLE_ID": "S033", "VARIANT_ID": "HX-0179", "GENOTYPE": "0/1", "VAF": 0.41, "DEPTH": 60}
+        - {"SAMPLE_ID": "S033", "VARIANT_ID": "HX-0198", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 74}
+        - {"SAMPLE_ID": "S033", "VARIANT_ID": "HX-0278", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 30}
+        - {"SAMPLE_ID": "S033", "VARIANT_ID": "HX-0289", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 36}
+        - {"SAMPLE_ID": "S033", "VARIANT_ID": "HX-0063", "GENOTYPE": "0/1", "VAF": 0.28, "DEPTH": 76}
+        - {"SAMPLE_ID": "S033", "VARIANT_ID": "HX-0065", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 66}
+        - {"SAMPLE_ID": "S034", "VARIANT_ID": "HX-0188", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 30}
+        - {"SAMPLE_ID": "S034", "VARIANT_ID": "HX-0218", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 86}
+        - {"SAMPLE_ID": "S034", "VARIANT_ID": "HX-0222", "GENOTYPE": "0/1", "VAF": 0.13, "DEPTH": 70}
+        - {"SAMPLE_ID": "S034", "VARIANT_ID": "HX-0110", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 70}
+        - {"SAMPLE_ID": "S034", "VARIANT_ID": "HX-0251", "GENOTYPE": "0/1", "VAF": 0.15, "DEPTH": 52}
+        - {"SAMPLE_ID": "S034", "VARIANT_ID": "HX-0060", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 80}
+        - {"SAMPLE_ID": "S034", "VARIANT_ID": "HX-0238", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 84}
+        - {"SAMPLE_ID": "S034", "VARIANT_ID": "HX-0108", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 82}
+        - {"SAMPLE_ID": "S034", "VARIANT_ID": "HX-0044", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 31}
+        - {"SAMPLE_ID": "S035", "VARIANT_ID": "HX-0056", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 41}
+        - {"SAMPLE_ID": "S035", "VARIANT_ID": "HX-0017", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 74}
+        - {"SAMPLE_ID": "S035", "VARIANT_ID": "HX-0226", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 35}
+        - {"SAMPLE_ID": "S035", "VARIANT_ID": "HX-0287", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 21}
+        - {"SAMPLE_ID": "S035", "VARIANT_ID": "HX-0211", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 67}
+        - {"SAMPLE_ID": "S035", "VARIANT_ID": "HX-0100", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 21}
+        - {"SAMPLE_ID": "S035", "VARIANT_ID": "HX-0164", "GENOTYPE": "0/1", "VAF": 0.17, "DEPTH": 87}
+        - {"SAMPLE_ID": "S035", "VARIANT_ID": "HX-0173", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 79}
+        - {"SAMPLE_ID": "S035", "VARIANT_ID": "HX-0261", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 32}
+        - {"SAMPLE_ID": "S036", "VARIANT_ID": "HX-0294", "GENOTYPE": "0/1", "VAF": 0.37, "DEPTH": 38}
+        - {"SAMPLE_ID": "S036", "VARIANT_ID": "HX-0247", "GENOTYPE": "0/1", "VAF": 0.29, "DEPTH": 37}
+        - {"SAMPLE_ID": "S036", "VARIANT_ID": "HX-0090", "GENOTYPE": "0/1", "VAF": 0.58, "DEPTH": 89}
+        - {"SAMPLE_ID": "S036", "VARIANT_ID": "HX-0229", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 22}
+        - {"SAMPLE_ID": "S036", "VARIANT_ID": "HX-0069", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 71}
+        - {"SAMPLE_ID": "S036", "VARIANT_ID": "HX-0187", "GENOTYPE": "0/1", "VAF": 0.2, "DEPTH": 83}
+        - {"SAMPLE_ID": "S036", "VARIANT_ID": "HX-0162", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 42}
+        - {"SAMPLE_ID": "S036", "VARIANT_ID": "HX-0142", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 84}
+        - {"SAMPLE_ID": "S036", "VARIANT_ID": "HX-0030", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 65}
+        - {"SAMPLE_ID": "S036", "VARIANT_ID": "HX-0155", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 34}
+        - {"SAMPLE_ID": "S037", "VARIANT_ID": "HX-0037", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 24}
+        - {"SAMPLE_ID": "S037", "VARIANT_ID": "HX-0257", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 86}
+        - {"SAMPLE_ID": "S037", "VARIANT_ID": "HX-0213", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 29}
+        - {"SAMPLE_ID": "S037", "VARIANT_ID": "HX-0087", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 65}
+        - {"SAMPLE_ID": "S037", "VARIANT_ID": "HX-0063", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 39}
+        - {"SAMPLE_ID": "S037", "VARIANT_ID": "HX-0297", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 29}
+        - {"SAMPLE_ID": "S037", "VARIANT_ID": "HX-0235", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 55}
+        - {"SAMPLE_ID": "S037", "VARIANT_ID": "HX-0212", "GENOTYPE": "0/1", "VAF": 0.1, "DEPTH": 34}
+        - {"SAMPLE_ID": "S037", "VARIANT_ID": "HX-0100", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 24}
+        - {"SAMPLE_ID": "S037", "VARIANT_ID": "HX-0185", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 35}
+        - {"SAMPLE_ID": "S038", "VARIANT_ID": "HX-0206", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 52}
+        - {"SAMPLE_ID": "S038", "VARIANT_ID": "HX-0014", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 42}
+        - {"SAMPLE_ID": "S038", "VARIANT_ID": "HX-0007", "GENOTYPE": "0/1", "VAF": 0.58, "DEPTH": 56}
+        - {"SAMPLE_ID": "S038", "VARIANT_ID": "HX-0243", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 65}
+        - {"SAMPLE_ID": "S038", "VARIANT_ID": "HX-0121", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 81}
+        - {"SAMPLE_ID": "S038", "VARIANT_ID": "HX-0299", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 89}
+        - {"SAMPLE_ID": "S038", "VARIANT_ID": "HX-0006", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 21}
+        - {"SAMPLE_ID": "S038", "VARIANT_ID": "HX-0175", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 42}
+        - {"SAMPLE_ID": "S038", "VARIANT_ID": "HX-0134", "GENOTYPE": "0/1", "VAF": 0.36, "DEPTH": 47}
+        - {"SAMPLE_ID": "S039", "VARIANT_ID": "HX-0148", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 73}
+        - {"SAMPLE_ID": "S039", "VARIANT_ID": "HX-0127", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 65}
+        - {"SAMPLE_ID": "S039", "VARIANT_ID": "HX-0151", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 78}
+        - {"SAMPLE_ID": "S039", "VARIANT_ID": "HX-0158", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 31}
+        - {"SAMPLE_ID": "S039", "VARIANT_ID": "HX-0108", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 78}
+        - {"SAMPLE_ID": "S039", "VARIANT_ID": "HX-0190", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 84}
+        - {"SAMPLE_ID": "S039", "VARIANT_ID": "HX-0196", "GENOTYPE": "0/1", "VAF": 0.36, "DEPTH": 42}
+        - {"SAMPLE_ID": "S039", "VARIANT_ID": "HX-0099", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 57}
+        - {"SAMPLE_ID": "S039", "VARIANT_ID": "HX-0284", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 85}
+        - {"SAMPLE_ID": "S039", "VARIANT_ID": "HX-0245", "GENOTYPE": "0/1", "VAF": 0.55, "DEPTH": 58}
+        - {"SAMPLE_ID": "S040", "VARIANT_ID": "HX-0038", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 66}
+        - {"SAMPLE_ID": "S040", "VARIANT_ID": "HX-0087", "GENOTYPE": "0/1", "VAF": 0.34, "DEPTH": 42}
+        - {"SAMPLE_ID": "S040", "VARIANT_ID": "HX-0111", "GENOTYPE": "0/1", "VAF": 0.33, "DEPTH": 43}
+        - {"SAMPLE_ID": "S040", "VARIANT_ID": "HX-0276", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 89}
+        - {"SAMPLE_ID": "S040", "VARIANT_ID": "HX-0296", "GENOTYPE": "0/1", "VAF": 0.1, "DEPTH": 37}
+        - {"SAMPLE_ID": "S040", "VARIANT_ID": "HX-0082", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 76}
+        - {"SAMPLE_ID": "S040", "VARIANT_ID": "HX-0015", "GENOTYPE": "0/1", "VAF": 0.36, "DEPTH": 51}
+        - {"SAMPLE_ID": "S040", "VARIANT_ID": "HX-0201", "GENOTYPE": "0/1", "VAF": 0.58, "DEPTH": 59}
+        - {"SAMPLE_ID": "S040", "VARIANT_ID": "HX-0030", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 21}
+        - {"SAMPLE_ID": "S041", "VARIANT_ID": "HX-0229", "GENOTYPE": "0/1", "VAF": 0.16, "DEPTH": 20}
+        - {"SAMPLE_ID": "S041", "VARIANT_ID": "HX-0073", "GENOTYPE": "0/1", "VAF": 0.15, "DEPTH": 88}
+        - {"SAMPLE_ID": "S041", "VARIANT_ID": "HX-0159", "GENOTYPE": "0/1", "VAF": 0.21, "DEPTH": 20}
+        - {"SAMPLE_ID": "S041", "VARIANT_ID": "HX-0024", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 22}
+        - {"SAMPLE_ID": "S041", "VARIANT_ID": "HX-0101", "GENOTYPE": "0/1", "VAF": 0.16, "DEPTH": 75}
+        - {"SAMPLE_ID": "S041", "VARIANT_ID": "HX-0184", "GENOTYPE": "0/1", "VAF": 0.35, "DEPTH": 28}
+        - {"SAMPLE_ID": "S041", "VARIANT_ID": "HX-0116", "GENOTYPE": "0/1", "VAF": 0.2, "DEPTH": 31}
+        - {"SAMPLE_ID": "S041", "VARIANT_ID": "HX-0245", "GENOTYPE": "0/1", "VAF": 0.58, "DEPTH": 33}
+        - {"SAMPLE_ID": "S041", "VARIANT_ID": "HX-0292", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 86}
+        - {"SAMPLE_ID": "S041", "VARIANT_ID": "HX-0005", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 55}
+        - {"SAMPLE_ID": "S042", "VARIANT_ID": "HX-0184", "GENOTYPE": "0/1", "VAF": 0.36, "DEPTH": 62}
+        - {"SAMPLE_ID": "S042", "VARIANT_ID": "HX-0157", "GENOTYPE": "0/1", "VAF": 0.21, "DEPTH": 60}
+        - {"SAMPLE_ID": "S042", "VARIANT_ID": "HX-0291", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 81}
+        - {"SAMPLE_ID": "S042", "VARIANT_ID": "HX-0270", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 37}
+        - {"SAMPLE_ID": "S042", "VARIANT_ID": "HX-0240", "GENOTYPE": "0/1", "VAF": 0.28, "DEPTH": 47}
+        - {"SAMPLE_ID": "S042", "VARIANT_ID": "HX-0144", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 85}
+        - {"SAMPLE_ID": "S042", "VARIANT_ID": "HX-0166", "GENOTYPE": "0/1", "VAF": 0.21, "DEPTH": 50}
+        - {"SAMPLE_ID": "S042", "VARIANT_ID": "HX-0095", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 86}
+        - {"SAMPLE_ID": "S042", "VARIANT_ID": "HX-0054", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 63}
+        - {"SAMPLE_ID": "S042", "VARIANT_ID": "HX-0035", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 31}
+        - {"SAMPLE_ID": "S043", "VARIANT_ID": "HX-0107", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 83}
+        - {"SAMPLE_ID": "S043", "VARIANT_ID": "HX-0207", "GENOTYPE": "0/1", "VAF": 0.36, "DEPTH": 34}
+        - {"SAMPLE_ID": "S043", "VARIANT_ID": "HX-0272", "GENOTYPE": "0/1", "VAF": 0.19, "DEPTH": 63}
+        - {"SAMPLE_ID": "S043", "VARIANT_ID": "HX-0035", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 25}
+        - {"SAMPLE_ID": "S043", "VARIANT_ID": "HX-0131", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 44}
+        - {"SAMPLE_ID": "S043", "VARIANT_ID": "HX-0192", "GENOTYPE": "0/1", "VAF": 0.19, "DEPTH": 43}
+        - {"SAMPLE_ID": "S043", "VARIANT_ID": "HX-0126", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 43}
+        - {"SAMPLE_ID": "S043", "VARIANT_ID": "HX-0009", "GENOTYPE": "0/1", "VAF": 0.28, "DEPTH": 31}
+        - {"SAMPLE_ID": "S043", "VARIANT_ID": "HX-0014", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 45}
+        - {"SAMPLE_ID": "S044", "VARIANT_ID": "HX-0210", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 34}
+        - {"SAMPLE_ID": "S044", "VARIANT_ID": "HX-0181", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 70}
+        - {"SAMPLE_ID": "S044", "VARIANT_ID": "HX-0237", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 86}
+        - {"SAMPLE_ID": "S044", "VARIANT_ID": "HX-0001", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 84}
+        - {"SAMPLE_ID": "S044", "VARIANT_ID": "HX-0043", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 42}
+        - {"SAMPLE_ID": "S044", "VARIANT_ID": "HX-0296", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 56}
+        - {"SAMPLE_ID": "S044", "VARIANT_ID": "HX-0135", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 89}
+        - {"SAMPLE_ID": "S044", "VARIANT_ID": "HX-0021", "GENOTYPE": "0/1", "VAF": 0.48, "DEPTH": 69}
+        - {"SAMPLE_ID": "S044", "VARIANT_ID": "HX-0233", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 72}
+        - {"SAMPLE_ID": "S045", "VARIANT_ID": "HX-0273", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 73}
+        - {"SAMPLE_ID": "S045", "VARIANT_ID": "HX-0251", "GENOTYPE": "0/1", "VAF": 0.28, "DEPTH": 67}
+        - {"SAMPLE_ID": "S045", "VARIANT_ID": "HX-0260", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 46}
+        - {"SAMPLE_ID": "S045", "VARIANT_ID": "HX-0043", "GENOTYPE": "0/1", "VAF": 0.6, "DEPTH": 34}
+        - {"SAMPLE_ID": "S045", "VARIANT_ID": "HX-0156", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 43}
+        - {"SAMPLE_ID": "S045", "VARIANT_ID": "HX-0098", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 53}
+        - {"SAMPLE_ID": "S045", "VARIANT_ID": "HX-0185", "GENOTYPE": "0/1", "VAF": 0.55, "DEPTH": 86}
+        - {"SAMPLE_ID": "S045", "VARIANT_ID": "HX-0177", "GENOTYPE": "0/1", "VAF": 0.41, "DEPTH": 28}
+        - {"SAMPLE_ID": "S045", "VARIANT_ID": "HX-0076", "GENOTYPE": "0/1", "VAF": 0.16, "DEPTH": 57}
+        - {"SAMPLE_ID": "S045", "VARIANT_ID": "HX-0125", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 23}
+        - {"SAMPLE_ID": "S046", "VARIANT_ID": "HX-0016", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 34}
+        - {"SAMPLE_ID": "S046", "VARIANT_ID": "HX-0185", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 71}
+        - {"SAMPLE_ID": "S046", "VARIANT_ID": "HX-0028", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 24}
+        - {"SAMPLE_ID": "S046", "VARIANT_ID": "HX-0063", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 62}
+        - {"SAMPLE_ID": "S046", "VARIANT_ID": "HX-0203", "GENOTYPE": "0/1", "VAF": 0.19, "DEPTH": 29}
+        - {"SAMPLE_ID": "S046", "VARIANT_ID": "HX-0188", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 28}
+        - {"SAMPLE_ID": "S046", "VARIANT_ID": "HX-0165", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 63}
+        - {"SAMPLE_ID": "S046", "VARIANT_ID": "HX-0240", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 85}
+        - {"SAMPLE_ID": "S046", "VARIANT_ID": "HX-0143", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 58}
+        - {"SAMPLE_ID": "S047", "VARIANT_ID": "HX-0111", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 22}
+        - {"SAMPLE_ID": "S047", "VARIANT_ID": "HX-0110", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 61}
+        - {"SAMPLE_ID": "S047", "VARIANT_ID": "HX-0204", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 24}
+        - {"SAMPLE_ID": "S047", "VARIANT_ID": "HX-0045", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 59}
+        - {"SAMPLE_ID": "S047", "VARIANT_ID": "HX-0183", "GENOTYPE": "0/1", "VAF": 0.28, "DEPTH": 58}
+        - {"SAMPLE_ID": "S047", "VARIANT_ID": "HX-0037", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 25}
+        - {"SAMPLE_ID": "S047", "VARIANT_ID": "HX-0062", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 47}
+        - {"SAMPLE_ID": "S047", "VARIANT_ID": "HX-0121", "GENOTYPE": "0/1", "VAF": 0.49, "DEPTH": 55}
+        - {"SAMPLE_ID": "S047", "VARIANT_ID": "HX-0214", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 87}
+        - {"SAMPLE_ID": "S048", "VARIANT_ID": "HX-0266", "GENOTYPE": "0/1", "VAF": 0.38, "DEPTH": 55}
+        - {"SAMPLE_ID": "S048", "VARIANT_ID": "HX-0068", "GENOTYPE": "0/1", "VAF": 0.19, "DEPTH": 50}
+        - {"SAMPLE_ID": "S048", "VARIANT_ID": "HX-0199", "GENOTYPE": "0/1", "VAF": 0.22, "DEPTH": 39}
+        - {"SAMPLE_ID": "S048", "VARIANT_ID": "HX-0190", "GENOTYPE": "0/1", "VAF": 0.55, "DEPTH": 47}
+        - {"SAMPLE_ID": "S048", "VARIANT_ID": "HX-0143", "GENOTYPE": "0/1", "VAF": 0.27, "DEPTH": 69}
+        - {"SAMPLE_ID": "S048", "VARIANT_ID": "HX-0062", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 79}
+        - {"SAMPLE_ID": "S048", "VARIANT_ID": "HX-0187", "GENOTYPE": "0/1", "VAF": 0.16, "DEPTH": 83}
+        - {"SAMPLE_ID": "S048", "VARIANT_ID": "HX-0242", "GENOTYPE": "0/1", "VAF": 0.55, "DEPTH": 52}
+        - {"SAMPLE_ID": "S048", "VARIANT_ID": "HX-0056", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 56}
+        - {"SAMPLE_ID": "S048", "VARIANT_ID": "HX-0215", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 52}
+        - {"SAMPLE_ID": "S049", "VARIANT_ID": "HX-0296", "GENOTYPE": "0/1", "VAF": 0.48, "DEPTH": 20}
+        - {"SAMPLE_ID": "S049", "VARIANT_ID": "HX-0112", "GENOTYPE": "0/1", "VAF": 0.51, "DEPTH": 65}
+        - {"SAMPLE_ID": "S049", "VARIANT_ID": "HX-0111", "GENOTYPE": "0/1", "VAF": 0.19, "DEPTH": 31}
+        - {"SAMPLE_ID": "S049", "VARIANT_ID": "HX-0288", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 61}
+        - {"SAMPLE_ID": "S049", "VARIANT_ID": "HX-0228", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 20}
+        - {"SAMPLE_ID": "S049", "VARIANT_ID": "HX-0278", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 85}
+        - {"SAMPLE_ID": "S049", "VARIANT_ID": "HX-0066", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 76}
+        - {"SAMPLE_ID": "S049", "VARIANT_ID": "HX-0104", "GENOTYPE": "0/1", "VAF": 0.25, "DEPTH": 88}
+        - {"SAMPLE_ID": "S049", "VARIANT_ID": "HX-0134", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 38}
+        - {"SAMPLE_ID": "S049", "VARIANT_ID": "HX-0245", "GENOTYPE": "0/1", "VAF": 0.55, "DEPTH": 36}
+        - {"SAMPLE_ID": "S050", "VARIANT_ID": "HX-0298", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 56}
+        - {"SAMPLE_ID": "S050", "VARIANT_ID": "HX-0168", "GENOTYPE": "0/1", "VAF": 0.15, "DEPTH": 45}
+        - {"SAMPLE_ID": "S050", "VARIANT_ID": "HX-0274", "GENOTYPE": "0/1", "VAF": 0.2, "DEPTH": 89}
+        - {"SAMPLE_ID": "S050", "VARIANT_ID": "HX-0079", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 35}
+        - {"SAMPLE_ID": "S050", "VARIANT_ID": "HX-0205", "GENOTYPE": "0/1", "VAF": 0.5, "DEPTH": 27}
+        - {"SAMPLE_ID": "S050", "VARIANT_ID": "HX-0243", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 25}
+        - {"SAMPLE_ID": "S050", "VARIANT_ID": "HX-0121", "GENOTYPE": "0/1", "VAF": 0.33, "DEPTH": 69}
+        - {"SAMPLE_ID": "S050", "VARIANT_ID": "HX-0266", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 62}
+        - {"SAMPLE_ID": "S050", "VARIANT_ID": "HX-0282", "GENOTYPE": "0/1", "VAF": 0.1, "DEPTH": 30}
+        - {"SAMPLE_ID": "S051", "VARIANT_ID": "HX-0150", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 30}
+        - {"SAMPLE_ID": "S051", "VARIANT_ID": "HX-0208", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 50}
+        - {"SAMPLE_ID": "S051", "VARIANT_ID": "HX-0042", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 72}
+        - {"SAMPLE_ID": "S051", "VARIANT_ID": "HX-0202", "GENOTYPE": "0/1", "VAF": 0.25, "DEPTH": 85}
+        - {"SAMPLE_ID": "S051", "VARIANT_ID": "HX-0118", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 25}
+        - {"SAMPLE_ID": "S051", "VARIANT_ID": "HX-0190", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 87}
+        - {"SAMPLE_ID": "S051", "VARIANT_ID": "HX-0002", "GENOTYPE": "0/1", "VAF": 0.22, "DEPTH": 62}
+        - {"SAMPLE_ID": "S051", "VARIANT_ID": "HX-0252", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 81}
+        - {"SAMPLE_ID": "S051", "VARIANT_ID": "HX-0197", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 84}
+        - {"SAMPLE_ID": "S051", "VARIANT_ID": "HX-0005", "GENOTYPE": "0/1", "VAF": 0.16, "DEPTH": 50}
+        - {"SAMPLE_ID": "S052", "VARIANT_ID": "HX-0209", "GENOTYPE": "0/1", "VAF": 0.55, "DEPTH": 80}
+        - {"SAMPLE_ID": "S052", "VARIANT_ID": "HX-0201", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 68}
+        - {"SAMPLE_ID": "S052", "VARIANT_ID": "HX-0099", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 90}
+        - {"SAMPLE_ID": "S052", "VARIANT_ID": "HX-0262", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 46}
+        - {"SAMPLE_ID": "S052", "VARIANT_ID": "HX-0070", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 89}
+        - {"SAMPLE_ID": "S052", "VARIANT_ID": "HX-0163", "GENOTYPE": "0/1", "VAF": 0.36, "DEPTH": 24}
+        - {"SAMPLE_ID": "S052", "VARIANT_ID": "HX-0230", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 43}
+        - {"SAMPLE_ID": "S052", "VARIANT_ID": "HX-0040", "GENOTYPE": "0/1", "VAF": 0.21, "DEPTH": 31}
+        - {"SAMPLE_ID": "S052", "VARIANT_ID": "HX-0164", "GENOTYPE": "0/1", "VAF": 0.15, "DEPTH": 84}
+        - {"SAMPLE_ID": "S053", "VARIANT_ID": "HX-0186", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 63}
+        - {"SAMPLE_ID": "S053", "VARIANT_ID": "HX-0036", "GENOTYPE": "0/1", "VAF": 0.12, "DEPTH": 61}
+        - {"SAMPLE_ID": "S053", "VARIANT_ID": "HX-0136", "GENOTYPE": "0/1", "VAF": 0.39, "DEPTH": 88}
+        - {"SAMPLE_ID": "S053", "VARIANT_ID": "HX-0157", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 59}
+        - {"SAMPLE_ID": "S053", "VARIANT_ID": "HX-0084", "GENOTYPE": "0/1", "VAF": 0.51, "DEPTH": 86}
+        - {"SAMPLE_ID": "S053", "VARIANT_ID": "HX-0086", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 31}
+        - {"SAMPLE_ID": "S053", "VARIANT_ID": "HX-0195", "GENOTYPE": "0/1", "VAF": 0.16, "DEPTH": 68}
+        - {"SAMPLE_ID": "S053", "VARIANT_ID": "HX-0063", "GENOTYPE": "0/1", "VAF": 0.47, "DEPTH": 56}
+        - {"SAMPLE_ID": "S053", "VARIANT_ID": "HX-0038", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 50}
+        - {"SAMPLE_ID": "S053", "VARIANT_ID": "HX-0065", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 59}
+        - {"SAMPLE_ID": "S054", "VARIANT_ID": "HX-0197", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 66}
+        - {"SAMPLE_ID": "S054", "VARIANT_ID": "HX-0293", "GENOTYPE": "0/1", "VAF": 0.16, "DEPTH": 69}
+        - {"SAMPLE_ID": "S054", "VARIANT_ID": "HX-0167", "GENOTYPE": "0/1", "VAF": 0.31, "DEPTH": 26}
+        - {"SAMPLE_ID": "S054", "VARIANT_ID": "HX-0053", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 55}
+        - {"SAMPLE_ID": "S054", "VARIANT_ID": "HX-0185", "GENOTYPE": "0/1", "VAF": 0.55, "DEPTH": 51}
+        - {"SAMPLE_ID": "S054", "VARIANT_ID": "HX-0250", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 64}
+        - {"SAMPLE_ID": "S054", "VARIANT_ID": "HX-0186", "GENOTYPE": "0/1", "VAF": 0.17, "DEPTH": 46}
+        - {"SAMPLE_ID": "S054", "VARIANT_ID": "HX-0219", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 89}
+        - {"SAMPLE_ID": "S054", "VARIANT_ID": "HX-0005", "GENOTYPE": "0/1", "VAF": 0.41, "DEPTH": 74}
+        - {"SAMPLE_ID": "S054", "VARIANT_ID": "HX-0095", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 71}
+        - {"SAMPLE_ID": "S055", "VARIANT_ID": "HX-0100", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 89}
+        - {"SAMPLE_ID": "S055", "VARIANT_ID": "HX-0071", "GENOTYPE": "0/1", "VAF": 0.45, "DEPTH": 28}
+        - {"SAMPLE_ID": "S055", "VARIANT_ID": "HX-0208", "GENOTYPE": "0/1", "VAF": 0.34, "DEPTH": 59}
+        - {"SAMPLE_ID": "S055", "VARIANT_ID": "HX-0166", "GENOTYPE": "0/1", "VAF": 0.33, "DEPTH": 67}
+        - {"SAMPLE_ID": "S055", "VARIANT_ID": "HX-0265", "GENOTYPE": "0/1", "VAF": 0.22, "DEPTH": 71}
+        - {"SAMPLE_ID": "S055", "VARIANT_ID": "HX-0163", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 50}
+        - {"SAMPLE_ID": "S055", "VARIANT_ID": "HX-0198", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 39}
+        - {"SAMPLE_ID": "S055", "VARIANT_ID": "HX-0160", "GENOTYPE": "0/1", "VAF": 0.22, "DEPTH": 72}
+        - {"SAMPLE_ID": "S055", "VARIANT_ID": "HX-0154", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 63}
+        - {"SAMPLE_ID": "S056", "VARIANT_ID": "HX-0229", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 51}
+        - {"SAMPLE_ID": "S056", "VARIANT_ID": "HX-0041", "GENOTYPE": "0/1", "VAF": 0.29, "DEPTH": 25}
+        - {"SAMPLE_ID": "S056", "VARIANT_ID": "HX-0298", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 62}
+        - {"SAMPLE_ID": "S056", "VARIANT_ID": "HX-0084", "GENOTYPE": "0/1", "VAF": 0.46, "DEPTH": 67}
+        - {"SAMPLE_ID": "S056", "VARIANT_ID": "HX-0280", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 75}
+        - {"SAMPLE_ID": "S056", "VARIANT_ID": "HX-0094", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 20}
+        - {"SAMPLE_ID": "S056", "VARIANT_ID": "HX-0086", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 42}
+        - {"SAMPLE_ID": "S056", "VARIANT_ID": "HX-0108", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 43}
+        - {"SAMPLE_ID": "S056", "VARIANT_ID": "HX-0249", "GENOTYPE": "0/1", "VAF": 0.18, "DEPTH": 45}
+        - {"SAMPLE_ID": "S057", "VARIANT_ID": "HX-0094", "GENOTYPE": "0/1", "VAF": 0.56, "DEPTH": 89}
+        - {"SAMPLE_ID": "S057", "VARIANT_ID": "HX-0085", "GENOTYPE": "0/1", "VAF": 0.33, "DEPTH": 25}
+        - {"SAMPLE_ID": "S057", "VARIANT_ID": "HX-0144", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 71}
+        - {"SAMPLE_ID": "S057", "VARIANT_ID": "HX-0287", "GENOTYPE": "0/1", "VAF": 0.57, "DEPTH": 28}
+        - {"SAMPLE_ID": "S057", "VARIANT_ID": "HX-0131", "GENOTYPE": "0/1", "VAF": 0.53, "DEPTH": 28}
+        - {"SAMPLE_ID": "S057", "VARIANT_ID": "HX-0062", "GENOTYPE": "0/1", "VAF": 0.52, "DEPTH": 41}
+        - {"SAMPLE_ID": "S057", "VARIANT_ID": "HX-0091", "GENOTYPE": "0/1", "VAF": 0.15, "DEPTH": 28}
+        - {"SAMPLE_ID": "S057", "VARIANT_ID": "HX-0022", "GENOTYPE": "0/1", "VAF": 0.43, "DEPTH": 21}
+        - {"SAMPLE_ID": "S057", "VARIANT_ID": "HX-0090", "GENOTYPE": "0/1", "VAF": 0.33, "DEPTH": 50}
+        - {"SAMPLE_ID": "S057", "VARIANT_ID": "HX-0185", "GENOTYPE": "0/1", "VAF": 0.23, "DEPTH": 52}
+        - {"SAMPLE_ID": "S058", "VARIANT_ID": "HX-0214", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 27}
+        - {"SAMPLE_ID": "S058", "VARIANT_ID": "HX-0210", "GENOTYPE": "0/1", "VAF": 0.33, "DEPTH": 57}
+        - {"SAMPLE_ID": "S058", "VARIANT_ID": "HX-0218", "GENOTYPE": "0/1", "VAF": 0.22, "DEPTH": 73}
+        - {"SAMPLE_ID": "S058", "VARIANT_ID": "HX-0254", "GENOTYPE": "0/1", "VAF": 0.41, "DEPTH": 86}
+        - {"SAMPLE_ID": "S058", "VARIANT_ID": "HX-0005", "GENOTYPE": "0/1", "VAF": 0.54, "DEPTH": 82}
+        - {"SAMPLE_ID": "S058", "VARIANT_ID": "HX-0127", "GENOTYPE": "0/1", "VAF": 0.35, "DEPTH": 69}
+        - {"SAMPLE_ID": "S058", "VARIANT_ID": "HX-0054", "GENOTYPE": "0/1", "VAF": 0.42, "DEPTH": 38}
+        - {"SAMPLE_ID": "S058", "VARIANT_ID": "HX-0299", "GENOTYPE": "0/1", "VAF": 0.14, "DEPTH": 31}
+        - {"SAMPLE_ID": "S058", "VARIANT_ID": "HX-0060", "GENOTYPE": "0/1", "VAF": 0.21, "DEPTH": 47}
+        - {"SAMPLE_ID": "S059", "VARIANT_ID": "HX-0271", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 30}
+        - {"SAMPLE_ID": "S059", "VARIANT_ID": "HX-0190", "GENOTYPE": "0/1", "VAF": 0.41, "DEPTH": 90}
+        - {"SAMPLE_ID": "S059", "VARIANT_ID": "HX-0192", "GENOTYPE": "0/1", "VAF": 0.4, "DEPTH": 37}
+        - {"SAMPLE_ID": "S059", "VARIANT_ID": "HX-0195", "GENOTYPE": "0/1", "VAF": 0.32, "DEPTH": 36}
+        - {"SAMPLE_ID": "S059", "VARIANT_ID": "HX-0007", "GENOTYPE": "0/1", "VAF": 0.36, "DEPTH": 70}
+        - {"SAMPLE_ID": "S059", "VARIANT_ID": "HX-0057", "GENOTYPE": "0/1", "VAF": 0.34, "DEPTH": 85}
+        - {"SAMPLE_ID": "S059", "VARIANT_ID": "HX-0208", "GENOTYPE": "0/1", "VAF": 0.44, "DEPTH": 83}
+        - {"SAMPLE_ID": "S059", "VARIANT_ID": "HX-0183", "GENOTYPE": "0/1", "VAF": 0.26, "DEPTH": 22}
+        - {"SAMPLE_ID": "S059", "VARIANT_ID": "HX-0209", "GENOTYPE": "0/1", "VAF": 0.26, "DEPTH": 78}
+        - {"SAMPLE_ID": "S060", "VARIANT_ID": "HX-0159", "GENOTYPE": "0/1", "VAF": 0.29, "DEPTH": 77}
+        - {"SAMPLE_ID": "S060", "VARIANT_ID": "HX-0021", "GENOTYPE": "0/1", "VAF": 0.33, "DEPTH": 48}
+        - {"SAMPLE_ID": "S060", "VARIANT_ID": "HX-0185", "GENOTYPE": "0/1", "VAF": 0.11, "DEPTH": 77}
+        - {"SAMPLE_ID": "S060", "VARIANT_ID": "HX-0027", "GENOTYPE": "0/1", "VAF": 0.34, "DEPTH": 24}
+        - {"SAMPLE_ID": "S060", "VARIANT_ID": "HX-0096", "GENOTYPE": "0/1", "VAF": 0.49, "DEPTH": 58}
+        - {"SAMPLE_ID": "S060", "VARIANT_ID": "HX-0095", "GENOTYPE": "0/1", "VAF": 0.35, "DEPTH": 39}
+        - {"SAMPLE_ID": "S060", "VARIANT_ID": "HX-0029", "GENOTYPE": "0/1", "VAF": 0.59, "DEPTH": 36}
+        - {"SAMPLE_ID": "S060", "VARIANT_ID": "HX-0212", "GENOTYPE": "0/1", "VAF": 0.15, "DEPTH": 87}
+        - {"SAMPLE_ID": "S060", "VARIANT_ID": "HX-0221", "GENOTYPE": "0/1", "VAF": 0.34, "DEPTH": 32}
+        - {"SAMPLE_ID": "S060", "VARIANT_ID": "HX-0275", "GENOTYPE": "0/1", "VAF": 0.3, "DEPTH": 74}
+    study-variant:
+      rows:
+        - {"VARIANT_ID": "HX-0001", "CHROM": "1", "POS": 100, "REF": "A", "ALT": "G", "GENE": "GX00", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 1, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0002", "CHROM": "2", "POS": 113, "REF": "A", "ALT": "G", "GENE": "GX01", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 8, "AA_REF": "C", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0003", "CHROM": "3", "POS": 126, "REF": "A", "ALT": "G", "GENE": "GX02", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 15, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0004", "CHROM": "1", "POS": 359, "REF": "A", "ALT": "G", "GENE": "GX03", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 22, "AA_REF": "I", "AA_ALT": "F"}
+        - {"VARIANT_ID": "HX-0005", "CHROM": "2", "POS": 372, "REF": "A", "ALT": "G", "GENE": "HLXK7", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 29, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0006", "CHROM": "3", "POS": 385, "REF": "A", "ALT": "G", "GENE": "GX05", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 36, "AA_REF": "E", "AA_ALT": "H"}
+        - {"VARIANT_ID": "HX-0007", "CHROM": "1", "POS": 618, "REF": "A", "ALT": "G", "GENE": "GX06", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 3, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0008", "CHROM": "2", "POS": 631, "REF": "A", "ALT": "G", "GENE": "GX07", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 10, "AA_REF": "P", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0009", "CHROM": "3", "POS": 644, "REF": "A", "ALT": "G", "GENE": "GX08", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 17, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0010", "CHROM": "1", "POS": 877, "REF": "A", "ALT": "G", "GENE": "GX09", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 24, "AA_REF": "M", "AA_ALT": "Y"}
+        - {"VARIANT_ID": "HX-0011", "CHROM": "2", "POS": 890, "REF": "A", "ALT": "G", "GENE": "GX10", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 31, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0012", "CHROM": "3", "POS": 903, "REF": "A", "ALT": "G", "GENE": "GX11", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 38, "AA_REF": "R", "AA_ALT": "V"}
+        - {"VARIANT_ID": "HX-0013", "CHROM": "1", "POS": 986, "REF": "A", "ALT": "G", "GENE": "GX12", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 5, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0014", "CHROM": "2", "POS": 999, "REF": "A", "ALT": "G", "GENE": "GX13", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 12, "AA_REF": "T", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0015", "CHROM": "3", "POS": 1012, "REF": "A", "ALT": "G", "GENE": "GX14", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 19, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0016", "CHROM": "1", "POS": 1245, "REF": "A", "ALT": "G", "GENE": "GX15", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 26, "AA_REF": "W", "AA_ALT": "G"}
+        - {"VARIANT_ID": "HX-0017", "CHROM": "2", "POS": 1258, "REF": "A", "ALT": "G", "GENE": "GX16", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 33, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0018", "CHROM": "3", "POS": 1271, "REF": "A", "ALT": "G", "GENE": "GX17", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 40, "AA_REF": "A", "AA_ALT": "L"}
+        - {"VARIANT_ID": "HX-0019", "CHROM": "1", "POS": 1504, "REF": "A", "ALT": "G", "GENE": "GX18", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 7, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0020", "CHROM": "2", "POS": 1517, "REF": "A", "ALT": "G", "GENE": "GX19", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 14, "AA_REF": "Q", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0021", "CHROM": "3", "POS": 1530, "REF": "A", "ALT": "G", "GENE": "GX20", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 21, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0022", "CHROM": "1", "POS": 1763, "REF": "A", "ALT": "G", "GENE": "GX21", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 28, "AA_REF": "C", "AA_ALT": "S"}
+        - {"VARIANT_ID": "HX-0023", "CHROM": "2", "POS": 1776, "REF": "A", "ALT": "G", "GENE": "GX22", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 35, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0024", "CHROM": "3", "POS": 1789, "REF": "A", "ALT": "G", "GENE": "GX23", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 2, "AA_REF": "I", "AA_ALT": "F"}
+        - {"VARIANT_ID": "HX-0025", "CHROM": "1", "POS": 1872, "REF": "A", "ALT": "G", "GENE": "GX24", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 9, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0026", "CHROM": "2", "POS": 1885, "REF": "A", "ALT": "G", "GENE": "GX25", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 16, "AA_REF": "E", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0027", "CHROM": "3", "POS": 1898, "REF": "A", "ALT": "G", "GENE": "GX26", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 23, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0028", "CHROM": "1", "POS": 2131, "REF": "A", "ALT": "G", "GENE": "GX27", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 30, "AA_REF": "P", "AA_ALT": "N"}
+        - {"VARIANT_ID": "HX-0029", "CHROM": "2", "POS": 2144, "REF": "A", "ALT": "G", "GENE": "GX28", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 37, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0030", "CHROM": "3", "POS": 2157, "REF": "A", "ALT": "G", "GENE": "GX29", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 4, "AA_REF": "M", "AA_ALT": "Y"}
+        - {"VARIANT_ID": "HX-0031", "CHROM": "1", "POS": 190, "REF": "A", "ALT": "G", "GENE": "GX00", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 11, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0032", "CHROM": "2", "POS": 203, "REF": "A", "ALT": "G", "GENE": "GX01", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 18, "AA_REF": "R", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0033", "CHROM": "3", "POS": 216, "REF": "A", "ALT": "G", "GENE": "GX02", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 25, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0034", "CHROM": "1", "POS": 449, "REF": "A", "ALT": "G", "GENE": "GX03", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 32, "AA_REF": "T", "AA_ALT": "D"}
+        - {"VARIANT_ID": "HX-0035", "CHROM": "2", "POS": 462, "REF": "A", "ALT": "G", "GENE": "HLXK7", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 39, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0036", "CHROM": "3", "POS": 325, "REF": "A", "ALT": "G", "GENE": "GX05", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 6, "AA_REF": "W", "AA_ALT": "G"}
+        - {"VARIANT_ID": "HX-0037", "CHROM": "1", "POS": 558, "REF": "A", "ALT": "G", "GENE": "GX06", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 13, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0038", "CHROM": "2", "POS": 571, "REF": "A", "ALT": "G", "GENE": "GX07", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 20, "AA_REF": "A", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0039", "CHROM": "3", "POS": 584, "REF": "A", "ALT": "G", "GENE": "GX08", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 27, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0040", "CHROM": "1", "POS": 817, "REF": "A", "ALT": "G", "GENE": "GX09", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 34, "AA_REF": "Q", "AA_ALT": "K"}
+        - {"VARIANT_ID": "HX-0041", "CHROM": "2", "POS": 830, "REF": "A", "ALT": "G", "GENE": "GX10", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 1, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0042", "CHROM": "3", "POS": 843, "REF": "A", "ALT": "G", "GENE": "GX11", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 8, "AA_REF": "C", "AA_ALT": "S"}
+        - {"VARIANT_ID": "HX-0043", "CHROM": "1", "POS": 1076, "REF": "A", "ALT": "G", "GENE": "GX12", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 15, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0044", "CHROM": "2", "POS": 1089, "REF": "A", "ALT": "G", "GENE": "GX13", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 22, "AA_REF": "I", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0045", "CHROM": "3", "POS": 1102, "REF": "A", "ALT": "G", "GENE": "GX14", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 29, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0046", "CHROM": "1", "POS": 1335, "REF": "A", "ALT": "G", "GENE": "GX15", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 36, "AA_REF": "E", "AA_ALT": "H"}
+        - {"VARIANT_ID": "HX-0047", "CHROM": "2", "POS": 1348, "REF": "A", "ALT": "G", "GENE": "GX16", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 3, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0048", "CHROM": "3", "POS": 1211, "REF": "A", "ALT": "G", "GENE": "GX17", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 10, "AA_REF": "P", "AA_ALT": "N"}
+        - {"VARIANT_ID": "HX-0049", "CHROM": "1", "POS": 1444, "REF": "A", "ALT": "G", "GENE": "GX18", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 17, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0050", "CHROM": "2", "POS": 1457, "REF": "A", "ALT": "G", "GENE": "GX19", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 24, "AA_REF": "M", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0051", "CHROM": "3", "POS": 1470, "REF": "A", "ALT": "G", "GENE": "GX20", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 31, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0052", "CHROM": "1", "POS": 1703, "REF": "A", "ALT": "G", "GENE": "GX21", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 38, "AA_REF": "R", "AA_ALT": "V"}
+        - {"VARIANT_ID": "HX-0053", "CHROM": "2", "POS": 1716, "REF": "A", "ALT": "G", "GENE": "GX22", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 5, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0054", "CHROM": "3", "POS": 1729, "REF": "A", "ALT": "G", "GENE": "GX23", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 12, "AA_REF": "T", "AA_ALT": "D"}
+        - {"VARIANT_ID": "HX-0055", "CHROM": "1", "POS": 1962, "REF": "A", "ALT": "G", "GENE": "GX24", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 19, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0056", "CHROM": "2", "POS": 1975, "REF": "A", "ALT": "G", "GENE": "GX25", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 26, "AA_REF": "W", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0057", "CHROM": "3", "POS": 1988, "REF": "A", "ALT": "G", "GENE": "GX26", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 33, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0058", "CHROM": "1", "POS": 2221, "REF": "A", "ALT": "G", "GENE": "GX27", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 40, "AA_REF": "A", "AA_ALT": "L"}
+        - {"VARIANT_ID": "HX-0059", "CHROM": "2", "POS": 2084, "REF": "A", "ALT": "G", "GENE": "GX28", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 7, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0060", "CHROM": "3", "POS": 2097, "REF": "A", "ALT": "G", "GENE": "GX29", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 14, "AA_REF": "Q", "AA_ALT": "K"}
+        - {"VARIANT_ID": "HX-0061", "CHROM": "1", "POS": 130, "REF": "A", "ALT": "G", "GENE": "GX00", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 21, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0062", "CHROM": "2", "POS": 143, "REF": "A", "ALT": "G", "GENE": "GX01", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 28, "AA_REF": "C", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0063", "CHROM": "3", "POS": 156, "REF": "A", "ALT": "G", "GENE": "GX02", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 35, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0064", "CHROM": "1", "POS": 389, "REF": "A", "ALT": "G", "GENE": "GX03", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 2, "AA_REF": "I", "AA_ALT": "F"}
+        - {"VARIANT_ID": "HX-0065", "CHROM": "2", "POS": 402, "REF": "A", "ALT": "G", "GENE": "HLXK7", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 9, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0066", "CHROM": "3", "POS": 415, "REF": "A", "ALT": "G", "GENE": "GX05", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 16, "AA_REF": "E", "AA_ALT": "H"}
+        - {"VARIANT_ID": "HX-0067", "CHROM": "1", "POS": 648, "REF": "A", "ALT": "G", "GENE": "GX06", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 23, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0068", "CHROM": "2", "POS": 661, "REF": "A", "ALT": "G", "GENE": "GX07", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 30, "AA_REF": "P", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0069", "CHROM": "3", "POS": 674, "REF": "A", "ALT": "G", "GENE": "GX08", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 37, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0070", "CHROM": "1", "POS": 907, "REF": "A", "ALT": "G", "GENE": "GX09", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 4, "AA_REF": "M", "AA_ALT": "Y"}
+        - {"VARIANT_ID": "HX-0071", "CHROM": "2", "POS": 770, "REF": "A", "ALT": "G", "GENE": "GX10", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 11, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0072", "CHROM": "3", "POS": 783, "REF": "A", "ALT": "G", "GENE": "GX11", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 18, "AA_REF": "R", "AA_ALT": "V"}
+        - {"VARIANT_ID": "HX-0073", "CHROM": "1", "POS": 1016, "REF": "A", "ALT": "G", "GENE": "GX12", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 25, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0074", "CHROM": "2", "POS": 1029, "REF": "A", "ALT": "G", "GENE": "GX13", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 32, "AA_REF": "T", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0075", "CHROM": "3", "POS": 1042, "REF": "A", "ALT": "G", "GENE": "GX14", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 39, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0076", "CHROM": "1", "POS": 1275, "REF": "A", "ALT": "G", "GENE": "GX15", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 6, "AA_REF": "W", "AA_ALT": "G"}
+        - {"VARIANT_ID": "HX-0077", "CHROM": "2", "POS": 1288, "REF": "A", "ALT": "G", "GENE": "GX16", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 13, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0078", "CHROM": "3", "POS": 1301, "REF": "A", "ALT": "G", "GENE": "GX17", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 20, "AA_REF": "A", "AA_ALT": "L"}
+        - {"VARIANT_ID": "HX-0079", "CHROM": "1", "POS": 1534, "REF": "A", "ALT": "G", "GENE": "GX18", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 27, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0080", "CHROM": "2", "POS": 1547, "REF": "A", "ALT": "G", "GENE": "GX19", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 34, "AA_REF": "Q", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0081", "CHROM": "3", "POS": 1560, "REF": "A", "ALT": "G", "GENE": "GX20", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 1, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0082", "CHROM": "1", "POS": 1643, "REF": "A", "ALT": "G", "GENE": "GX21", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 8, "AA_REF": "C", "AA_ALT": "S"}
+        - {"VARIANT_ID": "HX-0083", "CHROM": "2", "POS": 1656, "REF": "A", "ALT": "G", "GENE": "GX22", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 15, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0084", "CHROM": "3", "POS": 1669, "REF": "A", "ALT": "G", "GENE": "GX23", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 22, "AA_REF": "I", "AA_ALT": "F"}
+        - {"VARIANT_ID": "HX-0085", "CHROM": "1", "POS": 1902, "REF": "A", "ALT": "G", "GENE": "GX24", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 29, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0086", "CHROM": "2", "POS": 1915, "REF": "A", "ALT": "G", "GENE": "GX25", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 36, "AA_REF": "E", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0087", "CHROM": "3", "POS": 1928, "REF": "A", "ALT": "G", "GENE": "GX26", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 3, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0088", "CHROM": "1", "POS": 2161, "REF": "A", "ALT": "G", "GENE": "GX27", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 10, "AA_REF": "P", "AA_ALT": "N"}
+        - {"VARIANT_ID": "HX-0089", "CHROM": "2", "POS": 2174, "REF": "A", "ALT": "G", "GENE": "GX28", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 17, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0090", "CHROM": "3", "POS": 2187, "REF": "A", "ALT": "G", "GENE": "GX29", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 24, "AA_REF": "M", "AA_ALT": "Y"}
+        - {"VARIANT_ID": "HX-0091", "CHROM": "1", "POS": 220, "REF": "A", "ALT": "G", "GENE": "GX00", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 31, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0092", "CHROM": "2", "POS": 233, "REF": "A", "ALT": "G", "GENE": "GX01", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 38, "AA_REF": "R", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0093", "CHROM": "3", "POS": 246, "REF": "A", "ALT": "G", "GENE": "GX02", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 5, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0094", "CHROM": "1", "POS": 329, "REF": "A", "ALT": "G", "GENE": "GX03", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 12, "AA_REF": "T", "AA_ALT": "D"}
+        - {"VARIANT_ID": "HX-0095", "CHROM": "2", "POS": 342, "REF": "A", "ALT": "G", "GENE": "HLXK7", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 19, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0096", "CHROM": "3", "POS": 355, "REF": "A", "ALT": "G", "GENE": "GX05", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 26, "AA_REF": "W", "AA_ALT": "G"}
+        - {"VARIANT_ID": "HX-0097", "CHROM": "1", "POS": 588, "REF": "A", "ALT": "G", "GENE": "GX06", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 33, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0098", "CHROM": "2", "POS": 601, "REF": "A", "ALT": "G", "GENE": "GX07", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 40, "AA_REF": "A", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0099", "CHROM": "3", "POS": 614, "REF": "A", "ALT": "G", "GENE": "GX08", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 7, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0100", "CHROM": "1", "POS": 847, "REF": "A", "ALT": "G", "GENE": "GX09", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 14, "AA_REF": "Q", "AA_ALT": "K"}
+        - {"VARIANT_ID": "HX-0101", "CHROM": "2", "POS": 860, "REF": "A", "ALT": "G", "GENE": "GX10", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 21, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0102", "CHROM": "3", "POS": 873, "REF": "A", "ALT": "G", "GENE": "GX11", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 28, "AA_REF": "C", "AA_ALT": "S"}
+        - {"VARIANT_ID": "HX-0103", "CHROM": "1", "POS": 1106, "REF": "A", "ALT": "G", "GENE": "GX12", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 35, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0104", "CHROM": "2", "POS": 1119, "REF": "A", "ALT": "G", "GENE": "GX13", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 2, "AA_REF": "I", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0105", "CHROM": "3", "POS": 982, "REF": "A", "ALT": "G", "GENE": "GX14", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 9, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0106", "CHROM": "1", "POS": 1215, "REF": "A", "ALT": "G", "GENE": "GX15", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 16, "AA_REF": "E", "AA_ALT": "H"}
+        - {"VARIANT_ID": "HX-0107", "CHROM": "2", "POS": 1228, "REF": "A", "ALT": "G", "GENE": "GX16", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 23, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0108", "CHROM": "3", "POS": 1241, "REF": "A", "ALT": "G", "GENE": "GX17", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 30, "AA_REF": "P", "AA_ALT": "N"}
+        - {"VARIANT_ID": "HX-0109", "CHROM": "1", "POS": 1474, "REF": "A", "ALT": "G", "GENE": "GX18", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 37, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0110", "CHROM": "2", "POS": 1487, "REF": "A", "ALT": "G", "GENE": "GX19", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 4, "AA_REF": "M", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0111", "CHROM": "3", "POS": 1500, "REF": "A", "ALT": "G", "GENE": "GX20", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 11, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0112", "CHROM": "1", "POS": 1733, "REF": "A", "ALT": "G", "GENE": "GX21", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 18, "AA_REF": "R", "AA_ALT": "V"}
+        - {"VARIANT_ID": "HX-0113", "CHROM": "2", "POS": 1746, "REF": "A", "ALT": "G", "GENE": "GX22", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 25, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0114", "CHROM": "3", "POS": 1759, "REF": "A", "ALT": "G", "GENE": "GX23", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 32, "AA_REF": "T", "AA_ALT": "D"}
+        - {"VARIANT_ID": "HX-0115", "CHROM": "1", "POS": 1992, "REF": "A", "ALT": "G", "GENE": "GX24", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 39, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0116", "CHROM": "2", "POS": 2005, "REF": "A", "ALT": "G", "GENE": "GX25", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 6, "AA_REF": "W", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0117", "CHROM": "3", "POS": 1868, "REF": "A", "ALT": "G", "GENE": "GX26", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 13, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0118", "CHROM": "1", "POS": 2101, "REF": "A", "ALT": "G", "GENE": "GX27", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 20, "AA_REF": "A", "AA_ALT": "L"}
+        - {"VARIANT_ID": "HX-0119", "CHROM": "2", "POS": 2114, "REF": "A", "ALT": "G", "GENE": "GX28", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 27, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0120", "CHROM": "3", "POS": 2127, "REF": "A", "ALT": "G", "GENE": "GX29", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 34, "AA_REF": "Q", "AA_ALT": "K"}
+        - {"VARIANT_ID": "HX-0121", "CHROM": "1", "POS": 160, "REF": "A", "ALT": "G", "GENE": "GX00", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 1, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0122", "CHROM": "2", "POS": 173, "REF": "A", "ALT": "G", "GENE": "GX01", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 8, "AA_REF": "C", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0123", "CHROM": "3", "POS": 186, "REF": "A", "ALT": "G", "GENE": "GX02", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 15, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0124", "CHROM": "1", "POS": 419, "REF": "A", "ALT": "G", "GENE": "GX03", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 22, "AA_REF": "I", "AA_ALT": "F"}
+        - {"VARIANT_ID": "HX-0125", "CHROM": "2", "POS": 432, "REF": "A", "ALT": "G", "GENE": "HLXK7", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 29, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0126", "CHROM": "3", "POS": 445, "REF": "A", "ALT": "G", "GENE": "GX05", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 36, "AA_REF": "E", "AA_ALT": "H"}
+        - {"VARIANT_ID": "HX-0127", "CHROM": "1", "POS": 678, "REF": "A", "ALT": "G", "GENE": "GX06", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 3, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0128", "CHROM": "2", "POS": 541, "REF": "A", "ALT": "G", "GENE": "GX07", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 10, "AA_REF": "P", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0129", "CHROM": "3", "POS": 554, "REF": "A", "ALT": "G", "GENE": "GX08", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 17, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0130", "CHROM": "1", "POS": 787, "REF": "A", "ALT": "G", "GENE": "GX09", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 24, "AA_REF": "M", "AA_ALT": "Y"}
+        - {"VARIANT_ID": "HX-0131", "CHROM": "2", "POS": 800, "REF": "A", "ALT": "G", "GENE": "GX10", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 31, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0132", "CHROM": "3", "POS": 813, "REF": "A", "ALT": "G", "GENE": "GX11", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 38, "AA_REF": "R", "AA_ALT": "V"}
+        - {"VARIANT_ID": "HX-0133", "CHROM": "1", "POS": 1046, "REF": "A", "ALT": "G", "GENE": "GX12", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 5, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0134", "CHROM": "2", "POS": 1059, "REF": "A", "ALT": "G", "GENE": "GX13", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 12, "AA_REF": "T", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0135", "CHROM": "3", "POS": 1072, "REF": "A", "ALT": "G", "GENE": "GX14", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 19, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0136", "CHROM": "1", "POS": 1305, "REF": "A", "ALT": "G", "GENE": "GX15", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 26, "AA_REF": "W", "AA_ALT": "G"}
+        - {"VARIANT_ID": "HX-0137", "CHROM": "2", "POS": 1318, "REF": "A", "ALT": "G", "GENE": "GX16", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 33, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0138", "CHROM": "3", "POS": 1331, "REF": "A", "ALT": "G", "GENE": "GX17", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 40, "AA_REF": "A", "AA_ALT": "L"}
+        - {"VARIANT_ID": "HX-0139", "CHROM": "1", "POS": 1564, "REF": "A", "ALT": "G", "GENE": "GX18", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 7, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0140", "CHROM": "2", "POS": 1427, "REF": "A", "ALT": "G", "GENE": "GX19", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 14, "AA_REF": "Q", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0141", "CHROM": "3", "POS": 1440, "REF": "A", "ALT": "G", "GENE": "GX20", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 21, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0142", "CHROM": "1", "POS": 1673, "REF": "A", "ALT": "G", "GENE": "GX21", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 28, "AA_REF": "C", "AA_ALT": "S"}
+        - {"VARIANT_ID": "HX-0143", "CHROM": "2", "POS": 1686, "REF": "A", "ALT": "G", "GENE": "GX22", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 35, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0144", "CHROM": "3", "POS": 1699, "REF": "A", "ALT": "G", "GENE": "GX23", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 2, "AA_REF": "I", "AA_ALT": "F"}
+        - {"VARIANT_ID": "HX-0145", "CHROM": "1", "POS": 1932, "REF": "A", "ALT": "G", "GENE": "GX24", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 9, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0146", "CHROM": "2", "POS": 1945, "REF": "A", "ALT": "G", "GENE": "GX25", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 16, "AA_REF": "E", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0147", "CHROM": "3", "POS": 1958, "REF": "A", "ALT": "G", "GENE": "GX26", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 23, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0148", "CHROM": "1", "POS": 2191, "REF": "A", "ALT": "G", "GENE": "GX27", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 30, "AA_REF": "P", "AA_ALT": "N"}
+        - {"VARIANT_ID": "HX-0149", "CHROM": "2", "POS": 2204, "REF": "A", "ALT": "G", "GENE": "GX28", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 37, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0150", "CHROM": "3", "POS": 2217, "REF": "A", "ALT": "G", "GENE": "GX29", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 4, "AA_REF": "M", "AA_ALT": "Y"}
+        - {"VARIANT_ID": "HX-0151", "CHROM": "1", "POS": 100, "REF": "A", "ALT": "G", "GENE": "GX00", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 11, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0152", "CHROM": "2", "POS": 113, "REF": "A", "ALT": "G", "GENE": "GX01", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 18, "AA_REF": "R", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0153", "CHROM": "3", "POS": 126, "REF": "A", "ALT": "G", "GENE": "GX02", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 25, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0154", "CHROM": "1", "POS": 359, "REF": "A", "ALT": "G", "GENE": "GX03", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 32, "AA_REF": "T", "AA_ALT": "D"}
+        - {"VARIANT_ID": "HX-0155", "CHROM": "2", "POS": 372, "REF": "A", "ALT": "G", "GENE": "HLXK7", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 39, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0156", "CHROM": "3", "POS": 385, "REF": "A", "ALT": "G", "GENE": "GX05", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 6, "AA_REF": "W", "AA_ALT": "G"}
+        - {"VARIANT_ID": "HX-0157", "CHROM": "1", "POS": 618, "REF": "A", "ALT": "G", "GENE": "GX06", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 13, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0158", "CHROM": "2", "POS": 631, "REF": "A", "ALT": "G", "GENE": "GX07", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 20, "AA_REF": "A", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0159", "CHROM": "3", "POS": 644, "REF": "A", "ALT": "G", "GENE": "GX08", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 27, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0160", "CHROM": "1", "POS": 877, "REF": "A", "ALT": "G", "GENE": "GX09", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 34, "AA_REF": "Q", "AA_ALT": "K"}
+        - {"VARIANT_ID": "HX-0161", "CHROM": "2", "POS": 890, "REF": "A", "ALT": "G", "GENE": "GX10", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 1, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0162", "CHROM": "3", "POS": 903, "REF": "A", "ALT": "G", "GENE": "GX11", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 8, "AA_REF": "C", "AA_ALT": "S"}
+        - {"VARIANT_ID": "HX-0163", "CHROM": "1", "POS": 986, "REF": "A", "ALT": "G", "GENE": "GX12", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 15, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0164", "CHROM": "2", "POS": 999, "REF": "A", "ALT": "G", "GENE": "GX13", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 22, "AA_REF": "I", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0165", "CHROM": "3", "POS": 1012, "REF": "A", "ALT": "G", "GENE": "GX14", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 29, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0166", "CHROM": "1", "POS": 1245, "REF": "A", "ALT": "G", "GENE": "GX15", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 36, "AA_REF": "E", "AA_ALT": "H"}
+        - {"VARIANT_ID": "HX-0167", "CHROM": "2", "POS": 1258, "REF": "A", "ALT": "G", "GENE": "GX16", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 3, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0168", "CHROM": "3", "POS": 1271, "REF": "A", "ALT": "G", "GENE": "GX17", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 10, "AA_REF": "P", "AA_ALT": "N"}
+        - {"VARIANT_ID": "HX-0169", "CHROM": "1", "POS": 1504, "REF": "A", "ALT": "G", "GENE": "GX18", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 17, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0170", "CHROM": "2", "POS": 1517, "REF": "A", "ALT": "G", "GENE": "GX19", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 24, "AA_REF": "M", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0171", "CHROM": "3", "POS": 1530, "REF": "A", "ALT": "G", "GENE": "GX20", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 31, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0172", "CHROM": "1", "POS": 1763, "REF": "A", "ALT": "G", "GENE": "GX21", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 38, "AA_REF": "R", "AA_ALT": "V"}
+        - {"VARIANT_ID": "HX-0173", "CHROM": "2", "POS": 1776, "REF": "A", "ALT": "G", "GENE": "GX22", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 5, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0174", "CHROM": "3", "POS": 1789, "REF": "A", "ALT": "G", "GENE": "GX23", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 12, "AA_REF": "T", "AA_ALT": "D"}
+        - {"VARIANT_ID": "HX-0175", "CHROM": "1", "POS": 1872, "REF": "A", "ALT": "G", "GENE": "GX24", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 19, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0176", "CHROM": "2", "POS": 1885, "REF": "A", "ALT": "G", "GENE": "GX25", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 26, "AA_REF": "W", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0177", "CHROM": "3", "POS": 1898, "REF": "A", "ALT": "G", "GENE": "GX26", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 33, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0178", "CHROM": "1", "POS": 2131, "REF": "A", "ALT": "G", "GENE": "GX27", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 40, "AA_REF": "A", "AA_ALT": "L"}
+        - {"VARIANT_ID": "HX-0179", "CHROM": "2", "POS": 2144, "REF": "A", "ALT": "G", "GENE": "GX28", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 7, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0180", "CHROM": "3", "POS": 2157, "REF": "A", "ALT": "G", "GENE": "GX29", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 14, "AA_REF": "Q", "AA_ALT": "K"}
+        - {"VARIANT_ID": "HX-0181", "CHROM": "1", "POS": 190, "REF": "A", "ALT": "G", "GENE": "GX00", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 21, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0182", "CHROM": "2", "POS": 203, "REF": "A", "ALT": "G", "GENE": "GX01", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 28, "AA_REF": "C", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0183", "CHROM": "3", "POS": 216, "REF": "A", "ALT": "G", "GENE": "GX02", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 35, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0184", "CHROM": "1", "POS": 449, "REF": "A", "ALT": "G", "GENE": "GX03", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 2, "AA_REF": "I", "AA_ALT": "F"}
+        - {"VARIANT_ID": "HX-0185", "CHROM": "2", "POS": 462, "REF": "A", "ALT": "G", "GENE": "HLXK7", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 9, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0186", "CHROM": "3", "POS": 325, "REF": "A", "ALT": "G", "GENE": "GX05", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 16, "AA_REF": "E", "AA_ALT": "H"}
+        - {"VARIANT_ID": "HX-0187", "CHROM": "1", "POS": 558, "REF": "A", "ALT": "G", "GENE": "GX06", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 23, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0188", "CHROM": "2", "POS": 571, "REF": "A", "ALT": "G", "GENE": "GX07", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 30, "AA_REF": "P", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0189", "CHROM": "3", "POS": 584, "REF": "A", "ALT": "G", "GENE": "GX08", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 37, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0190", "CHROM": "1", "POS": 817, "REF": "A", "ALT": "G", "GENE": "GX09", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 4, "AA_REF": "M", "AA_ALT": "Y"}
+        - {"VARIANT_ID": "HX-0191", "CHROM": "2", "POS": 830, "REF": "A", "ALT": "G", "GENE": "GX10", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 11, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0192", "CHROM": "3", "POS": 843, "REF": "A", "ALT": "G", "GENE": "GX11", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 18, "AA_REF": "R", "AA_ALT": "V"}
+        - {"VARIANT_ID": "HX-0193", "CHROM": "1", "POS": 1076, "REF": "A", "ALT": "G", "GENE": "GX12", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 25, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0194", "CHROM": "2", "POS": 1089, "REF": "A", "ALT": "G", "GENE": "GX13", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 32, "AA_REF": "T", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0195", "CHROM": "3", "POS": 1102, "REF": "A", "ALT": "G", "GENE": "GX14", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 39, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0196", "CHROM": "1", "POS": 1335, "REF": "A", "ALT": "G", "GENE": "GX15", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 6, "AA_REF": "W", "AA_ALT": "G"}
+        - {"VARIANT_ID": "HX-0197", "CHROM": "2", "POS": 1348, "REF": "A", "ALT": "G", "GENE": "GX16", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 13, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0198", "CHROM": "3", "POS": 1211, "REF": "A", "ALT": "G", "GENE": "GX17", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 20, "AA_REF": "A", "AA_ALT": "L"}
+        - {"VARIANT_ID": "HX-0199", "CHROM": "1", "POS": 1444, "REF": "A", "ALT": "G", "GENE": "GX18", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 27, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0200", "CHROM": "2", "POS": 1457, "REF": "A", "ALT": "G", "GENE": "GX19", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 34, "AA_REF": "Q", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0201", "CHROM": "3", "POS": 1470, "REF": "A", "ALT": "G", "GENE": "GX20", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 1, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0202", "CHROM": "1", "POS": 1703, "REF": "A", "ALT": "G", "GENE": "GX21", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 8, "AA_REF": "C", "AA_ALT": "S"}
+        - {"VARIANT_ID": "HX-0203", "CHROM": "2", "POS": 1716, "REF": "A", "ALT": "G", "GENE": "GX22", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 15, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0204", "CHROM": "3", "POS": 1729, "REF": "A", "ALT": "G", "GENE": "GX23", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 22, "AA_REF": "I", "AA_ALT": "F"}
+        - {"VARIANT_ID": "HX-0205", "CHROM": "1", "POS": 1962, "REF": "A", "ALT": "G", "GENE": "GX24", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 29, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0206", "CHROM": "2", "POS": 1975, "REF": "A", "ALT": "G", "GENE": "GX25", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 36, "AA_REF": "E", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0207", "CHROM": "3", "POS": 1988, "REF": "A", "ALT": "G", "GENE": "GX26", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 3, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0208", "CHROM": "1", "POS": 2221, "REF": "A", "ALT": "G", "GENE": "GX27", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 10, "AA_REF": "P", "AA_ALT": "N"}
+        - {"VARIANT_ID": "HX-0209", "CHROM": "2", "POS": 2084, "REF": "A", "ALT": "G", "GENE": "GX28", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 17, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0210", "CHROM": "3", "POS": 2097, "REF": "A", "ALT": "G", "GENE": "GX29", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 24, "AA_REF": "M", "AA_ALT": "Y"}
+        - {"VARIANT_ID": "HX-0211", "CHROM": "1", "POS": 130, "REF": "A", "ALT": "G", "GENE": "GX00", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 31, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0212", "CHROM": "2", "POS": 143, "REF": "A", "ALT": "G", "GENE": "GX01", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 38, "AA_REF": "R", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0213", "CHROM": "3", "POS": 156, "REF": "A", "ALT": "G", "GENE": "GX02", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 5, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0214", "CHROM": "1", "POS": 389, "REF": "A", "ALT": "G", "GENE": "GX03", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 12, "AA_REF": "T", "AA_ALT": "D"}
+        - {"VARIANT_ID": "HX-0215", "CHROM": "2", "POS": 402, "REF": "A", "ALT": "G", "GENE": "HLXK7", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 19, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0216", "CHROM": "3", "POS": 415, "REF": "A", "ALT": "G", "GENE": "GX05", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 26, "AA_REF": "W", "AA_ALT": "G"}
+        - {"VARIANT_ID": "HX-0217", "CHROM": "1", "POS": 648, "REF": "A", "ALT": "G", "GENE": "GX06", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 33, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0218", "CHROM": "2", "POS": 661, "REF": "A", "ALT": "G", "GENE": "GX07", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 40, "AA_REF": "A", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0219", "CHROM": "3", "POS": 674, "REF": "A", "ALT": "G", "GENE": "GX08", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 7, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0220", "CHROM": "1", "POS": 907, "REF": "A", "ALT": "G", "GENE": "GX09", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 14, "AA_REF": "Q", "AA_ALT": "K"}
+        - {"VARIANT_ID": "HX-0221", "CHROM": "2", "POS": 770, "REF": "A", "ALT": "G", "GENE": "GX10", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 21, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0222", "CHROM": "3", "POS": 783, "REF": "A", "ALT": "G", "GENE": "GX11", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 28, "AA_REF": "C", "AA_ALT": "S"}
+        - {"VARIANT_ID": "HX-0223", "CHROM": "1", "POS": 1016, "REF": "A", "ALT": "G", "GENE": "GX12", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 35, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0224", "CHROM": "2", "POS": 1029, "REF": "A", "ALT": "G", "GENE": "GX13", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 2, "AA_REF": "I", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0225", "CHROM": "3", "POS": 1042, "REF": "A", "ALT": "G", "GENE": "GX14", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 9, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0226", "CHROM": "1", "POS": 1275, "REF": "A", "ALT": "G", "GENE": "GX15", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 16, "AA_REF": "E", "AA_ALT": "H"}
+        - {"VARIANT_ID": "HX-0227", "CHROM": "2", "POS": 1288, "REF": "A", "ALT": "G", "GENE": "GX16", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 23, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0228", "CHROM": "3", "POS": 1301, "REF": "A", "ALT": "G", "GENE": "GX17", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 30, "AA_REF": "P", "AA_ALT": "N"}
+        - {"VARIANT_ID": "HX-0229", "CHROM": "1", "POS": 1534, "REF": "A", "ALT": "G", "GENE": "GX18", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 37, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0230", "CHROM": "2", "POS": 1547, "REF": "A", "ALT": "G", "GENE": "GX19", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 4, "AA_REF": "M", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0231", "CHROM": "3", "POS": 1560, "REF": "A", "ALT": "G", "GENE": "GX20", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 11, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0232", "CHROM": "1", "POS": 1643, "REF": "A", "ALT": "G", "GENE": "GX21", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 18, "AA_REF": "R", "AA_ALT": "V"}
+        - {"VARIANT_ID": "HX-0233", "CHROM": "2", "POS": 1656, "REF": "A", "ALT": "G", "GENE": "GX22", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 25, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0234", "CHROM": "3", "POS": 1669, "REF": "A", "ALT": "G", "GENE": "GX23", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 32, "AA_REF": "T", "AA_ALT": "D"}
+        - {"VARIANT_ID": "HX-0235", "CHROM": "1", "POS": 1902, "REF": "A", "ALT": "G", "GENE": "GX24", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 39, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0236", "CHROM": "2", "POS": 1915, "REF": "A", "ALT": "G", "GENE": "GX25", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 6, "AA_REF": "W", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0237", "CHROM": "3", "POS": 1928, "REF": "A", "ALT": "G", "GENE": "GX26", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 13, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0238", "CHROM": "1", "POS": 2161, "REF": "A", "ALT": "G", "GENE": "GX27", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 20, "AA_REF": "A", "AA_ALT": "L"}
+        - {"VARIANT_ID": "HX-0239", "CHROM": "2", "POS": 2174, "REF": "A", "ALT": "G", "GENE": "GX28", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 27, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0240", "CHROM": "3", "POS": 2187, "REF": "A", "ALT": "G", "GENE": "GX29", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 34, "AA_REF": "Q", "AA_ALT": "K"}
+        - {"VARIANT_ID": "HX-0241", "CHROM": "1", "POS": 220, "REF": "A", "ALT": "G", "GENE": "GX00", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 1, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0242", "CHROM": "2", "POS": 233, "REF": "A", "ALT": "G", "GENE": "GX01", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 8, "AA_REF": "C", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0243", "CHROM": "3", "POS": 246, "REF": "A", "ALT": "G", "GENE": "GX02", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 15, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0244", "CHROM": "1", "POS": 329, "REF": "A", "ALT": "G", "GENE": "GX03", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 22, "AA_REF": "I", "AA_ALT": "F"}
+        - {"VARIANT_ID": "HX-0245", "CHROM": "2", "POS": 342, "REF": "A", "ALT": "G", "GENE": "HLXK7", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 29, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0246", "CHROM": "3", "POS": 355, "REF": "A", "ALT": "G", "GENE": "GX05", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 36, "AA_REF": "E", "AA_ALT": "H"}
+        - {"VARIANT_ID": "HX-0247", "CHROM": "1", "POS": 588, "REF": "A", "ALT": "G", "GENE": "GX06", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 3, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0248", "CHROM": "2", "POS": 601, "REF": "A", "ALT": "G", "GENE": "GX07", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 10, "AA_REF": "P", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0249", "CHROM": "3", "POS": 614, "REF": "A", "ALT": "G", "GENE": "GX08", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 17, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0250", "CHROM": "1", "POS": 847, "REF": "A", "ALT": "G", "GENE": "GX09", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 24, "AA_REF": "M", "AA_ALT": "Y"}
+        - {"VARIANT_ID": "HX-0251", "CHROM": "2", "POS": 860, "REF": "A", "ALT": "G", "GENE": "GX10", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 31, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0252", "CHROM": "3", "POS": 873, "REF": "A", "ALT": "G", "GENE": "GX11", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 38, "AA_REF": "R", "AA_ALT": "V"}
+        - {"VARIANT_ID": "HX-0253", "CHROM": "1", "POS": 1106, "REF": "A", "ALT": "G", "GENE": "GX12", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 5, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0254", "CHROM": "2", "POS": 1119, "REF": "A", "ALT": "G", "GENE": "GX13", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 12, "AA_REF": "T", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0255", "CHROM": "3", "POS": 982, "REF": "A", "ALT": "G", "GENE": "GX14", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 19, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0256", "CHROM": "1", "POS": 1215, "REF": "A", "ALT": "G", "GENE": "GX15", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 26, "AA_REF": "W", "AA_ALT": "G"}
+        - {"VARIANT_ID": "HX-0257", "CHROM": "2", "POS": 1228, "REF": "A", "ALT": "G", "GENE": "GX16", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 33, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0258", "CHROM": "3", "POS": 1241, "REF": "A", "ALT": "G", "GENE": "GX17", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 40, "AA_REF": "A", "AA_ALT": "L"}
+        - {"VARIANT_ID": "HX-0259", "CHROM": "1", "POS": 1474, "REF": "A", "ALT": "G", "GENE": "GX18", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 7, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0260", "CHROM": "2", "POS": 1487, "REF": "A", "ALT": "G", "GENE": "GX19", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 14, "AA_REF": "Q", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0261", "CHROM": "3", "POS": 1500, "REF": "A", "ALT": "G", "GENE": "GX20", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 21, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0262", "CHROM": "1", "POS": 1733, "REF": "A", "ALT": "G", "GENE": "GX21", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 28, "AA_REF": "C", "AA_ALT": "S"}
+        - {"VARIANT_ID": "HX-0263", "CHROM": "2", "POS": 1746, "REF": "A", "ALT": "G", "GENE": "GX22", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 35, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0264", "CHROM": "3", "POS": 1759, "REF": "A", "ALT": "G", "GENE": "GX23", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 2, "AA_REF": "I", "AA_ALT": "F"}
+        - {"VARIANT_ID": "HX-0265", "CHROM": "1", "POS": 1992, "REF": "A", "ALT": "G", "GENE": "GX24", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 9, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0266", "CHROM": "2", "POS": 2005, "REF": "A", "ALT": "G", "GENE": "GX25", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 16, "AA_REF": "E", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0267", "CHROM": "3", "POS": 1868, "REF": "A", "ALT": "G", "GENE": "GX26", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 23, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0268", "CHROM": "1", "POS": 2101, "REF": "A", "ALT": "G", "GENE": "GX27", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 30, "AA_REF": "P", "AA_ALT": "N"}
+        - {"VARIANT_ID": "HX-0269", "CHROM": "2", "POS": 2114, "REF": "A", "ALT": "G", "GENE": "GX28", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 37, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0270", "CHROM": "3", "POS": 2127, "REF": "A", "ALT": "G", "GENE": "GX29", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 4, "AA_REF": "M", "AA_ALT": "Y"}
+        - {"VARIANT_ID": "HX-0271", "CHROM": "1", "POS": 160, "REF": "A", "ALT": "G", "GENE": "GX00", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 11, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0272", "CHROM": "2", "POS": 173, "REF": "A", "ALT": "G", "GENE": "GX01", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 18, "AA_REF": "R", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0273", "CHROM": "3", "POS": 186, "REF": "A", "ALT": "G", "GENE": "GX02", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 25, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0274", "CHROM": "1", "POS": 419, "REF": "A", "ALT": "G", "GENE": "GX03", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 32, "AA_REF": "T", "AA_ALT": "D"}
+        - {"VARIANT_ID": "HX-0275", "CHROM": "2", "POS": 432, "REF": "A", "ALT": "G", "GENE": "HLXK7", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 39, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0276", "CHROM": "3", "POS": 445, "REF": "A", "ALT": "G", "GENE": "GX05", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 6, "AA_REF": "W", "AA_ALT": "G"}
+        - {"VARIANT_ID": "HX-0277", "CHROM": "1", "POS": 678, "REF": "A", "ALT": "G", "GENE": "GX06", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 13, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0278", "CHROM": "2", "POS": 541, "REF": "A", "ALT": "G", "GENE": "GX07", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 20, "AA_REF": "A", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0279", "CHROM": "3", "POS": 554, "REF": "A", "ALT": "G", "GENE": "GX08", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 27, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0280", "CHROM": "1", "POS": 787, "REF": "A", "ALT": "G", "GENE": "GX09", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 34, "AA_REF": "Q", "AA_ALT": "K"}
+        - {"VARIANT_ID": "HX-0281", "CHROM": "2", "POS": 800, "REF": "A", "ALT": "G", "GENE": "GX10", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 1, "AA_REF": "V", "AA_ALT": "M"}
+        - {"VARIANT_ID": "HX-0282", "CHROM": "3", "POS": 813, "REF": "A", "ALT": "G", "GENE": "GX11", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 8, "AA_REF": "C", "AA_ALT": "S"}
+        - {"VARIANT_ID": "HX-0283", "CHROM": "1", "POS": 1046, "REF": "A", "ALT": "G", "GENE": "GX12", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 15, "AA_REF": "D", "AA_ALT": "R"}
+        - {"VARIANT_ID": "HX-0284", "CHROM": "2", "POS": 1059, "REF": "A", "ALT": "G", "GENE": "GX13", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 22, "AA_REF": "I", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0285", "CHROM": "3", "POS": 1072, "REF": "A", "ALT": "G", "GENE": "GX14", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 29, "AA_REF": "G", "AA_ALT": "T"}
+        - {"VARIANT_ID": "HX-0286", "CHROM": "1", "POS": 1305, "REF": "A", "ALT": "G", "GENE": "GX15", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 36, "AA_REF": "E", "AA_ALT": "H"}
+        - {"VARIANT_ID": "HX-0287", "CHROM": "2", "POS": 1318, "REF": "A", "ALT": "G", "GENE": "GX16", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 3, "AA_REF": "L", "AA_ALT": "W"}
+        - {"VARIANT_ID": "HX-0288", "CHROM": "3", "POS": 1331, "REF": "A", "ALT": "G", "GENE": "GX17", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 10, "AA_REF": "P", "AA_ALT": "N"}
+        - {"VARIANT_ID": "HX-0289", "CHROM": "1", "POS": 1564, "REF": "A", "ALT": "G", "GENE": "GX18", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 17, "AA_REF": "K", "AA_ALT": "A"}
+        - {"VARIANT_ID": "HX-0290", "CHROM": "2", "POS": 1427, "REF": "A", "ALT": "G", "GENE": "GX19", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 24, "AA_REF": "M", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0291", "CHROM": "3", "POS": 1440, "REF": "A", "ALT": "G", "GENE": "GX20", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 31, "AA_REF": "S", "AA_ALT": "Q"}
+        - {"VARIANT_ID": "HX-0292", "CHROM": "1", "POS": 1673, "REF": "A", "ALT": "G", "GENE": "GX21", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 38, "AA_REF": "R", "AA_ALT": "V"}
+        - {"VARIANT_ID": "HX-0293", "CHROM": "2", "POS": 1686, "REF": "A", "ALT": "G", "GENE": "GX22", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 5, "AA_REF": "F", "AA_ALT": "C"}
+        - {"VARIANT_ID": "HX-0294", "CHROM": "3", "POS": 1699, "REF": "A", "ALT": "G", "GENE": "GX23", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 12, "AA_REF": "T", "AA_ALT": "D"}
+        - {"VARIANT_ID": "HX-0295", "CHROM": "1", "POS": 1932, "REF": "A", "ALT": "G", "GENE": "GX24", "CONSEQUENCE": "missense_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 19, "AA_REF": "H", "AA_ALT": "I"}
+        - {"VARIANT_ID": "HX-0296", "CHROM": "2", "POS": 1945, "REF": "A", "ALT": "G", "GENE": "GX25", "CONSEQUENCE": "stop_gained", "IMPACT": "HIGH", "PROTEIN_POS": 26, "AA_REF": "W", "AA_ALT": "*"}
+        - {"VARIANT_ID": "HX-0297", "CHROM": "3", "POS": 1958, "REF": "A", "ALT": "G", "GENE": "GX26", "CONSEQUENCE": "synonymous_variant", "IMPACT": "LOW", "PROTEIN_POS": 33, "AA_REF": "N", "AA_ALT": "E"}
+        - {"VARIANT_ID": "HX-0298", "CHROM": "1", "POS": 2191, "REF": "A", "ALT": "G", "GENE": "GX27", "CONSEQUENCE": "frameshift_variant", "IMPACT": "HIGH", "PROTEIN_POS": 40, "AA_REF": "A", "AA_ALT": "L"}
+        - {"VARIANT_ID": "HX-0299", "CHROM": "2", "POS": 2204, "REF": "A", "ALT": "G", "GENE": "GX28", "CONSEQUENCE": "splice_donor_variant", "IMPACT": "MODERATE", "PROTEIN_POS": 7, "AA_REF": "Y", "AA_ALT": "P"}
+        - {"VARIANT_ID": "HX-0300", "CHROM": "3", "POS": 2217, "REF": "A", "ALT": "G", "GENE": "GX29", "CONSEQUENCE": "inframe_deletion", "IMPACT": "MODERATE", "PROTEIN_POS": 14, "AA_REF": "Q", "AA_ALT": "K"}
+    study-gene:
+      rows:
+        - {"GENE": "GX00", "CHROM": "1", "START": 100, "END": 250, "STRAND": "+", "ROLE": "driver", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX01", "CHROM": "2", "START": 100, "END": 250, "STRAND": "+", "ROLE": "driver", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX02", "CHROM": "3", "START": 100, "END": 250, "STRAND": "+", "ROLE": "driver", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX03", "CHROM": "1", "START": 320, "END": 470, "STRAND": "+", "ROLE": "driver", "PROTEIN_LENGTH": 100}
+        - {"GENE": "HLXK7", "CHROM": "2", "START": 320, "END": 470, "STRAND": "+", "ROLE": "driver", "PROTEIN_LENGTH": 40}
+        - {"GENE": "GX05", "CHROM": "3", "START": 320, "END": 470, "STRAND": "+", "ROLE": "driver", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX06", "CHROM": "1", "START": 540, "END": 690, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX07", "CHROM": "2", "START": 540, "END": 690, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX08", "CHROM": "3", "START": 540, "END": 690, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX09", "CHROM": "1", "START": 760, "END": 910, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX10", "CHROM": "2", "START": 760, "END": 910, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX11", "CHROM": "3", "START": 760, "END": 910, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX12", "CHROM": "1", "START": 980, "END": 1130, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX13", "CHROM": "2", "START": 980, "END": 1130, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX14", "CHROM": "3", "START": 980, "END": 1130, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX15", "CHROM": "1", "START": 1200, "END": 1350, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX16", "CHROM": "2", "START": 1200, "END": 1350, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX17", "CHROM": "3", "START": 1200, "END": 1350, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX18", "CHROM": "1", "START": 1420, "END": 1570, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX19", "CHROM": "2", "START": 1420, "END": 1570, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX20", "CHROM": "3", "START": 1420, "END": 1570, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX21", "CHROM": "1", "START": 1640, "END": 1790, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX22", "CHROM": "2", "START": 1640, "END": 1790, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX23", "CHROM": "3", "START": 1640, "END": 1790, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX24", "CHROM": "1", "START": 1860, "END": 2010, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX25", "CHROM": "2", "START": 1860, "END": 2010, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX26", "CHROM": "3", "START": 1860, "END": 2010, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX27", "CHROM": "1", "START": 2080, "END": 2230, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX28", "CHROM": "2", "START": 2080, "END": 2230, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+        - {"GENE": "GX29", "CHROM": "3", "START": 2080, "END": 2230, "STRAND": "+", "ROLE": "passenger", "PROTEIN_LENGTH": 100}
+    cnv-segment:
+      rows:
+        - {"SAMPLE_ID": "S001", "CHROM": "1", "START": 90, "END": 260, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S002", "CHROM": "2", "START": 530, "END": 700, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S003", "CHROM": "3", "START": 970, "END": 1140, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S004", "CHROM": "1", "START": 1630, "END": 1800, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S005", "CHROM": "2", "START": 2070, "END": 2240, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S006", "CHROM": "3", "START": 310, "END": 480, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S007", "CHROM": "1", "START": 970, "END": 1140, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S008", "CHROM": "2", "START": 1410, "END": 1580, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S009", "CHROM": "3", "START": 1850, "END": 2020, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S010", "CHROM": "1", "START": 310, "END": 480, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S011", "CHROM": "2", "START": 750, "END": 920, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S012", "CHROM": "3", "START": 1190, "END": 1360, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S013", "CHROM": "1", "START": 1850, "END": 2020, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S014", "CHROM": "2", "START": 90, "END": 260, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S015", "CHROM": "3", "START": 530, "END": 700, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S016", "CHROM": "1", "START": 1190, "END": 1360, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S017", "CHROM": "2", "START": 1630, "END": 1800, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S018", "CHROM": "3", "START": 2070, "END": 2240, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S019", "CHROM": "1", "START": 530, "END": 700, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S020", "CHROM": "2", "START": 970, "END": 1140, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S021", "CHROM": "3", "START": 1410, "END": 1580, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S022", "CHROM": "1", "START": 2070, "END": 2240, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S023", "CHROM": "2", "START": 310, "END": 480, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S024", "CHROM": "3", "START": 750, "END": 920, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S025", "CHROM": "1", "START": 1410, "END": 1580, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S026", "CHROM": "2", "START": 1850, "END": 2020, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S027", "CHROM": "3", "START": 90, "END": 260, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S028", "CHROM": "1", "START": 750, "END": 920, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S029", "CHROM": "2", "START": 1190, "END": 1360, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S030", "CHROM": "3", "START": 1630, "END": 1800, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S031", "CHROM": "1", "START": 90, "END": 260, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S032", "CHROM": "2", "START": 530, "END": 700, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S033", "CHROM": "3", "START": 970, "END": 1140, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S034", "CHROM": "1", "START": 1630, "END": 1800, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S035", "CHROM": "2", "START": 2070, "END": 2240, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S036", "CHROM": "3", "START": 310, "END": 480, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S037", "CHROM": "1", "START": 970, "END": 1140, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S038", "CHROM": "2", "START": 1410, "END": 1580, "COPY_NUMBER": 8, "CALL": "AMP"}
+        - {"SAMPLE_ID": "S039", "CHROM": "3", "START": 1850, "END": 2020, "COPY_NUMBER": 0, "CALL": "DEL"}
+        - {"SAMPLE_ID": "S040", "CHROM": "1", "START": 310, "END": 480, "COPY_NUMBER": 8, "CALL": "AMP"}
+cases:
+  - id: summary-of-the-whole-cohort
+    source: "Drishti answers.json cohorts/ONC-1/summary (GenomicsBoard.summary over the showcase fixture)"
+    reference: true
+    request: { outputs: [ summary ], params: { cohort: ONC-1, gene: HLXK7 }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        summary:
+          columns: [ COHORT, SELECTION, COHORT_SAMPLES, SAMPLES, RESPONDERS, RESPONSE_RATE, ALTERED, ALTERED_RATE, RESPONSE_IF_ALTERED, RESPONSE_IF_NOT ]
+          rows:
+            - ["ONC-1", "cohort ONC-1", 60, 60, 19, 0.3167, 36, 0.6, 0.1944, 0.5]
+  - id: cohort-matrix
+    source: "Drishti answers.json cohorts/ONC-1/oncoprint with 24 genes and HLXK7 asked (GenomicsBoard.oncoprint)"
+    request: { outputs: [ matrix-genes, matrix-cells ], params: { cohort: ONC-1, gene: HLXK7, genes-wanted: 24 }, visibility: all, seed: 0 }
+    expect:
+      status: complete
+      tables:
+        matrix-genes:
+          columns: [ RANK, GENE, SAMPLES, PCT ]
+          rows:
+            - [1, "HLXK7", 36, 0.6]
+            - [2, "GX13", 22, 0.3667]
+            - [3, "GX05", 21, 0.35]
+            - [4, "GX07", 21, 0.35]
+            - [5, "GX27", 20, 0.3333]
+            - [6, "GX01", 18, 0.3]
+            - [7, "GX15", 18, 0.3]
+            - [8, "GX19", 18, 0.3]
+            - [9, "GX21", 18, 0.3]
+            - [10, "GX22", 18, 0.3]
+            - [11, "GX00", 17, 0.2833]
+            - [12, "GX03", 17, 0.2833]
+            - [13, "GX06", 17, 0.2833]
+            - [14, "GX28", 17, 0.2833]
+            - [15, "GX09", 16, 0.2667]
+            - [16, "GX17", 16, 0.2667]
+            - [17, "GX25", 16, 0.2667]
+            - [18, "GX10", 15, 0.25]
+            - [19, "GX11", 15, 0.25]
+            - [20, "GX16", 15, 0.25]
+            - [21, "GX23", 15, 0.25]
+            - [22, "GX29", 15, 0.25]
+            - [23, "GX24", 14, 0.2333]
+            - [24, "GX12", 13, 0.2167]
+        matrix-cells:
+          columns: [ ORDINAL, SAMPLE_ID, GENE, ALTERATION ]
+          rows:
+            - [1, "S049", "HLXK7", "missense"]
+            - [2, "S049", "GX13", "truncating"]
+            - [3, "S049", "GX05", "inframe"]
+            - [4, "S049", "GX07", "truncating"]
+            - [5, "S049", "GX21", "truncating"]
+            - [6, "S049", "GX17", "inframe"]
+            - [7, "S049", "GX25", "truncating"]
+            - [8, "S006", "HLXK7", "missense"]
+            - [9, "S006", "GX13", "truncating"]
+            - [10, "S006", "GX05", "amplification"]
+            - [11, "S006", "GX27", "truncating"]
+            - [12, "S006", "GX01", "truncating"]
+            - [13, "S006", "GX21", "truncating"]
+            - [14, "S006", "GX22", "splice"]
+            - [15, "S006", "GX00", "missense"]
+            - [16, "S021", "HLXK7", "missense"]
+            - [17, "S021", "GX13", "truncating"]
+            - [18, "S021", "GX05", "inframe"]
+            - [19, "S021", "GX27", "truncating"]
+            - [20, "S021", "GX19", "truncating"]
+            - [21, "S021", "GX21", "truncating"]
+            - [22, "S021", "GX28", "splice"]
+            - [23, "S021", "GX16", "splice"]
+            - [24, "S021", "GX29", "inframe"]
+            - [25, "S043", "HLXK7", "missense"]
+            - [26, "S043", "GX13", "truncating"]
+            - [27, "S043", "GX05", "inframe"]
+            - [28, "S043", "GX01", "truncating"]
+            - [29, "S043", "GX10", "splice"]
+            - [30, "S043", "GX11", "inframe"]
+            - [31, "S043", "GX16", "splice"]
+            - [32, "S024", "HLXK7", "missense"]
+            - [33, "S024", "GX13", "truncating"]
+            - [34, "S024", "GX05", "inframe"]
+            - [35, "S024", "GX19", "truncating"]
+            - [36, "S024", "GX22", "splice"]
+            - [37, "S024", "GX10", "splice"]
+            - [38, "S024", "GX11", "inframe"]
+            - [39, "S039", "HLXK7", "missense"]
+            - [40, "S039", "GX13", "truncating"]
+            - [41, "S039", "GX07", "truncating"]
+            - [42, "S039", "GX27", "truncating"]
+            - [43, "S039", "GX15", "truncating"]
+            - [44, "S039", "GX00", "missense"]
+            - [45, "S039", "GX06", "missense"]
+            - [46, "S039", "GX09", "truncating"]
+            - [47, "S039", "GX17", "inframe"]
+            - [48, "S012", "HLXK7", "missense"]
+            - [49, "S012", "GX13", "truncating"]
+            - [50, "S012", "GX07", "truncating"]
+            - [51, "S012", "GX19", "truncating"]
+            - [52, "S012", "GX06", "missense"]
+            - [53, "S012", "GX09", "truncating"]
+            - [54, "S012", "GX17", "amplification"]
+            - [55, "S012", "GX16", "splice"]
+            - [56, "S012", "GX23", "inframe"]
+            - [57, "S012", "GX24", "missense"]
+            - [58, "S058", "HLXK7", "missense"]
+            - [59, "S058", "GX13", "truncating"]
+            - [60, "S058", "GX07", "truncating"]
+            - [61, "S058", "GX03", "truncating"]
+            - [62, "S058", "GX06", "missense"]
+            - [63, "S058", "GX28", "splice"]
+            - [64, "S058", "GX23", "inframe"]
+            - [65, "S058", "GX29", "inframe"]
+            - [66, "S033", "HLXK7", "missense"]
+            - [67, "S033", "GX13", "truncating"]
+            - [68, "S033", "GX07", "truncating"]
+            - [69, "S033", "GX28", "splice"]
+            - [70, "S033", "GX17", "inframe"]
+            - [71, "S033", "GX12", "missense"]
+            - [72, "S018", "HLXK7", "missense"]
+            - [73, "S018", "GX13", "truncating"]
+            - [74, "S018", "GX27", "truncating"]
+            - [75, "S018", "GX19", "truncating"]
+            - [76, "S018", "GX22", "splice"]
+            - [77, "S018", "GX17", "inframe"]
+            - [78, "S018", "GX16", "splice"]
+            - [79, "S018", "GX29", "amplification"]
+            - [80, "S013", "HLXK7", "missense"]
+            - [81, "S013", "GX13", "truncating"]
+            - [82, "S013", "GX15", "truncating"]
+            - [83, "S013", "GX19", "truncating"]
+            - [84, "S013", "GX28", "splice"]
+            - [85, "S013", "GX24", "deep deletion"]
+            - [86, "S030", "HLXK7", "missense"]
+            - [87, "S030", "GX13", "truncating"]
+            - [88, "S030", "GX15", "truncating"]
+            - [89, "S030", "GX00", "missense"]
+            - [90, "S030", "GX28", "splice"]
+            - [91, "S030", "GX09", "truncating"]
+            - [92, "S030", "GX17", "inframe"]
+            - [93, "S030", "GX11", "inframe"]
+            - [94, "S030", "GX16", "splice"]
+            - [95, "S030", "GX23", "amplification"]
+            - [96, "S015", "HLXK7", "missense"]
+            - [97, "S015", "GX05", "inframe"]
+            - [98, "S015", "GX07", "truncating"]
+            - [99, "S015", "GX15", "truncating"]
+            - [100, "S015", "GX19", "truncating"]
+            - [101, "S015", "GX22", "splice"]
+            - [102, "S015", "GX00", "missense"]
+            - [103, "S015", "GX12", "missense"]
+            - [104, "S045", "HLXK7", "missense"]
+            - [105, "S045", "GX05", "inframe"]
+            - [106, "S045", "GX07", "truncating"]
+            - [107, "S045", "GX15", "truncating"]
+            - [108, "S045", "GX19", "truncating"]
+            - [109, "S045", "GX10", "splice"]
+            - [110, "S045", "GX12", "missense"]
+            - [111, "S053", "HLXK7", "missense"]
+            - [112, "S053", "GX05", "inframe"]
+            - [113, "S053", "GX07", "truncating"]
+            - [114, "S053", "GX15", "truncating"]
+            - [115, "S053", "GX06", "missense"]
+            - [116, "S053", "GX25", "truncating"]
+            - [117, "S053", "GX23", "inframe"]
+            - [118, "S022", "HLXK7", "missense"]
+            - [119, "S022", "GX05", "inframe"]
+            - [120, "S022", "GX27", "amplification"]
+            - [121, "S022", "GX15", "truncating"]
+            - [122, "S022", "GX19", "truncating"]
+            - [123, "S022", "GX09", "truncating"]
+            - [124, "S022", "GX16", "splice"]
+            - [125, "S060", "HLXK7", "missense"]
+            - [126, "S060", "GX05", "inframe"]
+            - [127, "S060", "GX01", "truncating"]
+            - [128, "S060", "GX28", "splice"]
+            - [129, "S060", "GX10", "splice"]
+            - [130, "S036", "HLXK7", "missense"]
+            - [131, "S036", "GX05", "amplification"]
+            - [132, "S036", "GX21", "truncating"]
+            - [133, "S036", "GX06", "missense"]
+            - [134, "S036", "GX11", "inframe"]
+            - [135, "S036", "GX23", "inframe"]
+            - [136, "S036", "GX29", "inframe"]
+            - [137, "S054", "HLXK7", "missense"]
+            - [138, "S054", "GX05", "inframe"]
+            - [139, "S054", "GX22", "splice"]
+            - [140, "S054", "GX09", "truncating"]
+            - [141, "S054", "GX16", "splice"]
+            - [142, "S005", "HLXK7", "missense"]
+            - [143, "S005", "GX07", "truncating"]
+            - [144, "S005", "GX27", "truncating"]
+            - [145, "S005", "GX01", "truncating"]
+            - [146, "S005", "GX15", "truncating"]
+            - [147, "S005", "GX22", "splice"]
+            - [148, "S005", "GX28", "deep deletion"]
+            - [149, "S005", "GX09", "truncating"]
+            - [150, "S005", "GX17", "inframe"]
+            - [151, "S005", "GX10", "splice"]
+            - [152, "S046", "HLXK7", "missense"]
+            - [153, "S046", "GX07", "truncating"]
+            - [154, "S046", "GX27", "truncating"]
+            - [155, "S046", "GX15", "truncating"]
+            - [156, "S046", "GX22", "splice"]
+            - [157, "S046", "GX29", "inframe"]
+            - [158, "S027", "HLXK7", "missense"]
+            - [159, "S027", "GX07", "truncating"]
+            - [160, "S027", "GX27", "truncating"]
+            - [161, "S027", "GX19", "truncating"]
+            - [162, "S027", "GX06", "missense"]
+            - [163, "S027", "GX28", "splice"]
+            - [164, "S027", "GX16", "splice"]
+            - [165, "S027", "GX23", "inframe"]
+            - [166, "S009", "HLXK7", "missense"]
+            - [167, "S009", "GX07", "truncating"]
+            - [168, "S009", "GX27", "truncating"]
+            - [169, "S009", "GX19", "truncating"]
+            - [170, "S009", "GX11", "inframe"]
+            - [171, "S009", "GX12", "missense"]
+            - [172, "S023", "HLXK7", "deep deletion"]
+            - [173, "S023", "GX07", "truncating"]
+            - [174, "S023", "GX27", "truncating"]
+            - [175, "S023", "GX21", "truncating"]
+            - [176, "S023", "GX22", "splice"]
+            - [177, "S023", "GX06", "missense"]
+            - [178, "S023", "GX25", "truncating"]
+            - [179, "S023", "GX10", "splice"]
+            - [180, "S017", "HLXK7", "missense"]
+            - [181, "S017", "GX07", "truncating"]
+            - [182, "S017", "GX27", "truncating"]
+            - [183, "S017", "GX22", "splice"]
+            - [184, "S017", "GX23", "inframe"]
+            - [185, "S048", "HLXK7", "missense"]
+            - [186, "S048", "GX07", "truncating"]
+            - [187, "S048", "GX01", "truncating"]
+            - [188, "S048", "GX22", "splice"]
+            - [189, "S048", "GX06", "missense"]
+            - [190, "S048", "GX09", "truncating"]
+            - [191, "S048", "GX25", "truncating"]
+            - [192, "S025", "HLXK7", "missense"]
+            - [193, "S025", "GX07", "truncating"]
+            - [194, "S025", "GX22", "splice"]
+            - [195, "S025", "GX00", "missense"]
+            - [196, "S025", "GX03", "truncating"]
+            - [197, "S025", "GX11", "inframe"]
+            - [198, "S025", "GX29", "inframe"]
+            - [199, "S051", "HLXK7", "missense"]
+            - [200, "S051", "GX27", "truncating"]
+            - [201, "S051", "GX01", "truncating"]
+            - [202, "S051", "GX21", "truncating"]
+            - [203, "S051", "GX09", "truncating"]
+            - [204, "S051", "GX11", "inframe"]
+            - [205, "S051", "GX16", "splice"]
+            - [206, "S051", "GX29", "inframe"]
+            - [207, "S003", "HLXK7", "missense"]
+            - [208, "S003", "GX27", "truncating"]
+            - [209, "S003", "GX01", "truncating"]
+            - [210, "S003", "GX06", "missense"]
+            - [211, "S003", "GX28", "splice"]
+            - [212, "S003", "GX25", "truncating"]
+            - [213, "S003", "GX24", "missense"]
+            - [214, "S057", "HLXK7", "missense"]
+            - [215, "S057", "GX01", "truncating"]
+            - [216, "S057", "GX21", "truncating"]
+            - [217, "S057", "GX00", "missense"]
+            - [218, "S057", "GX03", "truncating"]
+            - [219, "S057", "GX10", "splice"]
+            - [220, "S057", "GX16", "splice"]
+            - [221, "S057", "GX23", "inframe"]
+            - [222, "S057", "GX29", "inframe"]
+            - [223, "S057", "GX24", "missense"]
+            - [224, "S037", "HLXK7", "missense"]
+            - [225, "S037", "GX01", "truncating"]
+            - [226, "S037", "GX06", "missense"]
+            - [227, "S037", "GX09", "truncating"]
+            - [228, "S037", "GX16", "splice"]
+            - [229, "S037", "GX24", "missense"]
+            - [230, "S037", "GX12", "deep deletion"]
+            - [231, "S029", "HLXK7", "missense"]
+            - [232, "S029", "GX01", "truncating"]
+            - [233, "S029", "GX09", "truncating"]
+            - [234, "S029", "GX17", "inframe"]
+            - [235, "S029", "GX16", "splice"]
+            - [236, "S029", "GX23", "inframe"]
+            - [237, "S001", "HLXK7", "missense"]
+            - [238, "S001", "GX15", "truncating"]
+            - [239, "S001", "GX00", "deep deletion"]
+            - [240, "S001", "GX03", "truncating"]
+            - [241, "S001", "GX17", "inframe"]
+            - [242, "S001", "GX29", "inframe"]
+            - [243, "S042", "HLXK7", "missense"]
+            - [244, "S042", "GX15", "truncating"]
+            - [245, "S042", "GX03", "truncating"]
+            - [246, "S042", "GX06", "missense"]
+            - [247, "S042", "GX23", "inframe"]
+            - [248, "S042", "GX29", "inframe"]
+            - [249, "S007", "HLXK7", "missense"]
+            - [250, "S007", "GX21", "truncating"]
+            - [251, "S007", "GX00", "missense"]
+            - [252, "S007", "GX11", "inframe"]
+            - [253, "S007", "GX16", "splice"]
+            - [254, "S007", "GX12", "deep deletion"]
+            - [255, "S041", "HLXK7", "missense"]
+            - [256, "S041", "GX21", "truncating"]
+            - [257, "S041", "GX03", "truncating"]
+            - [258, "S041", "GX25", "truncating"]
+            - [259, "S041", "GX10", "splice"]
+            - [260, "S041", "GX23", "inframe"]
+            - [261, "S041", "GX12", "missense"]
+            - [262, "S020", "GX13", "amplification"]
+            - [263, "S020", "GX05", "inframe"]
+            - [264, "S020", "GX07", "truncating"]
+            - [265, "S020", "GX22", "splice"]
+            - [266, "S020", "GX10", "splice"]
+            - [267, "S020", "GX11", "inframe"]
+            - [268, "S008", "GX13", "truncating"]
+            - [269, "S008", "GX05", "inframe"]
+            - [270, "S008", "GX01", "truncating"]
+            - [271, "S008", "GX15", "truncating"]
+            - [272, "S008", "GX19", "amplification"]
+            - [273, "S008", "GX03", "truncating"]
+            - [274, "S038", "GX13", "truncating"]
+            - [275, "S038", "GX05", "inframe"]
+            - [276, "S038", "GX19", "amplification"]
+            - [277, "S038", "GX00", "missense"]
+            - [278, "S038", "GX06", "missense"]
+            - [279, "S038", "GX28", "splice"]
+            - [280, "S038", "GX25", "truncating"]
+            - [281, "S038", "GX24", "missense"]
+            - [282, "S034", "GX13", "truncating"]
+            - [283, "S034", "GX07", "truncating"]
+            - [284, "S034", "GX27", "truncating"]
+            - [285, "S034", "GX19", "truncating"]
+            - [286, "S034", "GX21", "amplification"]
+            - [287, "S034", "GX17", "inframe"]
+            - [288, "S034", "GX10", "splice"]
+            - [289, "S034", "GX11", "inframe"]
+            - [290, "S034", "GX29", "inframe"]
+            - [291, "S002", "GX13", "truncating"]
+            - [292, "S002", "GX07", "truncating"]
+            - [293, "S002", "GX01", "truncating"]
+            - [294, "S002", "GX03", "truncating"]
+            - [295, "S002", "GX28", "splice"]
+            - [296, "S002", "GX25", "truncating"]
+            - [297, "S002", "GX16", "splice"]
+            - [298, "S032", "GX13", "truncating"]
+            - [299, "S032", "GX07", "amplification"]
+            - [300, "S032", "GX15", "truncating"]
+            - [301, "S032", "GX19", "truncating"]
+            - [302, "S032", "GX21", "truncating"]
+            - [303, "S032", "GX24", "missense"]
+            - [304, "S032", "GX12", "missense"]
+            - [305, "S028", "GX13", "truncating"]
+            - [306, "S028", "GX01", "truncating"]
+            - [307, "S028", "GX15", "truncating"]
+            - [308, "S028", "GX21", "truncating"]
+            - [309, "S028", "GX09", "truncating"]
+            - [310, "S028", "GX25", "truncating"]
+            - [311, "S028", "GX10", "splice"]
+            - [312, "S028", "GX12", "missense"]
+            - [313, "S035", "GX13", "truncating"]
+            - [314, "S035", "GX15", "truncating"]
+            - [315, "S035", "GX22", "splice"]
+            - [316, "S035", "GX00", "missense"]
+            - [317, "S035", "GX28", "deep deletion"]
+            - [318, "S035", "GX09", "truncating"]
+            - [319, "S035", "GX25", "truncating"]
+            - [320, "S035", "GX16", "splice"]
+            - [321, "S052", "GX13", "truncating"]
+            - [322, "S052", "GX19", "truncating"]
+            - [323, "S052", "GX21", "truncating"]
+            - [324, "S052", "GX28", "splice"]
+            - [325, "S052", "GX09", "truncating"]
+            - [326, "S052", "GX12", "missense"]
+            - [327, "S031", "GX13", "truncating"]
+            - [328, "S031", "GX22", "splice"]
+            - [329, "S031", "GX00", "deep deletion"]
+            - [330, "S031", "GX17", "inframe"]
+            - [331, "S031", "GX11", "inframe"]
+            - [332, "S031", "GX23", "inframe"]
+            - [333, "S031", "GX24", "missense"]
+            - [334, "S040", "GX05", "inframe"]
+            - [335, "S040", "GX07", "truncating"]
+            - [336, "S040", "GX21", "truncating"]
+            - [337, "S040", "GX03", "amplification"]
+            - [338, "S040", "GX25", "truncating"]
+            - [339, "S040", "GX29", "inframe"]
+            - [340, "S014", "GX05", "inframe"]
+            - [341, "S014", "GX27", "truncating"]
+            - [342, "S014", "GX01", "amplification"]
+            - [343, "S014", "GX21", "truncating"]
+            - [344, "S014", "GX00", "missense"]
+            - [345, "S014", "GX03", "truncating"]
+            - [346, "S014", "GX11", "inframe"]
+            - [347, "S014", "GX24", "missense"]
+            - [348, "S019", "GX05", "inframe"]
+            - [349, "S019", "GX27", "truncating"]
+            - [350, "S019", "GX21", "truncating"]
+            - [351, "S019", "GX22", "splice"]
+            - [352, "S019", "GX03", "truncating"]
+            - [353, "S019", "GX06", "deep deletion"]
+            - [354, "S019", "GX10", "splice"]
+            - [355, "S019", "GX11", "inframe"]
+            - [356, "S019", "GX29", "inframe"]
+            - [357, "S011", "GX05", "inframe"]
+            - [358, "S011", "GX01", "truncating"]
+            - [359, "S011", "GX19", "truncating"]
+            - [360, "S011", "GX28", "splice"]
+            - [361, "S011", "GX17", "inframe"]
+            - [362, "S011", "GX25", "truncating"]
+            - [363, "S011", "GX10", "splice"]
+            - [364, "S011", "GX24", "missense"]
+            - [365, "S010", "GX05", "inframe"]
+            - [366, "S010", "GX15", "truncating"]
+            - [367, "S010", "GX19", "truncating"]
+            - [368, "S010", "GX22", "splice"]
+            - [369, "S010", "GX03", "amplification"]
+            - [370, "S010", "GX29", "inframe"]
+            - [371, "S010", "GX24", "missense"]
+            - [372, "S004", "GX05", "inframe"]
+            - [373, "S004", "GX21", "truncating"]
+            - [374, "S004", "GX22", "splice"]
+            - [375, "S004", "GX06", "missense"]
+            - [376, "S004", "GX17", "inframe"]
+            - [377, "S004", "GX24", "missense"]
+            - [378, "S055", "GX27", "truncating"]
+            - [379, "S055", "GX15", "truncating"]
+            - [380, "S055", "GX03", "truncating"]
+            - [381, "S055", "GX09", "truncating"]
+            - [382, "S055", "GX17", "inframe"]
+            - [383, "S055", "GX10", "splice"]
+            - [384, "S055", "GX24", "missense"]
+            - [385, "S055", "GX12", "missense"]
+            - [386, "S050", "GX27", "truncating"]
+            - [387, "S050", "GX00", "missense"]
+            - [388, "S050", "GX03", "truncating"]
+            - [389, "S050", "GX17", "inframe"]
+            - [390, "S050", "GX25", "truncating"]
+            - [391, "S050", "GX11", "inframe"]
+            - [392, "S050", "GX24", "missense"]
+            - [393, "S059", "GX27", "truncating"]
+            - [394, "S059", "GX00", "missense"]
+            - [395, "S059", "GX06", "missense"]
+            - [396, "S059", "GX28", "splice"]
+            - [397, "S059", "GX09", "truncating"]
+            - [398, "S059", "GX11", "inframe"]
+            - [399, "S056", "GX27", "truncating"]
+            - [400, "S056", "GX03", "truncating"]
+            - [401, "S056", "GX09", "truncating"]
+            - [402, "S056", "GX17", "inframe"]
+            - [403, "S056", "GX25", "truncating"]
+            - [404, "S056", "GX10", "splice"]
+            - [405, "S056", "GX23", "inframe"]
+            - [406, "S016", "GX01", "truncating"]
+            - [407, "S016", "GX15", "amplification"]
+            - [408, "S016", "GX00", "missense"]
+            - [409, "S016", "GX06", "missense"]
+            - [410, "S016", "GX28", "splice"]
+            - [411, "S016", "GX23", "inframe"]
+            - [412, "S016", "GX12", "missense"]
+            - [413, "S047", "GX01", "truncating"]
+            - [414, "S047", "GX19", "truncating"]
+            - [415, "S047", "GX00", "missense"]
+            - [416, "S047", "GX03", "truncating"]
+            - [417, "S047", "GX06", "missense"]
+            - [418, "S047", "GX23", "inframe"]
+            - [419, "S026", "GX01", "truncating"]
+            - [420, "S026", "GX21", "truncating"]
+            - [421, "S026", "GX03", "truncating"]
+            - [422, "S026", "GX28", "splice"]
+            - [423, "S026", "GX25", "truncating"]
+            - [424, "S044", "GX22", "splice"]
+            - [425, "S044", "GX00", "missense"]
+            - [426, "S044", "GX25", "truncating"]
+            - [427, "S044", "GX29", "inframe"]
+            - [428, "S044", "GX12", "missense"]
+  - id: a-box-of-three-numbers-is-refused
+    source: "Drishti ShowcaseTest: box is x0,x1,y0,y1 (four numbers)"
+    request: { outputs: [ summary ], params: { cohort: ONC-1, box: "1,2,3" }, visibility: all, seed: 0 }
+    expect: { refused: ENG-3002 }
+  - id: a-request-without-rows-of-samples-is-refused
+    source: "section 8.6 rule 1"
+    request: { outputs: [ summary ], params: { cohort: ONC-1 }, visibility: {}, seed: 0 }
+    expect: { refused: ENG-4002 }
